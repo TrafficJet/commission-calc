@@ -232,3 +232,11 @@ Most agents split their commission with their broker, typically keeping 60%–80
 
 ### Is a 6% real estate commission still common in 2025?
 Much less so. The NAR settlement and increased competition from discount brokerages have pushed the average below 6%. Most sellers in 2025 pay between 4.5% and 5.5% total (Clever Real Estate, 2025). Sellers who accept a 6% rate without negotiating are likely leaving money on the table.
+
+---
+
+<div style="background:#f0f9eb;border-left:4px solid #5a9e3f;padding:16px 20px;margin:32px 0;border-radius:4px;">
+<strong>AI tools for real estate agents:</strong><br>
+ChatGPT, Perplexity, and AI CRM tools are changing how top agents work in 2025.
+<a href="https://agentai-guide.com/blog/ai-tools-for-real-estate-agents/" style="display:inline-block;margin-top:10px;background:#5a9e3f;color:#fff;padding:8px 20px;border-radius:4px;text-decoration:none;font-weight:600;">See AI Tools for Agents →</a>
+</div>
