@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import { cities, getStateName } from '../../data/cities';
+
+const byState = cities.reduce((acc, c) => {
+  const key = c.state;
+  if (!acc[key]) acc[key] = [];
+  acc[key].push(c);
+  return acc;
+}, {} as Record<string, typeof cities>);
+
+const states = Object.keys(byState).sort();
+
+function fmt(n: number) { return '$' + n.toLocaleString('en-US'); }
+---
+
+<Base
+  title="Real Estate Commission Calculator by City — All 200 US Cities (2025)"
+  description="Free real estate commission calculators for 200 US cities. Find local median home prices, typical agent commission rates, and calculate seller net proceeds."
+  canonicalUrl="https://commission-calc.com/commission/"
+>
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-bold mb-3">Real Estate Commission Calculator by City</h1>
+    <p class="text-gray-500 mb-10 text-lg">
+      Select your city for a calculator pre-loaded with local median home prices and typical commission rates.
+    </p>
+
+    {states.map(state => (
+      <div class="mb-10">
+        <h2 class="text-xl font-bold text-indigo-800 border-b border-indigo-100 pb-2 mb-4">
+          {getStateName(state)} ({state})
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          {byState[state].map(c => (
+            <a
+              href={`/commission/${c.slug}/`}
+              class="flex flex-col p-4 border border-gray-200 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all"
+            >
+              <span class="font-semibold text-gray-900">{c.city}</span>
+              <span class="text-sm text-gray-500 mt-1">Median: {fmt(c.medianPrice)}</span>
+              <span class="text-sm text-indigo-600">{c.avgCommission}% avg commission</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <div class="mt-12 p-6 bg-gray-50 rounded-xl border border-gray-200">
+      <h2 class="font-bold text-lg mb-3">About These Commission Calculators</h2>
+      <p class="text-gray-600 text-sm">
+        Each calculator is pre-loaded with local median home prices from 2024–2025 MLS data and typical
+        commission rates for that state. Rates vary by agent and market conditions — use these as a
+        starting point for negotiation. Since the 2024 NAR settlement, all commission rates are negotiable
+        and must be agreed upon in writing.
+      </p>
+      <div class="mt-4 flex gap-4 text-sm">
+        <a href="/blog/real-estate-commission-calculator-2025/" class="text-indigo-700 hover:underline">Commission Guide 2025 →</a>
+        <a href="/blog/best-ai-real-estate-software-2025/" class="text-indigo-700 hover:underline">AI Tools for Agents →</a>
+        <a href="/" class="text-indigo-700 hover:underline">Main Calculator →</a>
+      </div>
+    </div>
+  </div>
+</Base>

@@ -240,3 +240,13 @@ Much less so. The NAR settlement and increased competition from discount brokera
 ChatGPT, Perplexity, and AI CRM tools are changing how top agents work in 2025.
 <a href="https://agentai-guide.com/blog/ai-tools-for-real-estate-agents/" style="display:inline-block;margin-top:10px;background:#5a9e3f;color:#fff;padding:8px 20px;border-radius:4px;text-decoration:none;font-weight:600;">See AI Tools for Agents →</a>
 </div>
+
+
+## Calculate Commission for Your City
+
+Use our city-specific calculators pre-loaded with local median prices and typical rates:
+- [Real Estate Commission Calculator — Los Angeles, CA](/commission/los-angeles-ca/)
+- [Real Estate Commission Calculator — Houston, TX](/commission/houston-tx/)
+- [Real Estate Commission Calculator — Phoenix, AZ](/commission/phoenix-az/)
+- [Real Estate Commission Calculator — Chicago, IL](/commission/chicago-il/)
+- [View all 200 cities →](/commission/)

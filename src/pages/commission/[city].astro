@@ -1,0 +1,157 @@
+---
+import Base from '../../layouts/Base.astro';
+import { cities, getStateName } from '../../data/cities';
+
+export function getStaticPaths() {
+  return cities.map(c => ({ params: { city: c.slug }, props: { data: c } }));
+}
+
+const { data } = Astro.props;
+const { city, state, medianPrice, avgCommission } = data;
+const stateName = getStateName(state);
+
+const totalComm = Math.round(medianPrice * avgCommission / 100);
+const listingAgent = Math.round(totalComm * 0.5 * 0.70);
+const buyerAgent   = Math.round(totalComm * 0.5 * 0.70);
+const sellerNet    = medianPrice - totalComm;
+
+function fmt(n: number) {
+  return '$' + n.toLocaleString('en-US');
+}
+
+const title = `Real Estate Commission Calculator ${city}, ${state} (2025)`;
+const description = `Free real estate commission calculator for ${city}, ${stateName}. Median home price ${fmt(medianPrice)}, typical commission ${avgCommission}%. Calculate agent splits and seller net instantly.`;
+const canonicalUrl = `https://commission-calc.com/commission/${data.slug}/`;
+---
+
+<Base title={title} description={description} canonicalUrl={canonicalUrl}>
+  <div class="max-w-3xl mx-auto">
+
+    <nav class="text-sm text-gray-400 mb-6">
+      <a href="/" class="hover:text-indigo-600">Calculator</a>
+      <span class="mx-2">›</span>
+      <a href="/commission/" class="hover:text-indigo-600">Cities</a>
+      <span class="mx-2">›</span>
+      <span class="text-gray-600">{city}, {state}</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold mb-2">Real Estate Commission Calculator — {city}, {state}</h1>
+    <p class="text-gray-500 mb-8">
+      Median home price in {city}: <strong>{fmt(medianPrice)}</strong> ·
+      Typical commission: <strong>{avgCommission}%</strong> · Updated 2025
+    </p>
+
+    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Sale Price ($)</label>
+          <input type="number" id="salePrice" value={medianPrice} min="0" step="5000"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Total Commission Rate (%)</label>
+          <input type="number" id="commissionRate" value={avgCommission} min="0" max="10" step="0.1"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Buyer's Agent Split (%)</label>
+          <input type="number" id="buyerSplit" value="50" min="0" max="100" step="1"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Agent/Broker Split (%)</label>
+          <input type="number" id="agentBrokerSplit" value="70" min="0" max="100" step="1"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+        <div class="bg-white rounded-xl p-4 text-center border border-gray-100">
+          <p class="text-xs text-gray-500 mb-1">Total Commission</p>
+          <p id="totalComm" class="text-xl font-bold text-indigo-700">{fmt(totalComm)}</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 text-center border border-gray-100">
+          <p class="text-xs text-gray-500 mb-1">Listing Agent Gets</p>
+          <p id="listingAgent" class="text-xl font-bold text-green-600">{fmt(listingAgent)}</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 text-center border border-gray-100">
+          <p class="text-xs text-gray-500 mb-1">Buyer's Agent Gets</p>
+          <p id="buyerAgent" class="text-xl font-bold text-green-600">{fmt(buyerAgent)}</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 text-center border border-gray-100">
+          <p class="text-xs text-gray-500 mb-1">Seller's Net</p>
+          <p id="sellerNet" class="text-xl font-bold text-gray-700">{fmt(sellerNet)}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 prose prose-lg max-w-none">
+      <h2>Real Estate Commission Rates in {city}, {stateName}</h2>
+      <p>
+        The typical total real estate commission in {city} is <strong>{avgCommission}%</strong> of the sale price,
+        based on current market data for {stateName}. On the median {city} home price of {fmt(medianPrice)},
+        that works out to <strong>{fmt(totalComm)}</strong> in total agent fees.
+      </p>
+      <p>
+        Following the 2024 NAR settlement, buyer's agent compensation is now negotiated separately in {stateName}.
+        Most transactions still split the commission 50/50 between listing and buyer agents, but this is
+        no longer required. Sellers in {city} have more flexibility than ever to offer lower buyer concessions.
+      </p>
+
+      <h3>How Commission Splits Work in {city}</h3>
+      <ul>
+        <li><strong>Listing agent</strong> typically receives {fmt(Math.round(totalComm * 0.5))} ({(avgCommission/2).toFixed(1)}% of sale price)</li>
+        <li><strong>Buyer's agent</strong> typically receives {fmt(Math.round(totalComm * 0.5))} (if seller offers full split)</li>
+        <li><strong>Agent keeps</strong> ~70% after broker split: ~{fmt(listingAgent)} per side</li>
+        <li><strong>Seller nets</strong> approximately {fmt(sellerNet)} on a {fmt(medianPrice)} sale</li>
+      </ul>
+
+      <h3>Tips for Negotiating Commission in {city}</h3>
+      <ol>
+        <li><strong>List at a higher price point</strong> — agents on {fmt(600000)}+ homes often accept 2–2.5% listing side</li>
+        <li><strong>Compare multiple agents</strong> — commission rates in {stateName} vary by 0.5–1% between agents</li>
+        <li><strong>Use a flat-fee MLS service</strong> — pay $300–$500 for MLS listing, offer buyer agent {(avgCommission/2).toFixed(1)}%</li>
+        <li><strong>Ask about a reduced rate on a simultaneous buy/sell</strong> — agents may discount if you're both buying and selling</li>
+      </ol>
+
+      <h3>Frequently Asked Questions</h3>
+      <h4>What is the average real estate commission in {city}, {state}?</h4>
+      <p>The average total commission in {city} is approximately {avgCommission}%, slightly {avgCommission < 5.0 ? 'below' : 'at or above'} the national average of 5.0–5.4% following the NAR settlement.</p>
+
+      <h4>How much does a real estate agent make on a home sale in {city}?</h4>
+      <p>On the median {city} home price of {fmt(medianPrice)}, a listing agent earns roughly {fmt(Math.round(totalComm * 0.5))} before broker split. After a typical 70/30 agent-broker split, the agent takes home approximately {fmt(listingAgent)}.</p>
+
+      <h4>Do sellers have to pay the buyer's agent in {city}?</h4>
+      <p>No. Since August 2024, sellers in {stateName} are no longer required to offer buyer agent compensation through the MLS. Many still do to attract buyers, but it's now fully negotiable.</p>
+    </div>
+
+    <div class="mt-10 p-6 bg-indigo-50 rounded-xl border border-indigo-100">
+      <h3 class="font-bold text-lg text-indigo-900 mb-2">Related Resources</h3>
+      <ul class="space-y-2 text-sm">
+        <li>→ <a href="/blog/real-estate-commission-calculator-2025/" class="text-indigo-700 hover:underline">Real Estate Commission Guide 2025</a></li>
+        <li>→ <a href="/blog/best-ai-real-estate-software-2025/" class="text-indigo-700 hover:underline">Best AI Tools for Real Estate Agents</a></li>
+        <li>→ <a href="/" class="text-indigo-700 hover:underline">Main Commission Calculator</a></li>
+        <li>→ <a href="/commission/" class="text-indigo-700 hover:underline">Commission Calculators by City</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    function fmt(n: number) { return '$' + Math.round(n).toLocaleString('en-US'); }
+    function calc() {
+      const price  = parseFloat((document.getElementById('salePrice') as HTMLInputElement).value) || 0;
+      const rate   = parseFloat((document.getElementById('commissionRate') as HTMLInputElement).value) / 100 || 0;
+      const buyPct = parseFloat((document.getElementById('buyerSplit') as HTMLInputElement).value) / 100 || 0.5;
+      const agPct  = parseFloat((document.getElementById('agentBrokerSplit') as HTMLInputElement).value) / 100 || 0.7;
+      const total  = price * rate;
+      const lPool  = total * (1 - buyPct);
+      const bPool  = total * buyPct;
+      (document.getElementById('totalComm') as HTMLElement).textContent   = fmt(total);
+      (document.getElementById('listingAgent') as HTMLElement).textContent = fmt(lPool * agPct);
+      (document.getElementById('buyerAgent') as HTMLElement).textContent   = fmt(bPool * agPct);
+      (document.getElementById('sellerNet') as HTMLElement).textContent    = fmt(price - total);
+    }
+    document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+  </script>
+</Base>

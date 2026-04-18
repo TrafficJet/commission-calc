@@ -186,3 +186,11 @@ An AVM (automated valuation model) uses statistical modeling to estimate propert
 ChatGPT, Perplexity, and AI CRM tools are changing how top agents work in 2025.
 <a href="https://agentai-guide.com/blog/ai-tools-for-real-estate-agents/" style="display:inline-block;margin-top:10px;background:#5a9e3f;color:#fff;padding:8px 20px;border-radius:4px;text-decoration:none;font-weight:600;">See AI Tools for Agents →</a>
 </div>
+
+
+## Calculate Your Commission Before Choosing an Agent
+
+Before selecting an agent, know what you should expect to pay. Use our [free real estate commission calculator](https://commission-calc.com/) — or find your city:
+- [Commission Calculator — New York, NY](https://commission-calc.com/commission/new-york-ny/)
+- [Commission Calculator — Los Angeles, CA](https://commission-calc.com/commission/los-angeles-ca/)
+- [Commission Calculator — All Cities](https://commission-calc.com/commission/)
