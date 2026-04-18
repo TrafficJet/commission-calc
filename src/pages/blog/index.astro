@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<Base title="Real Estate Commission Blog | CommissionCalc" description="Guides on real estate commissions, agent splits, and NAR rule changes.">
+<Base title="Real Estate Commission Blog | CommissionCalc" description="Guides on real estate commissions, agent splits, and NAR rule changes." noindex={posts.length === 0}>
   <h1 class="text-3xl font-bold mb-2">Commission Blog</h1>
   <p class="text-gray-500 mb-10">Real estate commission guides, split structures, and industry news.</p>
   {posts.length === 0 && <p class="text-gray-400 py-12 text-center">Articles coming soon...</p>}
