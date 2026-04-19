@@ -1,14 +1,14 @@
 ---
-title: "Real Estate Commission Calculator 2025"
+title: "Real Estate Commission Calculator 2026"
 slug: "real-estate-commission-calculator-2025"
 pubDate: 2026-04-17
-description: "Use our free real estate commission calculator to estimate agent fees, closing costs, and net proceeds when selling your home in 2025."
+description: "Use our free real estate commission calculator to estimate agent fees, closing costs, and net proceeds when selling your home in 2026."
 author: "Alex Morgan"
-tags: ["real estate commission calculator 2025"]
-seoTitle: "Real Estate Commission Calculator 2025 | Estimate Agent Fees"
+tags: ["real estate commission calculator 2026"]
+seoTitle: "Real Estate Commission Calculator 2026 | Estimate Agent Fees"
 ---
 
-# Real Estate Commission Calculator 2025
+# Real Estate Commission Calculator 2026
 
 Use this calculator to estimate how much you'll pay in agent fees when you sell your home. Enter your sale price, adjust commission percentages for each agent, and see your net proceeds instantly.
 
