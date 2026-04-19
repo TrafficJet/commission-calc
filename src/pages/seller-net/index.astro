@@ -1,0 +1,171 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Seller Net Proceeds Calculator — How Much Will I Make Selling My Home?"
+  description="Calculate exactly how much money you'll walk away with after commission, closing costs, and mortgage payoff. Supports USA, Canada, Australia, UK, Germany."
+  canonicalUrl="https://commission-calc.com/seller-net/"
+>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2 text-center">Seller Net Proceeds Calculator</h1>
+    <p class="text-gray-500 text-center mb-6">How much will I make selling my home? Enter your details for a complete breakdown.</p>
+
+    <!-- Country selector -->
+    <div class="flex justify-center mb-8">
+      <div class="inline-flex rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <button data-country="US" class="country-btn active px-4 py-2 text-sm font-medium">🇺🇸 USA</button>
+        <button data-country="CA" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇨🇦 Canada</button>
+        <button data-country="AU" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇦🇺 Australia</button>
+        <button data-country="GB" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇬🇧 UK</button>
+        <button data-country="DE" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇩🇪 Germany</button>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div>
+          <label id="lbl-price" class="block text-sm font-medium text-gray-700 mb-1">Sale Price ($)</label>
+          <input type="number" id="salePrice" value="450000" min="0" step="1000"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label id="lbl-comm" class="block text-sm font-medium text-gray-700 mb-1">Agent Commission (%)</label>
+          <input type="number" id="commRate" value="5.5" min="0" max="15" step="0.1"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label id="lbl-closing" class="block text-sm font-medium text-gray-700 mb-1">Seller Closing Costs (%)</label>
+          <input type="number" id="closingRate" value="1.5" min="0" max="15" step="0.1"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p id="closing-hint" class="text-xs text-gray-400 mt-1">Transfer tax, attorney, title — typically 1–3% in the US</p>
+        </div>
+        <div>
+          <label id="lbl-mortgage" class="block text-sm font-medium text-gray-700 mb-1">Remaining Mortgage ($)</label>
+          <input type="number" id="mortgage" value="280000" min="0" step="1000"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Enter 0 if property is paid off</p>
+        </div>
+      </div>
+
+      <!-- Waterfall result -->
+      <div class="space-y-2">
+        <div class="flex justify-between items-center p-3 bg-white rounded-xl border border-gray-100">
+          <span class="text-sm text-gray-600">Sale Price</span>
+          <span id="r-price" class="font-bold text-gray-900">$450,000</span>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-white rounded-xl border border-red-50">
+          <span class="text-sm text-gray-600">− Agent Commission</span>
+          <span id="r-comm" class="font-semibold text-red-600">−$24,750</span>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-white rounded-xl border border-red-50">
+          <span class="text-sm text-gray-600">− Seller Closing Costs</span>
+          <span id="r-closing" class="font-semibold text-red-600">−$6,750</span>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-white rounded-xl border border-red-50">
+          <span class="text-sm text-gray-600">− Mortgage Payoff</span>
+          <span id="r-mortgage" class="font-semibold text-red-600">−$280,000</span>
+        </div>
+        <div class="flex justify-between items-center p-4 bg-indigo-600 rounded-xl mt-2">
+          <span class="text-white font-bold text-lg">Net Proceeds</span>
+          <span id="r-net" class="text-white font-bold text-2xl">$138,500</span>
+        </div>
+        <p id="r-equity" class="text-center text-sm text-gray-500 mt-2"></p>
+      </div>
+
+      <div id="country-note" class="mt-6 p-4 bg-indigo-50 rounded-xl text-sm text-indigo-800 border border-indigo-100"></div>
+    </div>
+
+    <!-- Quick links -->
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <a href="/" class="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <span class="text-2xl">📊</span>
+        <div>
+          <p class="font-semibold text-gray-900">Commission Calculator</p>
+          <p class="text-sm text-gray-500">Agent & broker split details</p>
+        </div>
+      </a>
+      <a href="/closing-costs/" class="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <span class="text-2xl">🏠</span>
+        <div>
+          <p class="font-semibold text-gray-900">Closing Costs Calculator</p>
+          <p class="text-sm text-gray-500">Full breakdown of buyer & seller costs</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="mt-12 prose prose-lg max-w-none">
+      <h2>How to Calculate Seller Net Proceeds</h2>
+      <p>Your net proceeds = <strong>Sale Price − Commission − Closing Costs − Mortgage Payoff</strong>. Understanding each component helps you set the right asking price.</p>
+      <h3>Agent Commission</h3>
+      <p>In the US, typically 5–6% of the sale price. In Canada 3.5–5%, Australia 1.6–2.5%, UK 1–3%, Germany 3–7% (split with buyer). Use the commission calculator for a detailed breakdown.</p>
+      <h3>Seller Closing Costs</h3>
+      <p>These include transfer/stamp taxes, attorney fees, title fees, and any outstanding property taxes or HOA fees. Typically 1–3% in the US, varies widely internationally.</p>
+      <h3>Mortgage Payoff</h3>
+      <p>Your current outstanding mortgage balance. Check your most recent statement — the payoff amount may differ slightly due to accrued interest at closing.</p>
+      <h3>What's Not Included</h3>
+      <p>Capital gains tax (if applicable), moving costs, pre-sale repairs, and staging costs. Consult a tax advisor for your specific situation.</p>
+    </div>
+  </div>
+
+  <style>
+    .country-btn { background: white; color: #374151; transition: all 0.15s; }
+    .country-btn:hover { background: #eef2ff; color: #4338ca; }
+    .country-btn.active { background: #4f46e5; color: white; }
+  </style>
+
+  <script>
+    const DEFAULTS = {
+      US: { sym: '$', price: 450000, comm: 5.5, closing: 1.5, mortgage: 280000, closingHint: 'Transfer tax, attorney, title — typically 1–3% in the US', note: '🇺🇸 <strong>USA:</strong> Agent commissions are separate from closing costs. The 2024 NAR settlement changed how buyer agent fees are paid — always confirm in writing.' },
+      CA: { sym: 'C$', price: 620000, comm: 4.0, closing: 1.0, mortgage: 400000, closingHint: 'Legal fees, mortgage discharge — typically 0.5–1.5% in Canada', note: '🇨🇦 <strong>Canada:</strong> HST/GST applies to the agent commission (not shown here). First-time sellers may owe land transfer tax on their next purchase.' },
+      AU: { sym: 'A$', price: 780000, comm: 2.2, closing: 0.5, mortgage: 500000, closingHint: 'Conveyancing, discharge fee — typically 0.3–0.8% in Australia', note: '🇦🇺 <strong>Australia:</strong> Commission shown excludes GST (add 10%). Capital gains tax may apply if this is an investment property — consult an accountant.' },
+      GB: { sym: '£', price: 310000, comm: 1.5, closing: 0.5, mortgage: 180000, closingHint: 'Solicitor, EPC, discharge — typically 0.4–1% in the UK', note: '🇬🇧 <strong>UK:</strong> Agent fee shown excludes VAT (add 20%). Conveyancing fees for the seller are typically £1,000–1,500. No capital gains tax on primary residence.' },
+      DE: { sym: '€', price: 390000, comm: 3.5, closing: 1.0, mortgage: 250000, closingHint: 'Seller\'s share of notary, Grundbuch — typically 0.8–1.5% in Germany', note: '🇩🇪 <strong>Germany:</strong> Maklercourtage is split with buyer since 2020 — shown is seller\'s half. Spekulationssteuer (speculation tax) applies if sold within 10 years of purchase.' },
+    };
+
+    let current = 'US';
+
+    function fmt(n, sym) { return sym + Math.round(Math.abs(n)).toLocaleString('en-US'); }
+
+    function calc() {
+      const d = DEFAULTS[current];
+      const price = parseFloat(document.getElementById('salePrice').value) || 0;
+      const comm = parseFloat(document.getElementById('commRate').value) / 100 || 0;
+      const closing = parseFloat(document.getElementById('closingRate').value) / 100 || 0;
+      const mortgage = parseFloat(document.getElementById('mortgage').value) || 0;
+
+      const commAmt = price * comm;
+      const closingAmt = price * closing;
+      const net = price - commAmt - closingAmt - mortgage;
+
+      document.getElementById('r-price').textContent = fmt(price, d.sym);
+      document.getElementById('r-comm').textContent = '−' + fmt(commAmt, d.sym);
+      document.getElementById('r-closing').textContent = '−' + fmt(closingAmt, d.sym);
+      document.getElementById('r-mortgage').textContent = '−' + fmt(mortgage, d.sym);
+      document.getElementById('r-net').textContent = (net < 0 ? '−' : '') + fmt(net, d.sym);
+      document.getElementById('r-net').style.color = net < 0 ? '#fca5a5' : 'white';
+      document.getElementById('r-equity').textContent = price ? `Equity retained: ${(((price - mortgage) / price) * 100).toFixed(0)}% before costs` : '';
+    }
+
+    function setCountry(code) {
+      current = code;
+      const d = DEFAULTS[code];
+      document.querySelectorAll('.country-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.country === code);
+      });
+      document.getElementById('lbl-price').textContent = 'Sale Price (' + d.sym + ')';
+      document.getElementById('closing-hint').textContent = d.closingHint;
+      document.getElementById('country-note').innerHTML = d.note;
+      document.getElementById('salePrice').value = d.price;
+      document.getElementById('commRate').value = d.comm;
+      document.getElementById('closingRate').value = d.closing;
+      document.getElementById('mortgage').value = d.mortgage;
+      calc();
+    }
+
+    document.querySelectorAll('.country-btn').forEach(btn => {
+      btn.addEventListener('click', () => setCountry(btn.dataset.country));
+    });
+    document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+    setCountry('US');
+  </script>
+</Base>
