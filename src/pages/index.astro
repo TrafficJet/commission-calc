@@ -1,30 +1,46 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Real Estate Commission Calculator — Free Agent & Broker Split Tool" description="Calculate real estate agent commission, broker splits, and net pay instantly. Free tool for buyers, sellers, and agents.">
+<Base
+  title="Real Estate Commission Calculator — USA, Canada, Australia, UK, Germany"
+  description="Free real estate commission calculator for 5 countries. Calculate agent commission, broker splits, and seller net proceeds in USD, CAD, AUD, GBP, EUR."
+  canonicalUrl="https://commission-calc.com/"
+>
   <div class="max-w-3xl mx-auto">
     <h1 class="text-3xl font-bold mb-2 text-center">Real Estate Commission Calculator</h1>
-    <p class="text-gray-500 text-center mb-10">Calculate agent commission, broker split, and net earnings for any sale price.</p>
+    <p class="text-gray-500 text-center mb-6">Calculate agent commission, broker split, and net earnings. Supports 5 countries.</p>
+
+    <!-- Country selector -->
+    <div class="flex justify-center mb-8">
+      <div class="inline-flex rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <button data-country="US" class="country-btn active px-4 py-2 text-sm font-medium">🇺🇸 USA</button>
+        <button data-country="CA" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇨🇦 Canada</button>
+        <button data-country="AU" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇦🇺 Australia</button>
+        <button data-country="GB" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇬🇧 UK</button>
+        <button data-country="DE" class="country-btn px-4 py-2 text-sm font-medium border-l border-gray-200">🇩🇪 Germany</button>
+      </div>
+    </div>
 
     <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Sale Price ($)</label>
+          <label id="lbl-price" class="block text-sm font-medium text-gray-700 mb-1">Sale Price ($)</label>
           <input type="number" id="salePrice" value="450000" min="0" step="1000"
             class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Total Commission Rate (%)</label>
-          <input type="number" id="commissionRate" value="5.5" min="0" max="10" step="0.1"
+          <label id="lbl-rate" class="block text-sm font-medium text-gray-700 mb-1">Total Commission Rate (%)</label>
+          <input type="number" id="commissionRate" value="5.5" min="0" max="15" step="0.1"
             class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p id="rate-hint" class="text-xs text-gray-400 mt-1">Typically 5–6% in the US</p>
         </div>
-        <div>
+        <div id="buyer-split-row">
           <label class="block text-sm font-medium text-gray-700 mb-1">Buyer's Agent Split (%)</label>
           <input type="number" id="buyerSplit" value="50" min="0" max="100" step="1"
             class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Agent/Broker Split (%)</label>
+          <label id="lbl-agent-split" class="block text-sm font-medium text-gray-700 mb-1">Agent/Broker Split (%)</label>
           <input type="number" id="agentBrokerSplit" value="70" min="0" max="100" step="1"
             class="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         </div>
@@ -35,53 +51,172 @@ import Base from '../layouts/Base.astro';
           <p class="text-xs text-gray-500 mb-1">Total Commission</p>
           <p id="totalComm" class="text-xl font-bold text-indigo-700">$24,750</p>
         </div>
-        <div class="bg-white rounded-xl p-4 text-center border border-gray-100">
-          <p class="text-xs text-gray-500 mb-1">Listing Agent Gets</p>
+        <div id="listing-card" class="bg-white rounded-xl p-4 text-center border border-gray-100">
+          <p id="lbl-listing" class="text-xs text-gray-500 mb-1">Listing Agent Gets</p>
           <p id="listingAgent" class="text-xl font-bold text-green-600">$8,663</p>
         </div>
-        <div class="bg-white rounded-xl p-4 text-center border border-gray-100">
+        <div id="buyer-card" class="bg-white rounded-xl p-4 text-center border border-gray-100">
           <p class="text-xs text-gray-500 mb-1">Buyer's Agent Gets</p>
           <p id="buyerAgent" class="text-xl font-bold text-green-600">$8,663</p>
         </div>
         <div class="bg-white rounded-xl p-4 text-center border border-gray-100">
-          <p class="text-xs text-gray-500 mb-1">Seller's Net (after comm.)</p>
+          <p class="text-xs text-gray-500 mb-1">Seller's Net</p>
           <p id="sellerNet" class="text-xl font-bold text-gray-700">$425,250</p>
         </div>
       </div>
+
+      <!-- Country note -->
+      <div id="country-note" class="mt-6 p-4 bg-indigo-50 rounded-xl text-sm text-indigo-800 border border-indigo-100"></div>
+    </div>
+
+    <!-- Quick links to other tools -->
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <a href="/closing-costs/" class="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <span class="text-2xl">🏠</span>
+        <div>
+          <p class="font-semibold text-gray-900">Closing Costs Calculator</p>
+          <p class="text-sm text-gray-500">Buyer & seller closing costs by country</p>
+        </div>
+      </a>
+      <a href="/seller-net/" class="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <span class="text-2xl">💰</span>
+        <div>
+          <p class="font-semibold text-gray-900">Seller Net Proceeds</p>
+          <p class="text-sm text-gray-500">Commission + closing costs + mortgage payoff</p>
+        </div>
+      </a>
     </div>
 
     <div class="mt-12 prose prose-lg max-w-none">
-      <h2>How Real Estate Commissions Work</h2>
-      <p>In the US, real estate commissions are typically 5–6% of the sale price, split between the listing agent and buyer's agent. Each agent then splits their portion with their brokerage.</p>
-      <h3>The 2024 NAR Settlement Impact</h3>
-      <p>Following the NAR settlement, buyer's agent commissions are now negotiated separately and must be agreed upon in writing before touring homes. This has led to more varied commission structures.</p>
-      <h3>Typical Commission Splits</h3>
-      <ul>
-        <li><strong>New agents:</strong> 50/50 with broker</li>
-        <li><strong>Experienced agents:</strong> 70/30 to 80/20</li>
-        <li><strong>Top producers:</strong> 90/10 or 100% (desk fee model)</li>
-      </ul>
+      <h2>How Real Estate Commissions Work by Country</h2>
+      <p>Commission structures vary significantly across markets. Use the country selector above to switch between calculation modes.</p>
+
+      <h3>United States</h3>
+      <p>Typically 5–6% total, split between listing and buyer's agent. Following the 2024 NAR settlement, buyer agent fees must be negotiated in writing before home tours.</p>
+
+      <h3>Canada</h3>
+      <p>Typically 3.5–5% total, varies by province. HST/GST applies to the commission. Ontario averages around 4–5%, BC around 3–4%.</p>
+
+      <h3>Australia</h3>
+      <p>Seller pays 1.6–2.5% + GST (10%). No buyer agent commission in traditional transactions. Rates are lowest in capital cities, higher in regional areas.</p>
+
+      <h3>United Kingdom</h3>
+      <p>Estate agent fee is 0.75–3% (excluding VAT). Only the seller pays — there is no buyer's agent. VAT at 20% is added to the quoted fee.</p>
+
+      <h3>Germany</h3>
+      <p>Since 2020, the Maklercourtage (3–7% incl. VAT) is split equally between buyer and seller by law. Each pays half to their respective agent.</p>
     </div>
   </div>
 
+  <style>
+    .country-btn { background: white; color: #374151; transition: all 0.15s; }
+    .country-btn:hover { background: #eef2ff; color: #4338ca; }
+    .country-btn.active { background: #4f46e5; color: white; }
+  </style>
+
   <script>
-    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+    const COUNTRIES = {
+      US: {
+        sym: '$', rate: 5.5, buyerSplit: 50, agentSplit: 70, price: 450000,
+        hasBuyer: true,
+        rateLabel: 'Total Commission Rate (%)',
+        rateHint: 'Typically 5–6% in the US',
+        listingLabel: 'Listing Agent Gets',
+        note: '🇺🇸 <strong>USA:</strong> Commission is typically 5–6%, split 50/50 between listing and buyer\'s agent. Since the 2024 NAR settlement, buyer agent fees must be agreed in writing before touring homes.'
+      },
+      CA: {
+        sym: 'C$', rate: 4.0, buyerSplit: 38, agentSplit: 80, price: 620000,
+        hasBuyer: true,
+        rateLabel: 'Total Commission Rate (%)',
+        rateHint: 'Typically 3.5–5% in Canada + HST/GST',
+        listingLabel: 'Listing Agent Gets',
+        note: '🇨🇦 <strong>Canada:</strong> Commission varies by province — Ontario ~4–5%, BC ~3–4%. HST or GST applies on top of commission. Shown figures exclude tax.'
+      },
+      AU: {
+        sym: 'A$', rate: 2.2, buyerSplit: 0, agentSplit: 80, price: 780000,
+        hasBuyer: false,
+        rateLabel: 'Agent Commission Rate (%)',
+        rateHint: 'Typically 1.6–2.5% + 10% GST in Australia',
+        listingLabel: 'Agent Fee (excl. GST)',
+        note: '🇦🇺 <strong>Australia:</strong> Seller pays the agent 1.6–2.5%. There is no buyer\'s agent commission in traditional sales. GST (10%) is added to the agent fee — add A$' + '' + ' to the shown amount.'
+      },
+      GB: {
+        sym: '£', rate: 1.5, buyerSplit: 0, agentSplit: 75, price: 310000,
+        hasBuyer: false,
+        rateLabel: 'Agent Fee Rate (% excl. VAT)',
+        rateHint: 'Typically 0.75–3% excl. VAT in the UK',
+        listingLabel: 'Agent Fee (excl. VAT)',
+        note: '🇬🇧 <strong>United Kingdom:</strong> Only the seller pays the estate agent. VAT at 20% is added to the quoted fee — multiply agent fee by 1.2 for the total cost. No buyer\'s agent commission.'
+      },
+      DE: {
+        sym: '€', rate: 6.0, buyerSplit: 50, agentSplit: 100, price: 390000,
+        hasBuyer: true,
+        rateLabel: 'Total Maklercourtage (% incl. VAT)',
+        rateHint: 'Typically 5.95–7.14% incl. 19% VAT in Germany',
+        listingLabel: 'Seller\'s Agent Half',
+        note: '🇩🇪 <strong>Germany:</strong> Since 2020, buyer and seller must split the Maklercourtage equally by law. The total (5.95–7.14% incl. VAT) is divided 50/50. Each party pays their own agent.'
+      }
+    };
+
+    let current = 'US';
+
+    function fmt(n, sym) {
+      return sym + Math.round(n).toLocaleString('en-US');
+    }
+
     function calc() {
+      const c = COUNTRIES[current];
       const price = parseFloat(document.getElementById('salePrice').value) || 0;
       const rate = parseFloat(document.getElementById('commissionRate').value) / 100 || 0;
-      const buyerPct = parseFloat(document.getElementById('buyerSplit').value) / 100 || 0.5;
-      const agentPct = parseFloat(document.getElementById('agentBrokerSplit').value) / 100 || 0.7;
+      const buyerPct = c.hasBuyer ? (parseFloat(document.getElementById('buyerSplit').value) / 100 || 0) : 0;
+      const agentPct = parseFloat(document.getElementById('agentBrokerSplit').value) / 100 || 1;
       const total = price * rate;
-      const listingPool = total * (1 - buyerPct);
-      const buyerPool = total * buyerPct;
+      const listingPool = c.hasBuyer ? total * (1 - buyerPct) : total;
+      const buyerPool = c.hasBuyer ? total * buyerPct : 0;
       const listingAgentNet = listingPool * agentPct;
-      const buyerAgentNet = buyerPool * agentPct;
-      document.getElementById('totalComm').textContent = fmt(total);
-      document.getElementById('listingAgent').textContent = fmt(listingAgentNet);
-      document.getElementById('buyerAgent').textContent = fmt(buyerAgentNet);
-      document.getElementById('sellerNet').textContent = fmt(price - total);
+      const buyerAgentNet = c.hasBuyer ? buyerPool * agentPct : 0;
+
+      document.getElementById('totalComm').textContent = fmt(total, c.sym);
+      document.getElementById('listingAgent').textContent = fmt(listingAgentNet, c.sym);
+      document.getElementById('buyerAgent').textContent = fmt(buyerAgentNet, c.sym);
+      document.getElementById('sellerNet').textContent = fmt(price - total, c.sym);
     }
+
+    function setCountry(code) {
+      current = code;
+      const c = COUNTRIES[code];
+
+      // Update button styles
+      document.querySelectorAll('.country-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.country === code);
+      });
+
+      // Update labels
+      document.getElementById('lbl-price').textContent = 'Sale Price (' + c.sym + ')';
+      document.getElementById('lbl-rate').textContent = c.rateLabel;
+      document.getElementById('rate-hint').textContent = c.rateHint;
+      document.getElementById('lbl-listing').textContent = c.listingLabel;
+      document.getElementById('country-note').innerHTML = c.note;
+
+      // Update defaults
+      document.getElementById('salePrice').value = c.price;
+      document.getElementById('commissionRate').value = c.rate;
+      document.getElementById('agentBrokerSplit').value = c.agentSplit;
+
+      // Show/hide buyer split row and card
+      const hasBuyer = c.hasBuyer;
+      document.getElementById('buyer-split-row').style.display = hasBuyer ? '' : 'none';
+      document.getElementById('buyer-card').style.display = hasBuyer ? '' : 'none';
+      if (hasBuyer) document.getElementById('buyerSplit').value = c.buyerSplit;
+
+      calc();
+    }
+
+    document.querySelectorAll('.country-btn').forEach(btn => {
+      btn.addEventListener('click', () => setCountry(btn.dataset.country));
+    });
     document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
-    calc();
+
+    setCountry('US');
   </script>
 </Base>
