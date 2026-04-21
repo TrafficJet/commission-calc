@@ -28,13 +28,13 @@ Use this calculator to estimate how much you'll pay in agent fees when you sell 
 
 ## How to Use the Commission Calculator
 
-Start by entering your expected home sale price. Not sure what your home is worth? Pull up recent comparable sales on Zillow or Realtor.com for a rough number.
+Start with your expected sale price. Not sure what your home is worth? Pull up recent comparable sales on Zillow or Realtor.com to get a rough number.
 
-Then adjust the listing agent commission percentage. It usually lands between 2.5% and 3%, but enter whatever rate you've negotiated. Set the buyer agent commission separately — this matters in 2025. The NAR settlement (National Association of Realtors' antitrust resolution) means these two fees are no longer bundled together.
+Then enter your listing agent commission. It usually falls between 2.5% and 3%. Enter whatever rate you've negotiated. Set the buyer agent commission separately — this is important in 2025. The NAR settlement means these two fees no longer come bundled together.
 
-The calculator shows your total commission in dollars, estimated closing costs, and what you'll actually walk away with. Every field accepts decimals. You can model a 2.25% listing fee or a 2.75% buyer agent offer and see exactly how it shifts your bottom line.
+The calculator shows your total commission in dollars, estimated closing costs, and what you actually walk away with. Every field takes decimals. You can model a 2.25% listing fee or a 2.75% buyer agent offer and see exactly how it changes your bottom line.
 
-Most sellers run three to five different scenarios before listing. Bookmark this page if you're comparing agents or planning to negotiate rates.
+Most sellers run three to five scenarios before listing. Bookmark this page if you're comparing agents or planning to negotiate rates.
 
 ## Average Real Estate Commission Rates in 2025: Expect 4.5%–5.4% Total
 
