@@ -11,18 +11,9 @@ Use this calculator to estimate how much you'll pay in agent fees when you sell 
 
 ---
 
-**[Interactive Commission Calculator]**
+**[Use the free calculator at the top of this page — enter your sale price and commission rate to see results instantly.](https://commission-calc.com/)**
 
-| Input Field | Your Numbers |
-|---|---|
-| Home Sale Price | $ ________ |
-| Listing Agent Commission (%) | ________ % |
-| Buyer Agent Commission (%) | ________ % |
-| **Total Commission ($)** | **$ ________** |
-| Estimated Closing Costs (%) | ________ % |
-| **Estimated Net Proceeds** | **$ ________** |
-
-*Adjust any field to see updated results in real time.*
+> **Try it now:** Enter your home's sale price, adjust the commission percentage, and see your agent's net payout and your seller proceeds update in real time. Supports USA, Canada, Australia, UK, and Germany.
 
 ---
 
