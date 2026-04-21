@@ -28,17 +28,17 @@ Use this calculator to estimate how much you'll pay in agent fees when you sell 
 
 ## How to Use the Commission Calculator
 
-Start with your expected sale price. Not sure what your home is worth? Pull up recent comparable sales on Zillow or Realtor.com to get a rough number.
+Start with your expected sale price. Not sure what your home is worth? Pull up recent comparable sales on Zillow or Realtor.com for a rough number.
 
-Then enter your listing agent commission. It usually falls between 2.5% and 3%. Enter whatever rate you've negotiated. Set the buyer agent commission separately — this is important in 2025. The NAR settlement means these two fees no longer come bundled together.
+Then enter your listing agent commission. It usually falls between 2.5% and 3%, but put in whatever you've actually negotiated. Set the buyer agent commission separately — this is important in 2025. The NAR settlement (National Association of Realtors' antitrust resolution) split these two fees apart. They no longer get bundled.
 
-The calculator shows your total commission in dollars, estimated closing costs, and what you actually walk away with. Every field takes decimals. You can model a 2.25% listing fee or a 2.75% buyer agent offer and see exactly how it changes your bottom line.
+The calculator shows total commission in dollars, estimated closing costs, and what you actually walk away with. Every field takes decimals. You can try a 2.25% listing fee or a 2.75% buyer agent offer and watch exactly how it moves your bottom line.
 
 Most sellers run three to five scenarios before listing. Bookmark this page if you're comparing agents or planning to negotiate rates.
 
 ## Average Real Estate Commission Rates in 2025: Expect 4.5%–5.4% Total
 
-The average total commission has dropped since the 2024 NAR settlement. Before the settlement, most sellers paid 5%–6%. In 2025, that number sits closer to 4.5%–5.4%, according to NAR's 2024 Member Profile.
+The average total commission has dropped since the 2024 NAR settlement. Before it, most sellers paid 5%–6%. In 2025, that number sits closer to 4.5%–5.4%, according to NAR's 2024 Member Profile.
 
 Listing agent fees typically run 2.5%–3%. Buyer agent fees — now negotiated separately — tend to fall between 2% and 3% depending on the market. On high-value homes, agents often accept a lower percentage because the dollar amount is still large. A 2% fee on a $1.2 million home is $24,000.
 
@@ -56,7 +56,7 @@ Rural markets tend to have higher rates. Lower sale prices mean agents need a bi
 
 ## How the NAR Settlement Changed Commissions: Key Rules Since August 2024
 
-In August 2024, the National Association of Realtors put new rules into effect as part of a $418 million antitrust settlement. The lawsuits were filed by home sellers. The Department of Justice had been looking at industry commission practices since at least 2019. The settlement changed how agents get paid in a fundamental way (NAR official announcement, August 2024).
+In August 2024, the National Association of Realtors put new rules into effect as part of a $418 million antitrust settlement. The lawsuits were filed by home sellers. The Department of Justice had been examining industry commission practices since at least 2019. The settlement changed how agents get paid in a fundamental way (NAR official announcement, August 2024).
 
 **The biggest change:** sellers are no longer required to offer buyer agent compensation through the MLS. Before the settlement, listing on the MLS meant you had to name a buyer agent commission. That locked sellers into paying both sides. That requirement is gone.
 
@@ -79,7 +79,7 @@ Here's a concrete walkthrough — $400,000 sale price, 2.5% listing agent commis
 | Estimated Closing Costs (~2%) | $400,000 × 0.02 | $8,000 |
 | **Seller Net Proceeds** | $400,000 – $20,000 – $8,000 | **$372,000** |
 
-The commission doesn't all go to the agent. Each agent splits their share with their brokerage. If the listing agent has a 70/30 split, they keep $7,000 of that $10,000 and the brokerage takes $3,000. The same logic applies to the buyer's agent.
+The commission doesn't all go to the agent. Each agent splits their share with their brokerage. If the listing agent has a 70/30 split, they keep $7,000 of that $10,000 and the brokerage takes $3,000. Same logic applies to the buyer's agent.
 
 After commission and closing costs, you walk away with about $372,000 on a $400,000 sale. If you still owe $250,000 on the mortgage, your actual cash in hand drops to around $122,000. Run this math before you list. It helps you decide whether to push harder on commission, adjust your asking price, or look at discount options.
 
