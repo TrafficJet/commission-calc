@@ -1,0 +1,256 @@
+---
+import Base from '../layouts/Base.astro';
+const softwareSchema = JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"iBuyer Offer Analyzer","url":"https://commission-calc.com/ibuyer-offer-calculator/","description":"Free iBuyer offer analyzer. Compare Opendoor, Offerpad, and other iBuyer net proceeds vs traditional listing. See exactly what the convenience premium costs.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const faqSchema = JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an iBuyer and how do they work?","acceptedAnswer":{"@type":"Answer","text":"iBuyers (Opendoor, Offerpad) buy homes directly using algorithms to make near-instant cash offers. They charge a service fee of 5-8% plus repair deductions, then resell the home. Benefits: certainty and speed. You skip showings, negotiations, and contingencies."}},{"@type":"Question","name":"How much do iBuyers charge?","acceptedAnswer":{"@type":"Answer","text":"iBuyer service fees typically range from 5-8% of the sale price. Opendoor averages around 5-8%. Additionally, they deduct estimated repair costs ($0-$10,000+). Combined with closing costs they handle, the total cost is often similar to a traditional sale — but without the hassle."}},{"@type":"Question","name":"Do iBuyers offer fair market value?","acceptedAnswer":{"@type":"Answer","text":"iBuyers typically offer 1-5% below fair market value, plus their service fee. After fees and repairs, net proceeds are usually $10,000-$25,000 less than a traditional sale in typical market conditions. However in slow markets, an iBuyer offer can sometimes be competitive when you factor in carrying costs."}},{"@type":"Question","name":"When does selling to an iBuyer make sense?","acceptedAnswer":{"@type":"Answer","text":"iBuyers make sense when: you need to close quickly (relocation, divorce, financial pressure); you're buying another home and need sale certainty; you want to avoid the hassle of showings and open houses; or your local market is slow. The convenience premium is real — decide if it's worth it."}},{"@type":"Question","name":"Are iBuyers still operating in 2026?","acceptedAnswer":{"@type":"Answer","text":"Opendoor and Offerpad are the main remaining iBuyers after Zillow Offers shut down in 2021. Both are still operating in major US markets. Check their websites to see if your ZIP code qualifies."}}]});
+---
+<Base
+  title="iBuyer Offer Analyzer — Opendoor vs Traditional Sale Calculator 2026"
+  description="Free iBuyer offer analyzer. Compare Opendoor or Offerpad net proceeds vs traditional listing. See your exact convenience premium and time savings."
+  canonicalUrl="https://commission-calc.com/ibuyer-offer-calculator/"
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">iBuyer Offer Analyzer</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-2">Compare an iBuyer offer (Opendoor, Offerpad) vs. a traditional listing — see the exact cost of convenience.</p>
+
+    <div class="mb-6 p-3 bg-indigo-50 dark:bg-indigo-950 rounded-lg border border-indigo-200 dark:border-indigo-800 text-sm text-indigo-800 dark:text-indigo-300">
+      iBuyers charge 5–8% service fees plus repair deductions. This calculator shows your all-in net proceeds for both paths so you can decide if the convenience is worth it.
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Your Home</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fair Market Value ($)</label>
+            <input type="number" id="fmv" value="400000" min="0" step="5000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly Carrying Costs ($)</label>
+            <input type="number" id="carrying" value="2500" min="0" step="100"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Mortgage + taxes + insurance while selling</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">iBuyer Offer (Opendoor / Offerpad)</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">iBuyer Offer Price ($)</label>
+            <input type="number" id="ibuyerOffer" value="384000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Typically 96–99% of FMV</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">iBuyer Service Fee (%)</label>
+            <input type="number" id="ibuyerFee" value="6.5" min="0" max="15" step="0.1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Opendoor avg: 5–8%</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Repair Deductions ($)</label>
+            <input type="number" id="repairs" value="5000" min="0" step="500"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Days to Close (iBuyer)</label>
+            <input type="number" id="ibuyerDays" value="14" min="1" max="90" step="1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 sm:col-span-2">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Traditional Listing</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Expected Sale Price ($)</label>
+            <input type="number" id="tradPrice" value="410000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Agent Commission (%)</label>
+            <input type="number" id="commission" value="5.5" min="0" max="10" step="0.1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Closing + Prep ($)</label>
+            <input type="number" id="tradOther" value="5500" min="0" step="500"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Days on Market</label>
+            <input type="number" id="tradDays" value="45" min="1" max="365" step="1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">+ Close Time (days)</label>
+            <input type="number" id="closeTime" value="30" min="1" max="90" step="1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4 mb-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-orange-50 dark:bg-orange-950 rounded-2xl p-5 border border-orange-200 dark:border-orange-800">
+          <p class="text-sm font-semibold text-orange-700 dark:text-orange-400 mb-3">iBuyer Path</p>
+          <div class="space-y-1.5 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Offer price</span><span id="ib-offer" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Service fee</span><span id="ib-fee" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Repair deductions</span><span id="ib-repairs" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Carrying costs</span><span id="ib-carrying" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between border-t border-orange-200 dark:border-orange-700 pt-2 mt-2">
+              <span class="font-bold text-gray-800 dark:text-gray-100">Net Proceeds</span>
+              <span id="ib-net" class="text-xl font-bold text-orange-700 dark:text-orange-400">—</span>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-2"><span id="ib-days">—</span> days to close</p>
+        </div>
+        <div class="bg-indigo-50 dark:bg-indigo-950 rounded-2xl p-5 border border-indigo-200 dark:border-indigo-800">
+          <p class="text-sm font-semibold text-indigo-700 dark:text-indigo-400 mb-3">Traditional Listing</p>
+          <div class="space-y-1.5 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Sale price</span><span id="tr-price" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Agent commission</span><span id="tr-commission" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Closing + prep</span><span id="tr-other" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Carrying costs</span><span id="tr-carrying" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between border-t border-indigo-200 dark:border-indigo-700 pt-2 mt-2">
+              <span class="font-bold text-gray-800 dark:text-gray-100">Net Proceeds</span>
+              <span id="tr-net" class="text-xl font-bold text-indigo-700 dark:text-indigo-400">—</span>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-2"><span id="tr-days">—</span> days total</p>
+        </div>
+      </div>
+
+      <div id="verdict" class="rounded-2xl p-5 border text-center">
+        <p class="text-sm text-gray-500 mb-1">Convenience Premium</p>
+        <p id="verdict-amount" class="text-3xl font-bold mb-1">—</p>
+        <p id="verdict-text" class="text-sm">—</p>
+        <p id="verdict-perday" class="text-xs text-gray-400 mt-1">—</p>
+      </div>
+    </div>
+
+    <div class="p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-sm text-amber-800 dark:text-amber-300 mb-8">
+      For educational purposes only. iBuyer fees and offer discounts vary by company, market, and property condition. Always get multiple offers before deciding.
+    </div>
+
+    <div class="mt-10 prose dark:prose-invert prose-lg max-w-none">
+      <h2>iBuyer vs Traditional Sale: Complete Guide 2026</h2>
+
+      <h3>What is an iBuyer?</h3>
+      <p>iBuyers (Opendoor, Offerpad) use algorithms to make near-instant cash offers on homes. They charge a service fee of 5–8% and deduct estimated repairs, then resell the home. The main benefits are speed, certainty, and convenience — no showings, no contingencies, no waiting.</p>
+
+      <h3>How much do iBuyers charge?</h3>
+      <p>Service fees typically run 5–8% of the offer price. On top of that, they deduct repair costs ($0–$10,000+). Combined costs are often similar to a traditional sale — but the offer price is typically 1–5% below market value.</p>
+
+      <h3>When does selling to an iBuyer make sense?</h3>
+      <p>iBuyers work best when you need to close quickly (relocation, divorce, financial pressure), you're buying another home and need sale certainty, or you want to skip showings and open houses. The convenience premium is real — only you can decide if it's worth it.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>What is an iBuyer and how do they work?</h3>
+      <p>iBuyers buy homes directly using algorithms, charge 5–8% service fees, deduct repairs, then resell. Benefits: speed and certainty. Cost: typically 1–5% less than market value plus fees.</p>
+
+      <h3>How much do iBuyers charge?</h3>
+      <p>5–8% service fees plus repair deductions. Opendoor averages 5–8%. Compare total all-in costs vs traditional listing — the gap is often smaller than expected when you include carrying costs during a traditional sale.</p>
+
+      <h3>Do iBuyers offer fair market value?</h3>
+      <p>Typically 96–99% of FMV before fees. After fees and repairs, net proceeds are usually $10,000–$25,000 less than a traditional sale in typical market conditions.</p>
+
+      <h3>When does selling to an iBuyer make sense?</h3>
+      <p>When speed and certainty outweigh the convenience premium — relocation, buying a new home contingent on your sale, avoiding showings, or if your local market is slow.</p>
+
+      <h3>Are iBuyers still operating in 2026?</h3>
+      <p>Opendoor and Offerpad are the main remaining iBuyers after Zillow Offers shut down in 2021. Both operate in major US markets — check their websites to see if your ZIP code qualifies.</p>
+    </div>
+
+    <div class="mt-10 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
+      <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Related Calculators</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="/fsbo-vs-agent-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">FSBO vs Agent</a>
+        <a href="/seller-net/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Seller Net Proceeds</a>
+        <a href="/capital-gains-home-sale/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Capital Gains</a>
+        <a href="/closing-costs/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Closing Costs</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function fmt(n) {
+      const abs = Math.abs(n);
+      return (n < 0 ? '-$' : '$') + abs.toLocaleString('en-US', {maximumFractionDigits: 0});
+    }
+    function calc() {
+      const fmv = parseFloat(document.getElementById('fmv').value) || 0;
+      const carrying = parseFloat(document.getElementById('carrying').value) || 0;
+      const ibuyerOffer = parseFloat(document.getElementById('ibuyerOffer').value) || 0;
+      const ibuyerFee = parseFloat(document.getElementById('ibuyerFee').value) / 100 || 0;
+      const repairs = parseFloat(document.getElementById('repairs').value) || 0;
+      const ibuyerDays = parseFloat(document.getElementById('ibuyerDays').value) || 14;
+      const tradPrice = parseFloat(document.getElementById('tradPrice').value) || 0;
+      const commission = parseFloat(document.getElementById('commission').value) / 100 || 0;
+      const tradOther = parseFloat(document.getElementById('tradOther').value) || 0;
+      const tradDays = parseFloat(document.getElementById('tradDays').value) || 45;
+      const closeTime = parseFloat(document.getElementById('closeTime').value) || 30;
+
+      const ibFeeAmt = ibuyerOffer * ibuyerFee;
+      const ibCarrying = carrying * (ibuyerDays / 30);
+      const ibNet = ibuyerOffer - ibFeeAmt - repairs - ibCarrying;
+
+      const totalTradDays = tradDays + closeTime;
+      const trCarrying = carrying * (totalTradDays / 30);
+      const trCommAmt = tradPrice * commission;
+      const trNet = tradPrice - trCommAmt - tradOther - trCarrying;
+
+      const diff = trNet - ibNet;
+      const daysSaved = totalTradDays - ibuyerDays;
+      const perDay = daysSaved > 0 ? diff / daysSaved : 0;
+
+      document.getElementById('ib-offer').textContent = fmt(ibuyerOffer);
+      document.getElementById('ib-fee').textContent = '-' + fmt(ibFeeAmt);
+      document.getElementById('ib-repairs').textContent = '-' + fmt(repairs);
+      document.getElementById('ib-carrying').textContent = '-' + fmt(ibCarrying);
+      document.getElementById('ib-net').textContent = fmt(ibNet);
+      document.getElementById('ib-days').textContent = Math.round(ibuyerDays);
+
+      document.getElementById('tr-price').textContent = fmt(tradPrice);
+      document.getElementById('tr-commission').textContent = '-' + fmt(trCommAmt);
+      document.getElementById('tr-other').textContent = '-' + fmt(tradOther);
+      document.getElementById('tr-carrying').textContent = '-' + fmt(trCarrying);
+      document.getElementById('tr-net').textContent = fmt(trNet);
+      document.getElementById('tr-days').textContent = Math.round(totalTradDays);
+
+      const verdict = document.getElementById('verdict');
+      const vAmt = document.getElementById('verdict-amount');
+      const vText = document.getElementById('verdict-text');
+      const vPerDay = document.getElementById('verdict-perday');
+
+      vAmt.textContent = fmt(Math.abs(diff));
+      vPerDay.textContent = daysSaved > 0 ? 'That\'s ' + fmt(Math.abs(perDay)) + ' per day saved' : '';
+
+      if (diff > 0) {
+        verdict.className = 'rounded-2xl p-5 border text-center bg-orange-50 dark:bg-orange-950 border-orange-300 dark:border-orange-700';
+        vAmt.className = 'text-3xl font-bold mb-1 text-orange-700 dark:text-orange-400';
+        vText.textContent = 'The iBuyer path costs ' + fmt(diff) + ' more than listing traditionally.';
+      } else if (diff < 0) {
+        verdict.className = 'rounded-2xl p-5 border text-center bg-green-50 dark:bg-green-950 border-green-300 dark:border-green-700';
+        vAmt.className = 'text-3xl font-bold mb-1 text-green-700 dark:text-green-400';
+        vText.textContent = 'The iBuyer actually nets you ' + fmt(Math.abs(diff)) + ' MORE than listing, considering carrying costs.';
+      } else {
+        verdict.className = 'rounded-2xl p-5 border text-center bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700';
+        vAmt.className = 'text-3xl font-bold mb-1 text-gray-700 dark:text-gray-300';
+        vText.textContent = 'Both paths net the same — choose based on speed and convenience.';
+      }
+    }
+    document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+    calc();
+  </script>
+</Base>
