@@ -1,0 +1,483 @@
+---
+import Base from '../layouts/Base.astro';
+const canonicalUrl = 'https://commission-calc.com/mortgage-calculator/';
+const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Mortgage Payment Calculator",
+      "url": canonicalUrl,
+      "description": "Free mortgage payment calculator. Calculates PITI — principal, interest, taxes, and insurance — plus PMI, HOA, amortization schedule, and extra payment savings.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does PITI stand for in a mortgage?",
+          "acceptedAnswer": { "@type": "Answer", "text": "PITI stands for Principal, Interest, Taxes, and Insurance — the four components that make up your total monthly mortgage payment." }
+        },
+        {
+          "@type": "Question",
+          "name": "When does PMI drop off?",
+          "acceptedAnswer": { "@type": "Answer", "text": "PMI (private mortgage insurance) is required when your down payment is less than 20%. It automatically cancels when your loan balance reaches 78% of the original home value (i.e., 22% equity). You can also request cancellation at 80% LTV." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I make extra mortgage payments?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Extra principal payments reduce your loan balance faster, cutting total interest paid and shortening your payoff timeline. Even $100/month extra on a 30-year loan can save tens of thousands in interest." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a good mortgage interest rate in 2026?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The 30-year fixed mortgage rate has been in the 6.5–7.5% range through 2025-2026. Rates vary by credit score, loan type, and down payment. Check Freddie Mac's weekly PMMS survey for the latest national average." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is mortgage interest calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Each monthly payment's interest portion is: (remaining loan balance × annual rate) / 12. Early payments are mostly interest; over time a larger share goes to principal — this is amortization." }
+        }
+      ]
+    }
+  ]
+});
+---
+<Base
+  title="Mortgage Payment Calculator 2026 — PITI + Amortization | Free"
+  description="Calculate your full monthly mortgage payment including principal, interest, property taxes, insurance, and PMI. See amortization schedule and extra payment savings."
+  canonicalUrl={canonicalUrl}
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={schemaJson} />
+
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Mortgage Payment Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">Calculate your full monthly PITI payment — principal, interest, taxes, insurance, PMI, and HOA.</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Inputs -->
+      <div class="lg:col-span-3 bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-lg font-semibold mb-5 text-gray-800 dark:text-gray-200">Loan Details</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Price ($)</label>
+            <input type="number" id="homePrice" value="400000" min="0" step="5000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Down Payment ($)</label>
+            <div class="flex gap-2">
+              <input type="number" id="downPayment" value="80000" min="0" step="1000"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              <span id="downPct" class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap self-center">20%</span>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loan Term</label>
+            <div class="flex gap-2">
+              <button data-term="30" class="term-btn flex-1 py-2 rounded-lg border text-sm font-medium">30 yr</button>
+              <button data-term="20" class="term-btn flex-1 py-2 rounded-lg border text-sm font-medium">20 yr</button>
+              <button data-term="15" class="term-btn flex-1 py-2 rounded-lg border text-sm font-medium">15 yr</button>
+              <button data-term="10" class="term-btn flex-1 py-2 rounded-lg border text-sm font-medium">10 yr</button>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Interest Rate (%/yr)</label>
+            <input type="number" id="intRate" value="6.85" min="0" max="25" step="0.05"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">State</label>
+            <select id="stateSelect"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="1.10">National avg (1.10%)</option>
+              <option value="0.41">Alabama (0.41%)</option>
+              <option value="1.19">Alaska (1.19%)</option>
+              <option value="0.63">Arizona (0.63%)</option>
+              <option value="0.63">Arkansas (0.63%)</option>
+              <option value="0.75">California (0.75%)</option>
+              <option value="0.51">Colorado (0.51%)</option>
+              <option value="2.14">Connecticut (2.14%)</option>
+              <option value="0.59">Delaware (0.59%)</option>
+              <option value="0.56">Washington DC (0.56%)</option>
+              <option value="0.91">Florida (0.91%)</option>
+              <option value="0.92">Georgia (0.92%)</option>
+              <option value="0.29">Hawaii (0.29%)</option>
+              <option value="0.69">Idaho (0.69%)</option>
+              <option value="2.23">Illinois (2.23%)</option>
+              <option value="0.87">Indiana (0.87%)</option>
+              <option value="1.53">Iowa (1.53%)</option>
+              <option value="1.41">Kansas (1.41%)</option>
+              <option value="0.86">Kentucky (0.86%)</option>
+              <option value="0.56">Louisiana (0.56%)</option>
+              <option value="1.09">Maine (1.09%)</option>
+              <option value="1.07">Maryland (1.07%)</option>
+              <option value="1.23">Massachusetts (1.23%)</option>
+              <option value="1.54">Michigan (1.54%)</option>
+              <option value="1.11">Minnesota (1.11%)</option>
+              <option value="0.65">Mississippi (0.65%)</option>
+              <option value="1.01">Missouri (1.01%)</option>
+              <option value="0.84">Montana (0.84%)</option>
+              <option value="1.73">Nebraska (1.73%)</option>
+              <option value="0.60">Nevada (0.60%)</option>
+              <option value="2.09">New Hampshire (2.09%)</option>
+              <option value="2.49">New Jersey (2.49%)</option>
+              <option value="0.80">New Mexico (0.80%)</option>
+              <option value="1.73">New York (1.73%)</option>
+              <option value="0.84">North Carolina (0.84%)</option>
+              <option value="0.98">North Dakota (0.98%)</option>
+              <option value="1.62">Ohio (1.62%)</option>
+              <option value="0.90">Oklahoma (0.90%)</option>
+              <option value="1.01">Oregon (1.01%)</option>
+              <option value="1.58">Pennsylvania (1.58%)</option>
+              <option value="1.63">Rhode Island (1.63%)</option>
+              <option value="0.57">South Carolina (0.57%)</option>
+              <option value="1.31">South Dakota (1.31%)</option>
+              <option value="0.71">Tennessee (0.71%)</option>
+              <option value="1.74">Texas (1.74%)</option>
+              <option value="0.63">Utah (0.63%)</option>
+              <option value="1.90">Vermont (1.90%)</option>
+              <option value="0.82">Virginia (0.82%)</option>
+              <option value="0.98">Washington (0.98%)</option>
+              <option value="0.62">West Virginia (0.62%)</option>
+              <option value="1.85">Wisconsin (1.85%)</option>
+              <option value="0.61">Wyoming (0.61%)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Insurance ($/yr)</label>
+            <input type="number" id="insurance" value="1500" min="0" step="100"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">HOA ($/mo)</label>
+            <input type="number" id="hoa" value="0" min="0" step="25"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">PMI Rate (% if &lt;20% down)</label>
+            <input type="number" id="pmiRate" value="0.85" min="0" max="3" step="0.05"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+
+        <div class="mt-5 border-t border-gray-200 dark:border-gray-700 pt-5">
+          <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Extra Payment Simulator</h3>
+          <div class="flex gap-3 items-center">
+            <input type="number" id="extraPayment" value="0" min="0" step="50"
+              class="w-40 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <span class="text-sm text-gray-500 dark:text-gray-400">extra $/month</span>
+          </div>
+          <p id="extraResult" class="mt-2 text-sm text-indigo-700 dark:text-indigo-400 font-medium"></p>
+        </div>
+      </div>
+
+      <!-- Results panel -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-indigo-700 dark:bg-indigo-800 text-white rounded-2xl p-6">
+          <p class="text-indigo-200 text-sm mb-1">Monthly Payment</p>
+          <p id="totalPayment" class="text-4xl font-bold">$2,347</p>
+          <p id="pmiNote" class="text-indigo-200 text-xs mt-2 hidden">Includes PMI — drops off at 20% equity</p>
+        </div>
+
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 space-y-3">
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Principal & Interest</span>
+            <span id="piPayment" class="font-semibold">$2,094</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Property Tax</span>
+            <span id="taxPayment" class="font-semibold">$367</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Home Insurance</span>
+            <span id="insPayment" class="font-semibold">$125</span>
+          </div>
+          <div class="flex justify-between text-sm" id="pmiRow">
+            <span class="text-gray-500 dark:text-gray-400">PMI</span>
+            <span id="pmiPayment" class="font-semibold">$0</span>
+          </div>
+          <div class="flex justify-between text-sm" id="hoaRow">
+            <span class="text-gray-500 dark:text-gray-400">HOA</span>
+            <span id="hoaDisplay" class="font-semibold">$0</span>
+          </div>
+          <div class="border-t border-gray-200 dark:border-gray-600 pt-3 space-y-2">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500 dark:text-gray-400">Loan Amount</span>
+              <span id="loanAmt" class="font-semibold">$320,000</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500 dark:text-gray-400">Total Interest Paid</span>
+              <span id="totalInterest" class="font-semibold text-red-600 dark:text-red-400">$0</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500 dark:text-gray-400">Total Cost of Loan</span>
+              <span id="totalCost" class="font-semibold">$0</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500 dark:text-gray-400">Payoff Date</span>
+              <span id="payoffDate" class="font-semibold">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amortization chart -->
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+          <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Principal vs Interest Over Time</p>
+          <svg id="amorChart" width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+            <path id="chartInterest" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" d="" />
+            <path id="chartPrincipal" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" d="" />
+          </svg>
+          <div class="flex gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
+            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-sm bg-indigo-300 dark:bg-indigo-600"></span>Interest</span>
+            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-sm bg-green-300 dark:bg-green-600"></span>Principal</span>
+          </div>
+        </div>
+
+        <a href="/home-affordability-calculator/" class="block text-center text-sm text-indigo-600 dark:text-indigo-400 hover:underline">How much house can I afford? →</a>
+      </div>
+    </div>
+
+    <!-- Amortization table -->
+    <div class="mt-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold">Amortization Schedule</h2>
+        <button id="toggleAmor" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">Show all months</button>
+      </div>
+      <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50 dark:bg-gray-800">
+            <tr>
+              <th class="px-4 py-3 text-left font-medium text-gray-500 dark:text-gray-400">Month</th>
+              <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Payment</th>
+              <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Principal</th>
+              <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Interest</th>
+              <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Balance</th>
+            </tr>
+          </thead>
+          <tbody id="amorBody" class="divide-y divide-gray-100 dark:divide-gray-700 bg-white dark:bg-gray-900">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <a href="/home-affordability-calculator/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Home Affordability</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">How much house can you afford?</p>
+      </a>
+      <a href="/rent-vs-buy-calculator/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Rent vs Buy</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">When does buying beat renting?</p>
+      </a>
+      <a href="/capital-gains-home-sale/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Capital Gains Calculator</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Taxes when you sell your home</p>
+      </a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-12 prose dark:prose-invert prose-lg max-w-none">
+      <h2>Mortgage Calculator FAQ</h2>
+      <h3>What does PITI mean?</h3>
+      <p>PITI stands for Principal, Interest, Taxes, and Insurance — the four components of a complete monthly mortgage payment. Lenders use your PITI to calculate your housing expense ratio (should be under 28% of gross income).</p>
+      <h3>When does PMI drop off?</h3>
+      <p>By federal law (Homeowners Protection Act), lenders must automatically cancel PMI when your loan balance reaches 78% of the original purchase price. You can request cancellation at 80% LTV. PMI typically costs 0.5–1.5% of the loan amount per year.</p>
+      <h3>How much does an extra $200/month save?</h3>
+      <p>On a $320,000 30-year loan at 6.85%, an extra $200/month can save over $60,000 in interest and pay off your loan about 7 years early. Use the Extra Payment Simulator above to see your specific numbers.</p>
+      <h3>What is the current mortgage rate in 2026?</h3>
+      <p>The 30-year fixed rate has been in the 6.5–7.5% range. Check Freddie Mac's weekly Primary Mortgage Market Survey (PMMS) for the current national average.</p>
+      <h3>Is property tax included in my mortgage payment?</h3>
+      <p>Usually yes — most lenders require an escrow account that collects 1/12 of your annual property tax and insurance with each mortgage payment. They then pay the bills on your behalf.</p>
+      <p class="text-sm text-gray-400 dark:text-gray-500 italic">This calculator is for educational purposes only. Consult a licensed mortgage professional for personalized advice.</p>
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    var term = 30;
+
+    function $ (id) { return document.getElementById(id); }
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+    function fmtFull(n) { return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
+
+    function pmt(P, r, n) {
+      if (r === 0) return P / n;
+      return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+    }
+
+    function calcAmortization(P, r, n, extra) {
+      var schedule = [];
+      var bal = P;
+      for (var i = 1; i <= n && bal > 0; i++) {
+        var interest = bal * r;
+        var base = pmt(P, r, n);
+        var principal = Math.min(base - interest + extra, bal);
+        bal = Math.max(bal - principal, 0);
+        schedule.push({ month: i, payment: base + extra, principal: principal, interest: interest, balance: bal });
+      }
+      return schedule;
+    }
+
+    function drawChart(schedule, nMonths) {
+      var W = 300, H = 120, pad = 4;
+      var maxVal = schedule[0] ? schedule[0].payment : 1;
+      var step = (W - 2 * pad) / Math.max(schedule.length - 1, 1);
+
+      var iPath = 'M ';
+      var pPath = 'M ';
+      var iClose = '';
+      var pClose = '';
+
+      schedule.forEach(function(row, i) {
+        var x = pad + i * step;
+        var yi = pad + (H - 2 * pad) * (1 - row.interest / maxVal);
+        var yp = pad + (H - 2 * pad) * (1 - (row.interest + row.principal) / maxVal);
+        if (i === 0) {
+          iPath += x + ',' + yi;
+          pPath += x + ',' + yp;
+        } else {
+          iPath += ' L ' + x + ',' + yi;
+          pPath += ' L ' + x + ',' + yp;
+        }
+        if (i === schedule.length - 1) {
+          iClose = ' L ' + x + ',' + (H - pad) + ' L ' + pad + ',' + (H - pad) + ' Z';
+          pClose = ' L ' + x + ',' + yi + ' L ' + pad + ',' + schedule[0].interest / maxVal * (H - 2 * pad) + ' Z';
+        }
+      });
+
+      $('chartInterest').setAttribute('d', iPath + iClose);
+      $('chartPrincipal').setAttribute('d', pPath + pClose);
+    }
+
+    function calc() {
+      var price = parseFloat($('homePrice').value) || 0;
+      var down = parseFloat($('downPayment').value) || 0;
+      var rate = parseFloat($('intRate').value) / 100 / 12 || 0;
+      var taxRate = parseFloat($('stateSelect').value) / 100 || 0.011;
+      var ins = parseFloat($('insurance').value) || 0;
+      var hoa = parseFloat($('hoa').value) || 0;
+      var pmiRate = parseFloat($('pmiRate').value) / 100 || 0;
+      var extra = parseFloat($('extraPayment').value) || 0;
+      var n = term * 12;
+
+      var loan = Math.max(price - down, 0);
+      var ltv = price > 0 ? loan / price : 0;
+      var hasPmi = ltv > 0.80;
+
+      var pi = pmt(loan, rate, n);
+      var tax = (price * taxRate) / 12;
+      var insMonth = ins / 12;
+      var pmiMonth = hasPmi ? (loan * pmiRate) / 12 : 0;
+      var total = pi + tax + insMonth + pmiMonth + hoa;
+
+      var downPct = price > 0 ? Math.round((down / price) * 100) : 0;
+      $('downPct').textContent = downPct + '%';
+
+      $('totalPayment').textContent = fmt(total);
+      $('piPayment').textContent = fmt(pi);
+      $('taxPayment').textContent = fmt(tax);
+      $('insPayment').textContent = fmt(insMonth);
+      $('pmiPayment').textContent = fmt(pmiMonth);
+      $('hoaDisplay').textContent = fmt(hoa);
+      $('loanAmt').textContent = fmt(loan);
+      $('pmiNote').classList.toggle('hidden', !hasPmi);
+      $('pmiRow').style.display = hasPmi ? '' : 'none';
+      $('hoaRow').style.display = hoa > 0 ? '' : 'none';
+
+      var schedule = calcAmortization(loan, rate, n, 0);
+      var totalInt = schedule.reduce(function(s, r) { return s + r.interest; }, 0);
+      var totalCost = loan + totalInt;
+
+      $('totalInterest').textContent = fmt(totalInt);
+      $('totalCost').textContent = fmt(totalCost);
+
+      var d = new Date();
+      d.setMonth(d.getMonth() + schedule.length);
+      $('payoffDate').textContent = d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+      drawChart(schedule, n);
+      renderTable(schedule);
+
+      if (extra > 0) {
+        var schedExtra = calcAmortization(loan, rate, n, extra);
+        var totalIntExtra = schedExtra.reduce(function(s, r) { return s + r.interest; }, 0);
+        var savedInt = totalInt - totalIntExtra;
+        var savedMonths = schedule.length - schedExtra.length;
+        var savedYears = Math.floor(savedMonths / 12);
+        var savedMos = savedMonths % 12;
+        var yrStr = savedYears > 0 ? savedYears + ' yr' + (savedYears > 1 ? 's' : '') : '';
+        var moStr = savedMos > 0 ? savedMos + ' mo' : '';
+        $('extraResult').textContent = 'Pay off ' + [yrStr, moStr].filter(Boolean).join(' ') + ' earlier, save ' + fmt(savedInt) + ' in interest';
+      } else {
+        $('extraResult').textContent = '';
+      }
+    }
+
+    var allRows = [];
+    var showAll = false;
+
+    function renderTable(schedule) {
+      allRows = schedule;
+      updateTable();
+    }
+
+    function updateTable() {
+      var rows = showAll ? allRows : allRows.slice(0, 24);
+      var html = '';
+      rows.forEach(function(r, i) {
+        var bg = i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50';
+        html += '<tr class="' + bg + '">'
+          + '<td class="px-4 py-2 text-gray-600 dark:text-gray-400">' + r.month + '</td>'
+          + '<td class="px-4 py-2 text-right">' + fmt(r.payment) + '</td>'
+          + '<td class="px-4 py-2 text-right text-green-700 dark:text-green-400">' + fmt(r.principal) + '</td>'
+          + '<td class="px-4 py-2 text-right text-red-600 dark:text-red-400">' + fmt(r.interest) + '</td>'
+          + '<td class="px-4 py-2 text-right text-gray-700 dark:text-gray-300">' + fmt(r.balance) + '</td>'
+          + '</tr>';
+      });
+      $('amorBody').innerHTML = html;
+    }
+
+    function applyTermBtns() {
+      var dark = document.documentElement.classList.contains('dark');
+      document.querySelectorAll('.term-btn').forEach(function(b) {
+        var active = parseInt(b.dataset.term) === term;
+        b.style.background = active ? '#4f46e5' : (dark ? '#1f2937' : 'white');
+        b.style.color = active ? 'white' : (dark ? '#d1d5db' : '#374151');
+        b.style.borderColor = active ? '#4f46e5' : (dark ? '#374151' : '#d1d5db');
+      });
+    }
+
+    document.querySelectorAll('.term-btn').forEach(function(b) {
+      b.addEventListener('click', function() {
+        term = parseInt(b.dataset.term);
+        applyTermBtns();
+        calc();
+      });
+    });
+
+    $('toggleAmor').addEventListener('click', function() {
+      showAll = !showAll;
+      $('toggleAmor').textContent = showAll ? 'Show less' : 'Show all months';
+      updateTable();
+    });
+
+    document.querySelectorAll('input, select').forEach(function(el) {
+      el.addEventListener('input', calc);
+    });
+
+    document.getElementById('theme-toggle') && document.getElementById('theme-toggle').addEventListener('click', function() {
+      setTimeout(applyTermBtns, 10);
+    });
+
+    applyTermBtns();
+    calc();
+  })();
+  </script>
+</Base>

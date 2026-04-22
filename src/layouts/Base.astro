@@ -5,8 +5,10 @@ interface Props {
   canonicalUrl?: string;
   noindex?: boolean;
   ogImage?: string;
+  noWebAppSchema?: boolean;
 }
-const { title, description, canonicalUrl, noindex, ogImage } = Astro.props;
+const { title, description, canonicalUrl, noindex, ogImage, noWebAppSchema } = Astro.props;
+const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Real Estate Commission Calculator","url":"https://commission-calc.com/","description":"Free real estate commission calculator. Supports USA, Canada, Australia, UK, Germany.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
 const canon = canonicalUrl || Astro.url.href;
 const finalOgImage = ogImage || 'https://commission-calc.com/og-default.png';
 const GA_ID = 'G-3BRK8TYEGY';
@@ -37,9 +39,7 @@ const GA_ID = 'G-3BRK8TYEGY';
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   {noindex && <meta name="robots" content="noindex, follow" />}
   <meta name="p:domain_verify" content="011bb6d55b47efd0724be8831c4c5381"/>
-  <script type="application/ld+json" is:inline>
-  {"@context": "https://schema.org", "@type": "WebApplication", "name": "Real Estate Commission Calculator", "url": "https://commission-calc.com/", "description": "Free real estate commission calculator. Supports USA, Canada, Australia, UK, Germany.", "applicationCategory": "UtilityApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
-  </script>
+  {!noWebAppSchema && <script type="application/ld+json" set:html={webAppSchemaJson} />}
   <!-- Anti-FOUC: apply dark mode before paint -->
   <script is:inline>
     (function() {
@@ -57,6 +57,11 @@ const GA_ID = 'G-3BRK8TYEGY';
       <a href="/" class="text-lg font-bold text-indigo-700 dark:text-indigo-400">CommissionCalc</a>
       <ul class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 items-center">
         <li><a href="/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Commission</a></li>
+        <li><a href="/mortgage-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Mortgage</a></li>
+        <li><a href="/home-affordability-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Affordability</a></li>
+        <li><a href="/commission-calculator-2026/" class="hover:text-indigo-700 dark:hover:text-indigo-400">NAR 2026</a></li>
+        <li><a href="/rent-vs-buy-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Rent vs Buy</a></li>
+        <li><a href="/capital-gains-home-sale/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Capital Gains</a></li>
         <li><a href="/closing-costs/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Closing Costs</a></li>
         <li><a href="/seller-net/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Seller Net</a></li>
         <li><a href="/commission/" class="hover:text-indigo-700 dark:hover:text-indigo-400">By City</a></li>

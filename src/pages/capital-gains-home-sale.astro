@@ -1,0 +1,381 @@
+---
+import Base from '../layouts/Base.astro';
+const canonicalUrl = 'https://commission-calc.com/capital-gains-home-sale/';
+const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Capital Gains on Home Sale Calculator",
+      "url": canonicalUrl,
+      "description": "Calculate federal and state capital gains tax on your home sale. Includes the $250K/$500K primary residence exclusion, adjusted basis, and 2026 IRS tax brackets.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much of my home sale profit is tax-free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "If the home was your primary residence for at least 2 of the last 5 years, you can exclude up to $250,000 of gain (single) or $500,000 (married filing jointly) from capital gains tax. Most homeowners pay no federal capital gains tax on their home sale." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 2-out-of-5-year rule for home sale tax exclusion?",
+          "acceptedAnswer": { "@type": "Answer", "text": "To qualify for the primary residence exclusion, you must have owned and lived in the home as your primary residence for at least 2 of the 5 years immediately before the sale. The 2 years do not need to be consecutive." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I deduct home improvements from capital gains?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — capital improvements that add value to your home (kitchen renovation, addition, new roof) increase your adjusted cost basis and reduce your taxable gain. Regular maintenance and repairs do not count. Keep all receipts." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the capital gains tax rate on home sales in 2026?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For homes owned over 1 year (long-term capital gains), the federal rate is 0%, 15%, or 20% based on your taxable income. Single filers with income under $48,350 pay 0%; $48,350–$533,400 pay 15%; above $533,400 pay 20% (2026 estimated thresholds)." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I owe capital gains tax if I sell my home at a loss?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No federal tax is owed if you sell at a loss. However, unlike investment property losses, primary residence losses are not tax-deductible. You simply owe no capital gains tax." }
+        }
+      ]
+    }
+  ]
+});
+
+const stateRates: Record<string, number> = {
+  AL:5.0, AK:0, AZ:2.5, AR:4.4, CA:13.3, CO:4.55, CT:6.99, DE:6.6,
+  DC:10.75, FL:0, GA:5.49, HI:11.0, ID:5.8, IL:4.95, IN:3.15, IA:5.7,
+  KS:5.7, KY:4.5, LA:4.25, ME:7.15, MD:5.75, MA:5.0, MI:4.25, MN:9.85,
+  MS:4.7, MO:4.95, MT:5.9, NE:5.84, NV:0, NH:0, NJ:10.75, NM:5.9,
+  NY:10.9, NC:4.75, ND:2.5, OH:3.75, OK:4.75, OR:9.9, PA:3.07, RI:5.99,
+  SC:6.5, SD:0, TN:0, TX:0, UT:4.65, VT:8.75, VA:5.75, WA:7.0, WV:6.5,
+  WI:7.65, WY:0
+};
+---
+<Base
+  title="Capital Gains on Home Sale Calculator 2026 — Tax Estimator"
+  description="Calculate federal and state capital gains tax when you sell your home. Includes $250K/$500K primary residence exclusion, adjusted basis, and 2026 IRS rates."
+  canonicalUrl={canonicalUrl}
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={schemaJson} />
+
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Capital Gains on Home Sale Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">Estimate your federal and state capital gains tax when selling your home. Includes the primary residence exclusion ($250K single / $500K married).</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Inputs -->
+      <div class="lg:col-span-3 bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-lg font-semibold mb-5 text-gray-800 dark:text-gray-200">Home Sale Details</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Purchase Price ($)</label>
+            <input type="number" id="purchasePrice" value="250000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Capital Improvements ($)</label>
+            <input type="number" id="improvements" value="25000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Renovations that add permanent value</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Closing Costs at Purchase ($)</label>
+            <input type="number" id="purchaseClosing" value="7500" min="0" step="500"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sale Price ($)</label>
+            <input type="number" id="salePrice" value="450000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Selling Costs ($)</label>
+            <input type="number" id="sellingCosts" value="32000" min="0" step="500"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Commission + closing costs at sale</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Filing Status</label>
+            <select id="filingStatus"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="single">Single</option>
+              <option value="mfj" selected>Married Filing Jointly</option>
+              <option value="mfs">Married Filing Separately</option>
+              <option value="hoh">Head of Household</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Years Owned</label>
+            <input type="number" id="yearsOwned" value="7" min="0" max="50" step="1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Years Lived In (of last 5)</label>
+            <input type="number" id="yearsLived" value="5" min="0" max="5" step="0.5"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">State</label>
+            <select id="state"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="none">Select state (or skip)</option>
+              <option value="AL">Alabama (5.0%)</option>
+              <option value="AK">Alaska (0% — no income tax)</option>
+              <option value="AZ">Arizona (2.5%)</option>
+              <option value="AR">Arkansas (4.4%)</option>
+              <option value="CA">California (13.3%)</option>
+              <option value="CO">Colorado (4.55%)</option>
+              <option value="CT">Connecticut (6.99%)</option>
+              <option value="DE">Delaware (6.6%)</option>
+              <option value="DC">Washington DC (10.75%)</option>
+              <option value="FL">Florida (0% — no income tax)</option>
+              <option value="GA">Georgia (5.49%)</option>
+              <option value="HI">Hawaii (11.0%)</option>
+              <option value="ID">Idaho (5.8%)</option>
+              <option value="IL">Illinois (4.95%)</option>
+              <option value="IN">Indiana (3.15%)</option>
+              <option value="IA">Iowa (5.7%)</option>
+              <option value="KS">Kansas (5.7%)</option>
+              <option value="KY">Kentucky (4.5%)</option>
+              <option value="LA">Louisiana (4.25%)</option>
+              <option value="ME">Maine (7.15%)</option>
+              <option value="MD">Maryland (5.75%)</option>
+              <option value="MA">Massachusetts (5.0%)</option>
+              <option value="MI">Michigan (4.25%)</option>
+              <option value="MN">Minnesota (9.85%)</option>
+              <option value="MS">Mississippi (4.7%)</option>
+              <option value="MO">Missouri (4.95%)</option>
+              <option value="MT">Montana (5.9%)</option>
+              <option value="NE">Nebraska (5.84%)</option>
+              <option value="NV">Nevada (0% — no income tax)</option>
+              <option value="NH">New Hampshire (0%)</option>
+              <option value="NJ">New Jersey (10.75%)</option>
+              <option value="NM">New Mexico (5.9%)</option>
+              <option value="NY">New York (10.9%)</option>
+              <option value="NC">North Carolina (4.75%)</option>
+              <option value="ND">North Dakota (2.5%)</option>
+              <option value="OH">Ohio (3.75%)</option>
+              <option value="OK">Oklahoma (4.75%)</option>
+              <option value="OR">Oregon (9.9%)</option>
+              <option value="PA">Pennsylvania (3.07%)</option>
+              <option value="RI">Rhode Island (5.99%)</option>
+              <option value="SC">South Carolina (6.5%)</option>
+              <option value="SD">South Dakota (0% — no income tax)</option>
+              <option value="TN">Tennessee (0%)</option>
+              <option value="TX">Texas (0% — no income tax)</option>
+              <option value="UT">Utah (4.65%)</option>
+              <option value="VT">Vermont (8.75%)</option>
+              <option value="VA">Virginia (5.75%)</option>
+              <option value="WA">Washington (7.0% on cap gains)</option>
+              <option value="WV">West Virginia (6.5%)</option>
+              <option value="WI">Wisconsin (7.65%)</option>
+              <option value="WY">Wyoming (0% — no income tax)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Taxable Income Bracket</label>
+            <select id="incomeBracket"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="0">0% bracket (income under threshold)</option>
+              <option value="15" selected>15% bracket (most filers)</option>
+              <option value="20">20% bracket (high income)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="lg:col-span-2 space-y-4">
+        <!-- Exemption status -->
+        <div id="exemptBadge" class="rounded-2xl p-5">
+          <p class="text-sm font-medium mb-1 opacity-80">Primary Residence Exclusion</p>
+          <p id="exemptStatus" class="text-xl font-bold">Eligible</p>
+          <p id="exemptAmt" class="text-sm mt-1 opacity-80">Up to $500,000 excluded</p>
+        </div>
+
+        <!-- Gain breakdown -->
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 space-y-3 text-sm">
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Sale price</span>
+            <span id="rSalePrice" class="font-semibold">—</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">− Selling costs</span>
+            <span id="rSellingCosts" class="font-semibold text-red-600 dark:text-red-400">—</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">− Adjusted basis</span>
+            <span id="rBasis" class="font-semibold text-red-600 dark:text-red-400">—</span>
+          </div>
+          <div class="flex justify-between border-t border-gray-200 dark:border-gray-600 pt-2">
+            <span class="text-gray-700 dark:text-gray-300 font-medium">= Realized gain</span>
+            <span id="rGain" class="font-bold">—</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">− Exclusion</span>
+            <span id="rExclusion" class="font-semibold text-green-600 dark:text-green-400">—</span>
+          </div>
+          <div class="flex justify-between border-t border-gray-200 dark:border-gray-600 pt-2">
+            <span class="text-gray-700 dark:text-gray-300 font-medium">= Taxable gain</span>
+            <span id="rTaxableGain" class="font-bold">—</span>
+          </div>
+        </div>
+
+        <!-- Tax result -->
+        <div class="bg-indigo-700 dark:bg-indigo-800 text-white rounded-2xl p-6">
+          <p class="text-indigo-200 text-sm mb-1">Estimated Total Tax</p>
+          <p id="totalTax" class="text-4xl font-bold">$0</p>
+          <div class="mt-3 space-y-1 text-sm text-indigo-200">
+            <div class="flex justify-between">
+              <span>Federal cap gains</span>
+              <span id="fedTax">—</span>
+            </div>
+            <div class="flex justify-between">
+              <span>State tax</span>
+              <span id="stateTax">—</span>
+            </div>
+            <div class="flex justify-between">
+              <span>NIIT (3.8%) if applicable</span>
+              <span id="niitTax">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-4 border border-gray-200 dark:border-gray-700">
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Net proceeds after tax</span>
+            <span id="netProceeds" class="font-bold text-green-600 dark:text-green-400 text-lg">—</span>
+          </div>
+        </div>
+
+        <a href="/seller-net/" class="block text-center text-sm text-indigo-600 dark:text-indigo-400 hover:underline">Calculate full seller net proceeds →</a>
+      </div>
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <a href="/seller-net/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Seller Net Proceeds</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">What you'll walk away with</p>
+      </a>
+      <a href="/commission-calculator-2026/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Commission 2026</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Post-NAR commission scenarios</p>
+      </a>
+      <a href="/mortgage-calculator/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Mortgage Calculator</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">PITI + amortization schedule</p>
+      </a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-12 prose dark:prose-invert prose-lg max-w-none">
+      <h2>Capital Gains on Home Sale FAQ</h2>
+      <h3>Is the profit from my home sale taxable?</h3>
+      <p>Possibly, but most homeowners pay zero federal tax. If you've owned and lived in your home as your primary residence for at least 2 of the last 5 years, you can exclude up to $250,000 of gain (single) or $500,000 (married filing jointly). Only gains exceeding that exclusion are taxable.</p>
+      <h3>What is "adjusted basis" for a home?</h3>
+      <p>Your adjusted basis is your starting cost for tax purposes: original purchase price + purchase closing costs + capital improvements. Improvements that add permanent value (addition, new roof, kitchen remodel) increase your basis. Repairs (painting, fixing a leak) do not. The higher your basis, the lower your taxable gain.</p>
+      <h3>What is the NIIT (Net Investment Income Tax)?</h3>
+      <p>The NIIT is an additional 3.8% federal tax on net investment income for high earners — single filers above $200,000 and married couples above $250,000 in modified AGI. Taxable capital gains from home sales can be subject to NIIT if your income exceeds these thresholds.</p>
+      <h3>Can I deduct home improvements?</h3>
+      <p>Yes — capital improvements increase your adjusted basis and reduce your taxable gain dollar-for-dollar. Keep all receipts for renovation projects. You cannot deduct regular maintenance and repairs, only improvements that add value, extend useful life, or adapt the home to a new use.</p>
+      <h3>What if I sold at a loss?</h3>
+      <p>If you sell your primary residence at a loss, you owe no capital gains tax. Unfortunately, you also cannot deduct the loss from ordinary income (unlike investment property losses). You simply won't owe any tax on the transaction.</p>
+      <p class="text-sm text-gray-400 dark:text-gray-500 italic">This calculator provides estimates for educational purposes using 2026 estimated IRS brackets. Tax law is complex — consult a CPA or tax attorney for advice on your specific situation.</p>
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    function $ (id) { return document.getElementById(id); }
+    function fmt(n) { return '$' + Math.round(Math.abs(n)).toLocaleString('en-US'); }
+
+    var STATE_RATES = {
+      AL:5.0, AK:0, AZ:2.5, AR:4.4, CA:13.3, CO:4.55, CT:6.99, DE:6.6,
+      DC:10.75, FL:0, GA:5.49, HI:11.0, ID:5.8, IL:4.95, IN:3.15, IA:5.7,
+      KS:5.7, KY:4.5, LA:4.25, ME:7.15, MD:5.75, MA:5.0, MI:4.25, MN:9.85,
+      MS:4.7, MO:4.95, MT:5.9, NE:5.84, NV:0, NH:0, NJ:10.75, NM:5.9,
+      NY:10.9, NC:4.75, ND:2.5, OH:3.75, OK:4.75, OR:9.9, PA:3.07, RI:5.99,
+      SC:6.5, SD:0, TN:0, TX:0, UT:4.65, VT:8.75, VA:5.75, WA:7.0, WV:6.5,
+      WI:7.65, WY:0
+    };
+
+    // 2026 capital gains thresholds (approximate, based on 2025 + inflation)
+    var BRACKETS = {
+      single:   { t0: 48350, t15: 533400 },
+      mfj:      { t0: 96700, t15: 600050 },
+      mfs:      { t0: 48350, t15: 300000 },
+      hoh:      { t0: 64750, t15: 566700 }
+    };
+
+    // NIIT thresholds
+    var NIIT = { single: 200000, mfj: 250000, mfs: 125000, hoh: 200000 };
+
+    function calc() {
+      var purchase = parseFloat($('purchasePrice').value) || 0;
+      var improvements = parseFloat($('improvements').value) || 0;
+      var purchaseClosing = parseFloat($('purchaseClosing').value) || 0;
+      var salePrice = parseFloat($('salePrice').value) || 0;
+      var sellingCosts = parseFloat($('sellingCosts').value) || 0;
+      var filing = $('filingStatus').value;
+      var yearsOwned = parseFloat($('yearsOwned').value) || 0;
+      var yearsLived = parseFloat($('yearsLived').value) || 0;
+      var stateKey = $('state').value;
+      var bracketRate = parseInt($('incomeBracket').value) / 100;
+
+      var adjustedBasis = purchase + improvements + purchaseClosing;
+      var realizedGain = salePrice - sellingCosts - adjustedBasis;
+
+      var primaryResidenceQualified = yearsOwned >= 2 && yearsLived >= 2;
+      var exclusionLimit = filing === 'mfj' ? 500000 : 250000;
+      var exclusion = primaryResidenceQualified ? Math.min(Math.max(realizedGain, 0), exclusionLimit) : 0;
+      var taxableGain = Math.max(realizedGain - exclusion, 0);
+
+      var fedTax = taxableGain * bracketRate;
+      var stateRate = stateKey !== 'none' && STATE_RATES[stateKey] !== undefined ? STATE_RATES[stateKey] / 100 : 0;
+      var stTax = taxableGain * stateRate;
+      var niitTax = taxableGain * 0.038; // simplified — actual depends on total income
+
+      var totalTax = fedTax + stTax;
+      var netProceeds = salePrice - sellingCosts - totalTax;
+
+      // Exemption badge
+      var badge = $('exemptBadge');
+      if (primaryResidenceQualified) {
+        badge.className = 'rounded-2xl p-5 bg-green-600 dark:bg-green-700 text-white';
+        $('exemptStatus').textContent = 'Eligible';
+        $('exemptAmt').textContent = 'Up to ' + fmt(exclusionLimit) + ' excluded from tax';
+      } else {
+        badge.className = 'rounded-2xl p-5 bg-red-600 dark:bg-red-700 text-white';
+        $('exemptStatus').textContent = 'Not Eligible';
+        $('exemptAmt').textContent = 'Need 2+ years lived in home (of last 5)';
+      }
+
+      $('rSalePrice').textContent = fmt(salePrice);
+      $('rSellingCosts').textContent = '− ' + fmt(sellingCosts);
+      $('rBasis').textContent = '− ' + fmt(adjustedBasis);
+      $('rGain').textContent = (realizedGain < 0 ? '−' : '') + fmt(realizedGain);
+      $('rExclusion').textContent = '− ' + fmt(exclusion);
+      $('rTaxableGain').textContent = fmt(taxableGain);
+
+      $('totalTax').textContent = fmt(totalTax);
+      $('fedTax').textContent = fmt(fedTax);
+      $('stateTax').textContent = stateKey !== 'none' ? fmt(stTax) : 'N/A';
+      $('niitTax').textContent = taxableGain > 0 ? fmt(niitTax) + ' est.' : '$0';
+      $('netProceeds').textContent = fmt(netProceeds);
+    }
+
+    document.querySelectorAll('input, select').forEach(function(el) {
+      el.addEventListener('input', calc);
+    });
+
+    calc();
+  })();
+  </script>
+</Base>

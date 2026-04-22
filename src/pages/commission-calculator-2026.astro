@@ -1,0 +1,255 @@
+---
+import Base from '../layouts/Base.astro';
+const canonicalUrl = 'https://commission-calc.com/commission-calculator-2026/';
+const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Post-NAR Settlement Commission Calculator 2026",
+      "url": canonicalUrl,
+      "description": "Calculate real estate commissions under the 2024 NAR settlement rules. Compare all 4 scenarios: seller pays both agents, buyer pays own agent, split, or seller concession.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What changed with the NAR settlement in 2024?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The National Association of Realtors (NAR) settled a major antitrust lawsuit in August 2024. The key changes: (1) MLS listings can no longer include offers of buyer agent compensation, (2) buyers must sign a written agreement with their agent before touring homes, and (3) buyer agent fees are now fully negotiable between buyer and their agent." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the seller still have to pay the buyer's agent in 2026?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Sellers are no longer required to offer compensation to buyer agents via MLS. However, sellers CAN still choose to offer a concession to help buyers cover their agent fee — this is now the most common approach and is negotiated separately from the MLS listing." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a seller concession for buyer agent fees?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A seller concession is a credit the seller gives the buyer at closing. The buyer can use this credit to pay their agent (or for closing costs). It's different from the seller directly paying the buyer's agent — with a concession, the money flows through the buyer. There are loan-type limits on concession amounts." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a typical real estate commission rate in 2026?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Listing agent commissions have remained around 2–3% in most markets after the NAR settlement. Buyer agent fees now typically range from 2–3% and are increasingly negotiated separately. Total transaction costs have not changed dramatically, but the structure of who pays what has shifted." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I negotiate my real estate agent commission?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — commissions have always been negotiable, and the NAR settlement reinforces this. As a seller, negotiate your listing commission directly with your agent. As a buyer, your agent fee is now spelled out in a written buyer representation agreement, giving you clear visibility and negotiating power." }
+        }
+      ]
+    }
+  ]
+});
+---
+<Base
+  title="Real Estate Commission Calculator 2026 — Post-NAR Settlement Scenarios"
+  description="Calculate real estate commissions under the 2024 NAR settlement. Compare seller pays both, buyer pays own agent, 50/50 split, and seller concession scenarios side by side."
+  canonicalUrl={canonicalUrl}
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={schemaJson} />
+
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-4">
+      <span class="inline-block bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">Updated for 2024 NAR Settlement</span>
+    </div>
+    <h1 class="text-3xl font-bold mb-2">Real Estate Commission Calculator 2026</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">The August 2024 NAR settlement changed who pays buyer agent commissions. Compare all 4 scenarios to find the best deal for your situation.</p>
+
+    <!-- What changed banner -->
+    <div class="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl p-5 mb-8">
+      <h2 class="text-base font-semibold text-amber-800 dark:text-amber-300 mb-2">What Changed in August 2024</h2>
+      <ul class="text-sm text-amber-700 dark:text-amber-400 space-y-1 list-disc list-inside">
+        <li>MLS listings can no longer include offers of buyer agent compensation</li>
+        <li>Buyers must sign a written fee agreement with their agent before home tours</li>
+        <li>Buyer agent fees are now fully negotiable — sellers can offer a concession but aren't required to</li>
+        <li>Listing agent commissions are unchanged and still negotiated with the seller</li>
+      </ul>
+    </div>
+
+    <!-- Inputs -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-8">
+      <h2 class="text-lg font-semibold mb-5 text-gray-800 dark:text-gray-200">Deal Details</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sale Price ($)</label>
+          <input type="number" id="salePrice" value="450000" min="0" step="5000"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Listing Commission (%)</label>
+          <input type="number" id="listingComm" value="2.5" min="0" max="10" step="0.1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Buyer Agent Fee (%)</label>
+          <input type="number" id="buyerComm" value="2.5" min="0" max="10" step="0.1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenario comparison table -->
+    <h2 class="text-xl font-semibold mb-4">4-Scenario Comparison</h2>
+    <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700 mb-8">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 dark:bg-gray-800">
+          <tr>
+            <th class="px-4 py-3 text-left font-medium text-gray-500 dark:text-gray-400 w-48">Scenario</th>
+            <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Seller Pays</th>
+            <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Buyer Pays</th>
+            <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Seller Net</th>
+            <th class="px-4 py-3 text-right font-medium text-gray-500 dark:text-gray-400">Buyer Total Cost</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-700 bg-white dark:bg-gray-900">
+          <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+            <td class="px-4 py-4">
+              <p class="font-medium text-gray-900 dark:text-gray-100">A — Seller pays both</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Old model, still common</p>
+            </td>
+            <td class="px-4 py-4 text-right font-semibold" id="a-seller"></td>
+            <td class="px-4 py-4 text-right text-green-600 dark:text-green-400 font-semibold">$0</td>
+            <td class="px-4 py-4 text-right font-semibold" id="a-net"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="a-buyer-total"></td>
+          </tr>
+          <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+            <td class="px-4 py-4">
+              <p class="font-medium text-gray-900 dark:text-gray-100">B — Buyer pays own agent</p>
+              <p class="text-xs text-indigo-600 dark:text-indigo-400 mt-0.5 font-medium">Most common post-NAR</p>
+            </td>
+            <td class="px-4 py-4 text-right font-semibold" id="b-seller"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="b-buyer"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="b-net"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="b-buyer-total"></td>
+          </tr>
+          <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+            <td class="px-4 py-4">
+              <p class="font-medium text-gray-900 dark:text-gray-100">C — 50/50 split</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Seller covers half buyer fee</p>
+            </td>
+            <td class="px-4 py-4 text-right font-semibold" id="c-seller"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="c-buyer"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="c-net"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="c-buyer-total"></td>
+          </tr>
+          <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+            <td class="px-4 py-4">
+              <p class="font-medium text-gray-900 dark:text-gray-100">D — Seller concession</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Seller credits buyer at closing</p>
+            </td>
+            <td class="px-4 py-4 text-right font-semibold" id="d-seller"></td>
+            <td class="px-4 py-4 text-right text-green-600 dark:text-green-400 font-semibold">$0 out-of-pocket</td>
+            <td class="px-4 py-4 text-right font-semibold" id="d-net"></td>
+            <td class="px-4 py-4 text-right font-semibold" id="d-buyer-total"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Insight -->
+    <div id="insight" class="bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800 rounded-xl p-5 mb-10 text-sm text-indigo-800 dark:text-indigo-300"></div>
+
+    <!-- Related tools -->
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <a href="/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Commission Calculator</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Agent & broker split calculator</p>
+      </a>
+      <a href="/seller-net/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Seller Net Proceeds</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">What you'll actually walk away with</p>
+      </a>
+      <a href="/capital-gains-home-sale/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Capital Gains Calculator</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Tax on your home sale profit</p>
+      </a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-12 prose dark:prose-invert prose-lg max-w-none">
+      <h2>Post-NAR Commission FAQ</h2>
+      <h3>What changed with the NAR settlement?</h3>
+      <p>In August 2024, the National Association of Realtors agreed to a $418M settlement that changed US real estate commission rules. MLS listings can no longer include buyer agent compensation offers. Buyers must now sign a written fee agreement with their agent before touring homes, making buyer agent fees transparent and negotiable.</p>
+      <h3>Do sellers still pay buyer agent fees?</h3>
+      <p>They don't have to — but many still do. Sellers can choose to offer a concession to help buyers cover their agent's fee. This is negotiated case-by-case, not mandated by MLS rules. In competitive markets, seller concessions are common to attract buyers. In seller's markets, buyers may pay their own agent.</p>
+      <h3>Which scenario is best for sellers?</h3>
+      <p>Scenario B (buyer pays own agent) results in the highest seller net proceeds — you only pay your listing agent's commission. However, limiting buyer agent compensation can reduce your buyer pool. In most markets, offering some form of concession (Scenario D or C) remains the best strategy for attracting buyers quickly.</p>
+      <h3>What is a typical commission rate in 2026?</h3>
+      <p>Listing agent commissions are typically 2–3%. Buyer agent fees, now negotiated separately, also run 2–3%. The national average total has decreased slightly from the pre-settlement 5–6%, with some markets seeing total costs in the 4–5% range.</p>
+      <p class="text-sm text-gray-400 dark:text-gray-500 italic">This calculator is for educational purposes. Consult a licensed real estate attorney or agent for legal and financial advice.</p>
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    function $ (id) { return document.getElementById(id); }
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+    function calc() {
+      var price = parseFloat($('salePrice').value) || 0;
+      var listPct = (parseFloat($('listingComm').value) || 0) / 100;
+      var buyPct = (parseFloat($('buyerComm').value) || 0) / 100;
+
+      var listFee = price * listPct;
+      var buyFee = price * buyPct;
+
+      // Scenario A: seller pays both
+      var aSellerPays = listFee + buyFee;
+      var aSellerNet = price - aSellerPays;
+      var aBuyerTotal = price;
+
+      // Scenario B: buyer pays own agent
+      var bSellerPays = listFee;
+      var bBuyerPays = buyFee;
+      var bSellerNet = price - bSellerPays;
+      var bBuyerTotal = price + bBuyerPays;
+
+      // Scenario C: 50/50 split of buyer fee
+      var cSellerPays = listFee + buyFee * 0.5;
+      var cBuyerPays = buyFee * 0.5;
+      var cSellerNet = price - cSellerPays;
+      var cBuyerTotal = price + cBuyerPays;
+
+      // Scenario D: seller concession (seller credits buyer full buyer fee, but that reduces seller net further)
+      var dConcession = buyFee;
+      var dSellerPays = listFee + dConcession;
+      var dSellerNet = price - dSellerPays;
+      var dBuyerTotal = price; // buyer gets concession credit = no out-of-pocket for agent
+
+      $('a-seller').textContent = fmt(aSellerPays);
+      $('a-net').textContent = fmt(aSellerNet);
+      $('a-buyer-total').textContent = fmt(aBuyerTotal);
+
+      $('b-seller').textContent = fmt(bSellerPays);
+      $('b-buyer').textContent = fmt(bBuyerPays);
+      $('b-net').textContent = fmt(bSellerNet);
+      $('b-buyer-total').textContent = fmt(bBuyerTotal);
+
+      $('c-seller').textContent = fmt(cSellerPays);
+      $('c-buyer').textContent = fmt(cBuyerPays);
+      $('c-net').textContent = fmt(cSellerNet);
+      $('c-buyer-total').textContent = fmt(cBuyerTotal);
+
+      $('d-seller').textContent = fmt(dSellerPays);
+      $('d-net').textContent = fmt(dSellerNet);
+      $('d-buyer-total').textContent = fmt(dBuyerTotal);
+
+      var sellerSaving = aSellerPays - bSellerPays;
+      var buyerCost = bBuyerPays;
+      $('insight').innerHTML = '<strong>Key insight:</strong> Under Scenario B (post-NAR common model), the seller saves '
+        + fmt(sellerSaving) + ' compared to the old model — but the buyer pays an extra '
+        + fmt(buyerCost) + ' out of pocket. Scenario D (concession) gives buyers the same out-of-pocket as the old model '
+        + 'while still lowering seller commission obligations slightly.';
+    }
+
+    document.querySelectorAll('input').forEach(function(el) { el.addEventListener('input', calc); });
+    calc();
+  })();
+  </script>
+</Base>

@@ -1,0 +1,399 @@
+---
+import Base from '../layouts/Base.astro';
+const canonicalUrl = 'https://commission-calc.com/rent-vs-buy-calculator/';
+const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Rent vs Buy Calculator",
+      "url": canonicalUrl,
+      "description": "Calculate whether renting or buying is cheaper over time. See the break-even year, wealth comparison, and a 30-year cost projection chart.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it better to rent or buy in 2026?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It depends on your local market, how long you plan to stay, and financial situation. In most US cities, buying breaks even vs renting in 4–8 years when you factor in equity building, appreciation, and tax benefits. If you plan to move within 3 years, renting is typically cheaper." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do you need to stay in a house to make buying worth it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The typical break-even point is 4–7 years, depending on closing costs, mortgage rate, and local rent-to-price ratios. This calculator shows your specific break-even year based on your inputs." }
+        },
+        {
+          "@type": "Question",
+          "name": "What costs are included in the rent vs buy comparison?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Buying costs include: mortgage P&I, property taxes, insurance, HOA, maintenance (typically 1% of home value/year), closing costs on purchase and eventual sale. Renting costs include: rent (growing annually), renters insurance. The renter's alternative is to invest the down payment and monthly savings at the assumed investment return rate." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does buying build more wealth than renting?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Usually yes over 7+ years, but renting and investing the difference can compete. Home equity builds through appreciation and mortgage paydown, but renters who diligently invest their down payment and monthly savings can accumulate comparable wealth — especially if home appreciation is low or investment returns are high." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is home appreciation factored in?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Home appreciation increases your equity (and eventual sale proceeds) but also increases maintenance costs and property taxes over time. The calculator computes your net equity at sale (home value minus remaining mortgage and selling costs) and compares it to the renter's invested portfolio." }
+        }
+      ]
+    }
+  ]
+});
+---
+<Base
+  title="Rent vs Buy Calculator 2026 — Break-Even Year + Wealth Comparison"
+  description="Is it cheaper to rent or buy? Find your break-even year and compare 30-year wealth accumulation between renting and buying with our free calculator."
+  canonicalUrl={canonicalUrl}
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={schemaJson} />
+
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Rent vs Buy Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">Compare the total cost and wealth outcome of renting vs buying. Find the exact year where buying pulls ahead.</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Inputs -->
+      <div class="lg:col-span-3 space-y-6">
+        <!-- Renting -->
+        <div class="bg-orange-50 dark:bg-orange-950 rounded-2xl p-5 border border-orange-200 dark:border-orange-800">
+          <h2 class="text-base font-semibold text-orange-800 dark:text-orange-300 mb-4">Renting Scenario</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly Rent ($)</label>
+              <input type="number" id="rent" value="2500" min="0" step="100"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Rent Increase (%)</label>
+              <input type="number" id="rentGrowth" value="3" min="0" max="20" step="0.5"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Renters Insurance ($/yr)</label>
+              <input type="number" id="rentersIns" value="200" min="0" step="50"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Investment Return (%/yr)</label>
+              <input type="number" id="investReturn" value="7" min="0" max="30" step="0.5"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+              <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">If you invest down payment + savings</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buying -->
+        <div class="bg-blue-50 dark:bg-blue-950 rounded-2xl p-5 border border-blue-200 dark:border-blue-800">
+          <h2 class="text-base font-semibold text-blue-800 dark:text-blue-300 mb-4">Buying Scenario</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Price ($)</label>
+              <input type="number" id="homePrice" value="450000" min="0" step="5000"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Down Payment ($)</label>
+              <input type="number" id="downPayment" value="90000" min="0" step="5000"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mortgage Rate (%)</label>
+              <input type="number" id="mortRate" value="6.85" min="0" max="25" step="0.05"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loan Term (years)</label>
+              <select id="loanTerm"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="30" selected>30</option>
+                <option value="20">20</option>
+                <option value="15">15</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Property Tax (%/yr)</label>
+              <input type="number" id="propTax" value="1.10" min="0" max="5" step="0.05"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Insurance ($/yr)</label>
+              <input type="number" id="homeIns" value="1500" min="0" step="100"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">HOA ($/mo)</label>
+              <input type="number" id="hoa" value="0" min="0" step="25"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maintenance (%/yr)</label>
+              <input type="number" id="maintenance" value="1" min="0" max="5" step="0.1"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Appreciation (%/yr)</label>
+              <input type="number" id="appreciation" value="3" min="-5" max="20" step="0.5"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Closing Costs (% buy)</label>
+              <input type="number" id="closingBuy" value="3" min="0" max="10" step="0.5"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Selling Costs (% sell)</label>
+              <input type="number" id="closingSell" value="6" min="0" max="15" step="0.5"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Years to Compare</label>
+              <input type="number" id="years" value="10" min="1" max="30" step="1"
+                class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="lg:col-span-2 space-y-4">
+        <div id="breakEvenBadge" class="rounded-2xl p-6 text-center">
+          <p class="text-sm mb-1">Break-even Point</p>
+          <p id="breakEvenYear" class="text-4xl font-bold">Year 6</p>
+          <p id="breakEvenSub" class="text-xs mt-1 opacity-80">After this, buying builds more wealth</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 rounded-xl p-4 text-center">
+            <p class="text-xs text-orange-700 dark:text-orange-400 font-semibold mb-1">Rent</p>
+            <p id="rentWealth" class="text-xl font-bold text-orange-800 dark:text-orange-300">—</p>
+            <p class="text-xs text-orange-600 dark:text-orange-500 mt-1">Net wealth at year <span class="year-label">10</span></p>
+          </div>
+          <div class="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-xl p-4 text-center">
+            <p class="text-xs text-blue-700 dark:text-blue-400 font-semibold mb-1">Buy</p>
+            <p id="buyWealth" class="text-xl font-bold text-blue-800 dark:text-blue-300">—</p>
+            <p class="text-xs text-blue-600 dark:text-blue-500 mt-1">Net equity at year <span class="year-label">10</span></p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 space-y-3 text-sm">
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Total rent paid</span>
+            <span id="totalRentPaid" class="font-semibold">—</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Total mortgage paid</span>
+            <span id="totalMortPaid" class="font-semibold">—</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Home value at year end</span>
+            <span id="homeValue" class="font-semibold">—</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Remaining mortgage</span>
+            <span id="remainMort" class="font-semibold">—</span>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+          <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Wealth Over Time</p>
+          <svg id="rvbChart" width="100%" height="160" viewBox="0 0 300 160" preserveAspectRatio="none">
+            <line x1="0" y1="80" x2="300" y2="80" stroke="#e5e7eb" stroke-width="1" />
+            <path id="rentLine" fill="none" stroke="#f97316" stroke-width="2" d="" />
+            <path id="buyLine" fill="none" stroke="#3b82f6" stroke-width="2" d="" />
+          </svg>
+          <div class="flex gap-4 mt-1 text-xs text-gray-500 dark:text-gray-400">
+            <span class="flex items-center gap-1"><span class="inline-block w-4 h-0.5 bg-orange-400"></span>Rent + Invest</span>
+            <span class="flex items-center gap-1"><span class="inline-block w-4 h-0.5 bg-blue-400"></span>Buy (equity)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <a href="/mortgage-calculator/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Mortgage Calculator</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Calculate exact PITI payment</p>
+      </a>
+      <a href="/home-affordability-calculator/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Affordability Calculator</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">How much house can you afford?</p>
+      </a>
+      <a href="/closing-costs/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Closing Costs</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">What you'll pay to close</p>
+      </a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-12 prose dark:prose-invert prose-lg max-w-none">
+      <h2>Rent vs Buy FAQ</h2>
+      <h3>How long until buying pays off?</h3>
+      <p>The break-even point — when your home equity exceeds what you'd have accumulated by renting and investing — is typically 4–7 years in most US markets. If you plan to move sooner than that, renting is usually the financially smarter choice. Use the calculator above to find your exact break-even year.</p>
+      <h3>What costs does this calculator include?</h3>
+      <p>Buying costs: mortgage P&I, property taxes, home insurance, HOA, maintenance (default 1%/year), closing costs at purchase, and selling costs when you eventually sell. Renting costs: monthly rent (growing at your specified rate), renters insurance. The renter scenario assumes you invest the down payment and any monthly savings at the specified investment return rate.</p>
+      <h3>Is renting throwing money away?</h3>
+      <p>Not necessarily. Renters invest their down payment and may invest monthly savings — building wealth without the illiquidity of real estate. Homeowners build equity through appreciation and mortgage paydown but also face maintenance, taxes, and transaction costs. Both paths can build significant wealth over time.</p>
+      <h3>What appreciation rate should I use?</h3>
+      <p>The US national average home appreciation is approximately 3–4% per year over the long term, though it varies significantly by city. Use a conservative 2–3% for planning, or check your local Zillow market forecast. Note that past appreciation doesn't guarantee future results.</p>
+      <p class="text-sm text-gray-400 dark:text-gray-500 italic">This calculator provides estimates for educational purposes. Consult a financial advisor for personalized guidance.</p>
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    function $ (id) { return document.getElementById(id); }
+    function fmt(n) { return '$' + Math.round(Math.abs(n)).toLocaleString('en-US'); }
+    function fmtSigned(n) { return (n >= 0 ? '+' : '-') + '$' + Math.round(Math.abs(n)).toLocaleString('en-US'); }
+
+    function pmt(P, r, n) {
+      if (r === 0) return P / n;
+      return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+    }
+
+    function calcYearly() {
+      var rent0 = parseFloat($('rent').value) || 0;
+      var rentGrowth = (parseFloat($('rentGrowth').value) || 0) / 100;
+      var rentersIns = (parseFloat($('rentersIns').value) || 0) / 12;
+      var investR = (parseFloat($('investReturn').value) || 0) / 100 / 12;
+
+      var homePrice = parseFloat($('homePrice').value) || 0;
+      var down = parseFloat($('downPayment').value) || 0;
+      var mortR = (parseFloat($('mortRate').value) || 0) / 100 / 12;
+      var n = parseInt($('loanTerm').value || 30) * 12;
+      var taxRate = (parseFloat($('propTax').value) || 0) / 100;
+      var homeInsAnnual = parseFloat($('homeIns').value) || 0;
+      var hoa = parseFloat($('hoa').value) || 0;
+      var maintPct = (parseFloat($('maintenance').value) || 0) / 100;
+      var appRate = (parseFloat($('appreciation').value) || 0) / 100;
+      var closingBuyPct = (parseFloat($('closingBuy').value) || 0) / 100;
+      var closingSellPct = (parseFloat($('closingSell').value) || 0) / 100;
+      var years = Math.min(Math.max(parseInt($('years').value) || 10, 1), 30);
+
+      var piMonthly = pmt(homePrice - down, mortR, n);
+      var closingCostBuy = homePrice * closingBuyPct;
+
+      // Yearly simulation
+      var rentPortfolio = down + closingCostBuy; // renter invests the down payment + closing costs they save
+      var buyEquity = down - closingCostBuy; // buyer starts with equity = down - closing costs
+      var loanBal = homePrice - down;
+      var curHomeValue = homePrice;
+      var curRent = rent0;
+
+      var rentWealthArr = [];
+      var buyWealthArr = [];
+      var totalRentPaid = 0;
+      var totalMortPaid = 0;
+      var breakEvenYear = null;
+
+      for (var yr = 1; yr <= 30; yr++) {
+        // Rent side: monthly rent for this year, invest difference
+        var annualRent = 0;
+        for (var mo = 0; mo < 12; mo++) {
+          var rentThisMo = curRent * Math.pow(1 + rentGrowth, (yr - 1) + mo / 12);
+          annualRent += rentThisMo + rentersIns;
+          rentPortfolio *= (1 + investR);
+        }
+        totalRentPaid += annualRent;
+
+        // Buy side: mortgage payments, equity building, appreciation
+        var annualMort = 0;
+        for (var mo2 = 0; mo2 < 12; mo2++) {
+          var interestMo = loanBal * mortR;
+          var principalMo = Math.min(piMonthly - interestMo, loanBal);
+          loanBal = Math.max(loanBal - principalMo, 0);
+          annualMort += piMonthly;
+          var taxes = curHomeValue * taxRate / 12;
+          var ins = homeInsAnnual / 12;
+          var maint = curHomeValue * maintPct / 12;
+          var buyMonthlyCost = piMonthly + taxes + ins + hoa + maint;
+          var rentMonthlyCost = curRent * Math.pow(1 + rentGrowth, (yr - 1) + mo2 / 12) + rentersIns;
+          var diff = rentMonthlyCost - buyMonthlyCost;
+          if (diff > 0) {
+            rentPortfolio += diff; // renter invests savings vs buyer
+          } else {
+            // buyer "saves" compared to renter — handled by not investing
+          }
+          rentPortfolio *= (1 + investR);
+        }
+        curHomeValue *= (1 + appRate);
+        totalMortPaid += annualMort;
+
+        var netSaleProceeds = curHomeValue * (1 - closingSellPct) - loanBal;
+        var buyWealthNow = netSaleProceeds;
+        var rentWealthNow = rentPortfolio;
+
+        rentWealthArr.push(rentWealthNow);
+        buyWealthArr.push(buyWealthNow);
+
+        if (breakEvenYear === null && buyWealthNow >= rentWealthNow) {
+          breakEvenYear = yr;
+        }
+      }
+
+      // Display at user's chosen year
+      var yIdx = years - 1;
+      var bw = buyWealthArr[yIdx];
+      var rw = rentWealthArr[yIdx];
+
+      // Update year labels
+      document.querySelectorAll('.year-label').forEach(function(el) { el.textContent = years; });
+
+      $('breakEvenYear').textContent = breakEvenYear ? 'Year ' + breakEvenYear : 'Never (in 30 yrs)';
+      var badge = $('breakEvenBadge');
+      badge.className = 'rounded-2xl p-6 text-center ' + (breakEvenYear && breakEvenYear <= years
+        ? 'bg-blue-700 dark:bg-blue-800 text-white'
+        : 'bg-orange-600 dark:bg-orange-700 text-white');
+      $('breakEvenSub').textContent = breakEvenYear
+        ? (breakEvenYear <= years ? 'Buying has already pulled ahead at year ' + years : 'Buying pulls ahead at year ' + breakEvenYear)
+        : 'Renting + investing wins in this scenario';
+
+      $('rentWealth').textContent = fmt(rw);
+      $('buyWealth').textContent = fmt(bw);
+      $('totalRentPaid').textContent = fmt(totalRentPaid);
+      $('totalMortPaid').textContent = fmt(totalMortPaid);
+      $('homeValue').textContent = fmt(buyWealthArr[yIdx] + loanBal + curHomeValue * closingSellPct);
+      $('remainMort').textContent = fmt(loanBal);
+
+      // Draw chart (30 years)
+      drawChart(rentWealthArr, buyWealthArr, years);
+    }
+
+    function drawChart(rentArr, buyArr, highlightYear) {
+      var W = 300, H = 160, pad = 8;
+      var allVals = rentArr.concat(buyArr);
+      var minV = Math.min(0, Math.min.apply(null, allVals));
+      var maxV = Math.max.apply(null, allVals);
+      var range = maxV - minV || 1;
+
+      function toY(v) { return H - pad - (v - minV) / range * (H - 2 * pad); }
+      function toX(i) { return pad + i / (rentArr.length - 1) * (W - 2 * pad); }
+
+      var rPath = '', bPath = '';
+      rentArr.forEach(function(v, i) {
+        rPath += (i === 0 ? 'M' : 'L') + ' ' + toX(i) + ',' + toY(v) + ' ';
+      });
+      buyArr.forEach(function(v, i) {
+        bPath += (i === 0 ? 'M' : 'L') + ' ' + toX(i) + ',' + toY(v) + ' ';
+      });
+
+      $('rentLine').setAttribute('d', rPath);
+      $('buyLine').setAttribute('d', bPath);
+    }
+
+    document.querySelectorAll('input, select').forEach(function(el) {
+      el.addEventListener('input', calcYearly);
+    });
+
+    calcYearly();
+  })();
+  </script>
+</Base>

@@ -1,0 +1,314 @@
+---
+import Base from '../layouts/Base.astro';
+const canonicalUrl = 'https://commission-calc.com/home-affordability-calculator/';
+const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Home Affordability Calculator",
+      "url": canonicalUrl,
+      "description": "Calculate how much house you can afford based on your income, debts, and down payment using the 28/36 rule and CFPB 43% DTI guidelines.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the 28/36 rule for buying a home?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The 28/36 rule says your housing expenses should be no more than 28% of gross monthly income (front-end ratio), and your total debt payments (housing + all other debts) should be no more than 36% of gross income (back-end ratio)." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is DTI and what is a good DTI for a mortgage?",
+          "acceptedAnswer": { "@type": "Answer", "text": "DTI (Debt-to-Income ratio) measures your monthly debt payments divided by gross monthly income. Most conventional lenders want a back-end DTI under 36–43%. FHA loans allow up to 57% in some cases, but lower is always better." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is 43% DTI too high for a mortgage?",
+          "acceptedAnswer": { "@type": "Answer", "text": "43% DTI is the CFPB \"Qualified Mortgage\" limit and represents a stretch scenario. While you may qualify, your monthly cash flow will be tight. Most financial planners recommend staying under 36% total DTI." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much income do I need to buy a $400,000 home?",
+          "acceptedAnswer": { "@type": "Answer", "text": "With a 20% down payment ($80K), a $320,000 mortgage at 6.85% has a P&I payment of about $2,094/month. Adding taxes and insurance, PITI is roughly $2,500–2,800/month. To keep housing under 28% of income, you'd need about $9,000–10,000/month ($108,000–$120,000/year) in gross income." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is PITI and how does it affect affordability?",
+          "acceptedAnswer": { "@type": "Answer", "text": "PITI is Principal, Interest, Taxes, and Insurance — the full monthly mortgage cost. Lenders use your PITI to calculate your front-end DTI ratio to determine how much house you can afford." }
+        }
+      ]
+    }
+  ]
+});
+---
+<Base
+  title="Home Affordability Calculator 2026 — How Much House Can I Afford?"
+  description="Find out how much house you can afford using the 28/36 DTI rule. See conservative, moderate, and stretch scenarios based on your income and existing debts."
+  canonicalUrl={canonicalUrl}
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={schemaJson} />
+
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Home Affordability Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">How much house can you afford? Enter your income and debts to see three affordability scenarios based on standard lending guidelines.</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Inputs -->
+      <div class="lg:col-span-3 bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-lg font-semibold mb-5 text-gray-800 dark:text-gray-200">Your Financial Profile</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Gross Income ($)</label>
+            <input type="number" id="income" value="85000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Co-borrower Income ($/yr)</label>
+            <input type="number" id="coBorrowerIncome" value="0" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly Debts ($) <span class="text-gray-400 font-normal text-xs">car, student loan, credit cards</span></label>
+            <input type="number" id="monthlyDebts" value="500" min="0" step="50"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Down Payment ($)</label>
+            <input type="number" id="downPayment" value="50000" min="0" step="5000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Interest Rate (%)</label>
+            <input type="number" id="intRate" value="6.85" min="0" max="25" step="0.05"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loan Term</label>
+            <select id="loanTerm"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="30" selected>30 years</option>
+              <option value="20">20 years</option>
+              <option value="15">15 years</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Property Tax Rate (%/yr)</label>
+            <input type="number" id="taxRate" value="1.10" min="0" max="5" step="0.05"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Insurance ($/yr)</label>
+            <input type="number" id="insurance" value="1500" min="0" step="100"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">HOA ($/mo)</label>
+            <input type="number" id="hoa" value="0" min="0" step="25"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-indigo-700 dark:bg-indigo-800 text-white rounded-2xl p-6">
+          <p class="text-indigo-200 text-sm mb-1">Comfortable Budget</p>
+          <p id="comfPrice" class="text-4xl font-bold">$350,000</p>
+          <p class="text-indigo-200 text-xs mt-1">Based on 28% / 36% rule</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-xl p-3 text-center">
+            <p class="text-xs text-green-700 dark:text-green-400 font-semibold mb-1">Conservative</p>
+            <p id="conservPrice" class="text-lg font-bold text-green-800 dark:text-green-300">$290K</p>
+            <p class="text-xs text-green-600 dark:text-green-500 mt-1">28% front-end</p>
+          </div>
+          <div class="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-xl p-3 text-center">
+            <p class="text-xs text-blue-700 dark:text-blue-400 font-semibold mb-1">Moderate</p>
+            <p id="moderPrice" class="text-lg font-bold text-blue-800 dark:text-blue-300">$350K</p>
+            <p class="text-xs text-blue-600 dark:text-blue-500 mt-1">36% back-end</p>
+          </div>
+          <div class="bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 rounded-xl p-3 text-center">
+            <p class="text-xs text-orange-700 dark:text-orange-400 font-semibold mb-1">Stretch</p>
+            <p id="stretchPrice" class="text-lg font-bold text-orange-800 dark:text-orange-300">$420K</p>
+            <p class="text-xs text-orange-600 dark:text-orange-500 mt-1">43% CFPB max</p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 space-y-3">
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Gross Monthly Income</span>
+            <span id="monthlyIncome" class="font-semibold">$7,083</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Max Housing Payment (28%)</span>
+            <span id="maxHousing28" class="font-semibold text-green-600 dark:text-green-400">$1,983</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Max Housing Payment (36%)</span>
+            <span id="maxHousing36" class="font-semibold text-blue-600 dark:text-blue-400">$2,050</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 dark:text-gray-400">Max Housing Payment (43%)</span>
+            <span id="maxHousing43" class="font-semibold text-orange-600 dark:text-orange-400">$2,546</span>
+          </div>
+        </div>
+
+        <!-- DTI bar -->
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+          <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Current DTI Breakdown</p>
+          <div class="space-y-2">
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-gray-500 dark:text-gray-400">Housing (front-end DTI)</span>
+                <span id="frontDtiLabel" class="font-medium">—</span>
+              </div>
+              <div class="h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div id="frontDtiBar" class="h-full bg-indigo-500 rounded-full transition-all" style="width:0%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-gray-500 dark:text-gray-400">All debts (back-end DTI)</span>
+                <span id="backDtiLabel" class="font-medium">—</span>
+              </div>
+              <div class="h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div id="backDtiBar" class="h-full bg-purple-500 rounded-full transition-all" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/mortgage-calculator/" class="block text-center text-sm text-indigo-600 dark:text-indigo-400 hover:underline">Calculate exact PITI payment →</a>
+      </div>
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <a href="/mortgage-calculator/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Mortgage Calculator</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">PITI + amortization schedule</p>
+      </a>
+      <a href="/rent-vs-buy-calculator/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Rent vs Buy</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Break-even year analysis</p>
+      </a>
+      <a href="/closing-costs/" class="flex flex-col gap-1 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+        <p class="font-semibold text-gray-900 dark:text-gray-100">Closing Costs</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">What you'll pay at closing</p>
+      </a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-12 prose dark:prose-invert prose-lg max-w-none">
+      <h2>Home Affordability FAQ</h2>
+      <h3>What is the 28/36 rule?</h3>
+      <p>The 28/36 rule is the most common affordability guideline used by mortgage lenders. Your housing costs (PITI) should be no more than 28% of gross monthly income (front-end ratio), and all your monthly debt payments combined should be no more than 36% (back-end ratio). The calculator above shows all three thresholds: 28%, 36%, and the CFPB's 43% maximum.</p>
+      <h3>What counts as monthly debt?</h3>
+      <p>Lenders count minimum payments on: car loans, student loans, credit card minimums, personal loans, child support/alimony, and other financed obligations. They do NOT count utilities, subscriptions, or insurance (unless it's credit insurance on an existing debt).</p>
+      <h3>What's the difference between front-end and back-end DTI?</h3>
+      <p>Front-end DTI (housing ratio) = monthly housing costs ÷ gross monthly income. Back-end DTI = (housing + all other monthly debts) ÷ gross income. Lenders look at both. Conventional loans typically cap front-end at 28% and back-end at 36–45%.</p>
+      <h3>How do I increase my home buying power?</h3>
+      <p>Four levers: (1) increase income, (2) pay down existing debts to lower DTI, (3) increase down payment to lower monthly P&I, (4) improve credit score to get a lower interest rate. A 0.5% rate reduction on a $350,000 loan saves about $100/month.</p>
+      <p class="text-sm text-gray-400 dark:text-gray-500 italic">This calculator is for educational purposes only. Consult a licensed mortgage professional for personalized advice.</p>
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    function $ (id) { return document.getElementById(id); }
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+    function fmtK(n) { return '$' + (Math.round(n / 1000)) + 'K'; }
+
+    function pmt(P, r, n) {
+      if (r === 0) return P / n;
+      return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+    }
+
+    function maxLoanFromPayment(payment, r, n) {
+      if (r === 0) return payment * n;
+      return payment * (Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n));
+    }
+
+    function calc() {
+      var annualIncome = (parseFloat($('income').value) || 0) + (parseFloat($('coBorrowerIncome').value) || 0);
+      var monthlyIncome = annualIncome / 12;
+      var debts = parseFloat($('monthlyDebts').value) || 0;
+      var down = parseFloat($('downPayment').value) || 0;
+      var r = (parseFloat($('intRate').value) || 0) / 100 / 12;
+      var n = parseInt($('loanTerm').value || 30) * 12;
+      var taxRate = (parseFloat($('taxRate').value) || 0) / 100;
+      var ins = (parseFloat($('insurance').value) || 0) / 12;
+      var hoa = parseFloat($('hoa').value) || 0;
+
+      // For each threshold, figure out max housing payment then back-calculate home price
+      // Housing payment = P&I + tax + ins + hoa
+      // tax = price * taxRate / 12; so tax + ins + hoa varies with price
+      // Iteratively solve: maxHousing = PI(loan) + price*taxRate/12 + ins + hoa
+      // PI(loan) = PMT(price - down, r, n)
+      // So: maxHousing - ins - hoa = PMT(price - down, r, n) + price * taxRate / 12
+
+      function solvePrice(maxHousing) {
+        // iterate: guess price, compute required housing payment, adjust
+        if (maxHousing <= 0) return 0;
+        var price = down + maxLoanFromPayment(maxHousing - ins - hoa, r, n);
+        for (var i = 0; i < 30; i++) {
+          var tax = price * taxRate / 12;
+          var pi = pmt(Math.max(price - down, 0), r, n);
+          var required = pi + tax + ins + hoa;
+          if (Math.abs(required - maxHousing) < 1) break;
+          price = price + (maxHousing - required) / (1 / 12 * taxRate + r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1));
+        }
+        return Math.max(price, 0);
+      }
+
+      var max28 = monthlyIncome * 0.28;
+      var max36 = monthlyIncome * 0.36 - debts;
+      var max43 = monthlyIncome * 0.43 - debts;
+
+      var price28 = solvePrice(max28);
+      var price36 = solvePrice(max36);
+      var price43 = solvePrice(max43);
+
+      var comfortable = Math.min(price28, price36);
+
+      $('comfPrice').textContent = fmt(comfortable);
+      $('conservPrice').textContent = fmtK(price28);
+      $('moderPrice').textContent = fmtK(price36);
+      $('stretchPrice').textContent = fmtK(price43);
+      $('monthlyIncome').textContent = fmt(monthlyIncome);
+      $('maxHousing28').textContent = fmt(max28);
+      $('maxHousing36').textContent = fmt(Math.max(max36, 0));
+      $('maxHousing43').textContent = fmt(Math.max(max43, 0));
+
+      // DTI bars using comfortable price
+      if (comfortable > 0 && monthlyIncome > 0) {
+        var cTax = comfortable * taxRate / 12;
+        var cPI = pmt(Math.max(comfortable - down, 0), r, n);
+        var cHousing = cPI + cTax + ins + hoa;
+        var frontDti = cHousing / monthlyIncome * 100;
+        var backDti = (cHousing + debts) / monthlyIncome * 100;
+        $('frontDtiLabel').textContent = frontDti.toFixed(1) + '%';
+        $('backDtiLabel').textContent = backDti.toFixed(1) + '%';
+        $('frontDtiBar').style.width = Math.min(frontDti, 100) + '%';
+        $('frontDtiBar').style.background = frontDti > 36 ? '#f97316' : frontDti > 28 ? '#3b82f6' : '#6366f1';
+        $('backDtiBar').style.width = Math.min(backDti, 100) + '%';
+        $('backDtiBar').style.background = backDti > 43 ? '#ef4444' : backDti > 36 ? '#f97316' : '#8b5cf6';
+      }
+    }
+
+    document.querySelectorAll('input, select').forEach(function(el) {
+      el.addEventListener('input', calc);
+    });
+
+    calc();
+  })();
+  </script>
+</Base>
