@@ -1,0 +1,308 @@
+---
+import Base from '../layouts/Base.astro';
+const softwareSchema = JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rental Property Calculator","url":"https://commission-calc.com/rental-property-calculator/","description":"Free rental property calculator. Analyze cap rate, cash-on-cash return, cash flow, DSCR, and the 1% rule for any investment property.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const faqSchema = JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a good cap rate for rental property?","acceptedAnswer":{"@type":"Answer","text":"A cap rate of 5–10% is generally considered good for most markets. In expensive cities like NYC or SF, 3–5% is common. In secondary markets, 7–10% is achievable. Higher cap rates mean higher risk or lower demand — always evaluate in context."}},{"@type":"Question","name":"What is cash-on-cash return in real estate?","acceptedAnswer":{"@type":"Answer","text":"Cash-on-cash return measures annual pre-tax cash flow divided by total cash invested (down payment + closing costs). A 6–12% cash-on-cash return is considered solid for a rental property."}},{"@type":"Question","name":"What is the 1% rule in rental property investing?","acceptedAnswer":{"@type":"Answer","text":"The 1% rule states that monthly rent should equal at least 1% of the purchase price (e.g., a $200,000 property should rent for $2,000/month). It's a quick screening tool — properties that pass the 1% rule are more likely to cash flow positively."}},{"@type":"Question","name":"What is DSCR and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"DSCR (Debt Service Coverage Ratio) = Net Operating Income ÷ Annual Mortgage Payment. Lenders typically require DSCR ≥ 1.25 for investment property loans. Below 1.0 means the property doesn't cover its own debt."}},{"@type":"Question","name":"What expenses should I include in a rental property analysis?","acceptedAnswer":{"@type":"Answer","text":"Include: property taxes, insurance, property management (8–12%), vacancy (5–10%), maintenance (1% of value/year), capital expenditures (1–2%/year for HVAC, roof, appliances), HOA, and repairs. Many investors underestimate these — use the 50% rule as a sanity check: expenses are roughly 50% of gross rent."}},{"@type":"Question","name":"How do I calculate rental property cap rate?","acceptedAnswer":{"@type":"Answer","text":"Cap Rate = Net Operating Income (NOI) ÷ Property Value × 100. NOI = Gross Rental Income − All Operating Expenses (excluding mortgage). A $200,000 property generating $14,400 NOI has a 7.2% cap rate."}}]});
+---
+<Base
+  title="Rental Property Calculator — Cap Rate, Cash Flow, COC Return 2026"
+  description="Free rental property calculator. Analyze cap rate, cash-on-cash return, monthly cash flow, DSCR, and the 1% rule before buying any investment property."
+  canonicalUrl="https://commission-calc.com/rental-property-calculator/"
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Rental Property Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">Analyze cap rate, cash flow, COC return, DSCR, and the 1% rule for any rental property investment.</p>
+
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Purchase & Financing</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Purchase Price ($)</label>
+          <input type="number" id="purchasePrice" value="300000" min="0" step="1000"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Down Payment (%)</label>
+          <input type="number" id="downPct" value="20" min="0" max="100" step="1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Interest Rate (%)</label>
+          <input type="number" id="intRate" value="7.0" min="0" max="20" step="0.1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loan Term (years)</label>
+          <select id="loanTerm" class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="30" selected>30 years</option>
+            <option value="20">20 years</option>
+            <option value="15">15 years</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Closing Costs ($)</label>
+          <input type="number" id="closingCosts" value="4500" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Income</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly Gross Rent ($)</label>
+          <input type="number" id="monthlyRent" value="2200" min="0" step="50"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vacancy Rate (%)</label>
+          <input type="number" id="vacancyRate" value="5" min="0" max="50" step="1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Monthly Expenses</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Property Tax ($/yr)</label>
+          <input type="number" id="propTax" value="3600" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Insurance ($/yr)</label>
+          <input type="number" id="insurance" value="1200" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Property Management (%)</label>
+          <input type="number" id="mgmtPct" value="10" min="0" max="30" step="1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">HOA ($/mo)</label>
+          <input type="number" id="hoa" value="0" min="0" step="10"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maintenance ($/yr)</label>
+          <input type="number" id="maintenance" value="1500" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CapEx Reserve ($/yr)</label>
+          <input type="number" id="capex" value="1200" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="space-y-4 mb-8">
+      <!-- Cash Flow Summary -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-4">Monthly Cash Flow Breakdown</h2>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span class="text-gray-500 dark:text-gray-400">Gross rent</span><span id="r-grossRent" class="font-medium">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-500 dark:text-gray-400">Vacancy loss</span><span id="r-vacancy" class="font-medium text-red-500">—</span></div>
+          <div class="flex justify-between border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-600 dark:text-gray-300 font-medium">Effective gross income</span><span id="r-egi" class="font-semibold">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-500 dark:text-gray-400">Operating expenses</span><span id="r-opex" class="font-medium text-red-500">—</span></div>
+          <div class="flex justify-between border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-600 dark:text-gray-300 font-medium">Net Operating Income</span><span id="r-noi" class="font-semibold">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-500 dark:text-gray-400">Mortgage P&amp;I</span><span id="r-mortgage" class="font-medium text-red-500">—</span></div>
+          <div class="flex justify-between border-t-2 border-indigo-200 dark:border-indigo-700 pt-2 mt-1">
+            <span class="font-bold text-gray-800 dark:text-gray-100">Monthly Cash Flow</span>
+            <span id="r-cashflow" class="text-xl font-bold">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Cap Rate</p>
+          <p id="r-capRate" class="text-xl font-bold text-indigo-700 dark:text-indigo-400">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Cash-on-Cash</p>
+          <p id="r-coc" class="text-xl font-bold text-indigo-700 dark:text-indigo-400">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">DSCR</p>
+          <p id="r-dscr" class="text-xl font-bold text-indigo-700 dark:text-indigo-400">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">GRM</p>
+          <p id="r-grm" class="text-xl font-bold text-indigo-700 dark:text-indigo-400">—</p>
+        </div>
+      </div>
+
+      <!-- 1% Rule + DSCR badges -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div id="badge-1pct" class="rounded-xl p-4 border text-sm font-medium text-center">—</div>
+        <div id="badge-dscr" class="rounded-xl p-4 border text-sm font-medium text-center">—</div>
+      </div>
+
+      <!-- Annual summary -->
+      <div class="bg-indigo-50 dark:bg-indigo-950 rounded-xl p-4 border border-indigo-200 dark:border-indigo-800 text-sm">
+        <div class="grid grid-cols-2 gap-2">
+          <div><span class="text-gray-500 dark:text-gray-400">Annual cash flow:</span> <span id="r-annualCF" class="font-semibold">—</span></div>
+          <div><span class="text-gray-500 dark:text-gray-400">Cash invested:</span> <span id="r-cashIn" class="font-semibold">—</span></div>
+          <div><span class="text-gray-500 dark:text-gray-400">Annual NOI:</span> <span id="r-annualNOI" class="font-semibold">—</span></div>
+          <div><span class="text-gray-500 dark:text-gray-400">Annual debt service:</span> <span id="r-annualDebt" class="font-semibold">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-sm text-amber-800 dark:text-amber-300 mb-8">
+      For educational purposes only. Not financial or investment advice — consult a licensed financial advisor before investing.
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-10 prose dark:prose-invert prose-lg max-w-none">
+      <h2>Rental Property Analysis: Key Metrics Explained</h2>
+
+      <h3>Cap Rate</h3>
+      <p>Cap rate (capitalization rate) = Annual NOI ÷ Purchase Price. It measures return assuming an all-cash purchase. A 5–8% cap rate is typical in most US markets. Higher cap rates signal more risk or lower demand. Use cap rate to compare properties — not to evaluate leverage.</p>
+
+      <h3>Cash-on-Cash Return</h3>
+      <p>COC = Annual Pre-Tax Cash Flow ÷ Total Cash Invested. This is the metric that matters most for leveraged investors — it measures return on actual dollars you put in. Target 6–12% COC for a solid rental property.</p>
+
+      <h3>Debt Service Coverage Ratio (DSCR)</h3>
+      <p>DSCR = Monthly NOI ÷ Monthly Mortgage Payment. Lenders use this to qualify DSCR loans. A DSCR ≥ 1.25 is typically required. Below 1.0 means the property doesn't cover its own debt from rent alone.</p>
+
+      <h3>The 1% Rule</h3>
+      <p>Monthly rent ÷ Purchase price ≥ 1%. A $300,000 property should rent for $3,000+/month to pass. Useful as a quick screen, but not sufficient analysis on its own — always run full expense projections.</p>
+
+      <h3>The 50% Rule (Sanity Check)</h3>
+      <p>Operating expenses (excluding mortgage) typically run 40–50% of gross rent. If your projected expenses are significantly lower, you may be underestimating maintenance, vacancies, or capital expenditures.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>What is a good cap rate for rental property?</h3>
+      <p>5–10% is generally good. In major cities 3–5% is common. In secondary markets 7–10% is achievable. Always benchmark against comparable properties in the same market.</p>
+
+      <h3>What is the 1% rule in real estate?</h3>
+      <p>Monthly rent ≥ 1% of purchase price. A $200,000 home should rent for $2,000/month. It's a screening tool — not a guarantee of positive cash flow.</p>
+
+      <h3>What is cash-on-cash return?</h3>
+      <p>Annual pre-tax cash flow divided by total cash invested (down payment + closing costs). A 6–12% COC is considered solid. It measures return on YOUR money specifically.</p>
+
+      <h3>What is DSCR and why does it matter?</h3>
+      <p>Debt Service Coverage Ratio = NOI ÷ Annual Debt Service. Lenders typically require ≥ 1.25. Below 1.0 means rent doesn't cover the mortgage.</p>
+
+      <h3>What expenses should I include?</h3>
+      <p>Property tax, insurance, property management (8–12%), vacancy (5–10%), maintenance (1% of value/year), CapEx reserves, HOA, and repairs. Use the 50% rule as a sanity check.</p>
+
+      <h3>How do I calculate rental property cap rate?</h3>
+      <p>Cap Rate = (Annual Gross Rent − Operating Expenses) ÷ Property Value × 100. Excludes mortgage — pure property performance metric.</p>
+    </div>
+
+    <div class="mt-10 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
+      <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Related Calculators</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="/brrrr-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">BRRRR Calculator</a>
+        <a href="/1031-exchange-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">1031 Exchange</a>
+        <a href="/capital-gains-home-sale/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Capital Gains</a>
+        <a href="/mortgage-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Mortgage Calculator</a>
+        <a href="/fsbo-vs-agent-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">FSBO vs Agent</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function pmt(P, r, n) {
+      if (r === 0) return P / n;
+      return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+    }
+
+    function fmt(n) {
+      const abs = Math.abs(n);
+      return (n < 0 ? '-$' : '$') + abs.toLocaleString('en-US', {maximumFractionDigits: 0});
+    }
+
+    function calc() {
+      const purchase = parseFloat(document.getElementById('purchasePrice').value) || 0;
+      const downPct = parseFloat(document.getElementById('downPct').value) / 100 || 0;
+      const rate = parseFloat(document.getElementById('intRate').value) / 100 / 12 || 0;
+      const term = parseInt(document.getElementById('loanTerm').value) * 12;
+      const closing = parseFloat(document.getElementById('closingCosts').value) || 0;
+      const rent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+      const vacPct = parseFloat(document.getElementById('vacancyRate').value) / 100 || 0;
+      const propTax = (parseFloat(document.getElementById('propTax').value) || 0) / 12;
+      const ins = (parseFloat(document.getElementById('insurance').value) || 0) / 12;
+      const mgmt = (parseFloat(document.getElementById('mgmtPct').value) / 100 || 0) * rent;
+      const hoa = parseFloat(document.getElementById('hoa').value) || 0;
+      const maint = (parseFloat(document.getElementById('maintenance').value) || 0) / 12;
+      const capex = (parseFloat(document.getElementById('capex').value) || 0) / 12;
+
+      const down = purchase * downPct;
+      const loan = purchase - down;
+      const cashIn = down + closing;
+      const mortgage = pmt(loan, rate, term);
+
+      const vacancyLoss = rent * vacPct;
+      const egi = rent - vacancyLoss;
+      const opex = propTax + ins + mgmt + hoa + maint + capex;
+      const noi = egi - opex;
+      const cashflow = noi - mortgage;
+
+      const annualNOI = noi * 12;
+      const annualCF = cashflow * 12;
+      const capRate = purchase > 0 ? (annualNOI / purchase * 100) : 0;
+      const coc = cashIn > 0 ? (annualCF / cashIn * 100) : 0;
+      const annualDebt = mortgage * 12;
+      const dscr = annualDebt > 0 ? (annualNOI / annualDebt) : 0;
+      const grm = rent > 0 ? (purchase / (rent * 12)) : 0;
+      const pctRule = purchase > 0 ? (rent / purchase * 100) : 0;
+
+      document.getElementById('r-grossRent').textContent = fmt(rent);
+      document.getElementById('r-vacancy').textContent = '-' + fmt(vacancyLoss);
+      document.getElementById('r-egi').textContent = fmt(egi);
+      document.getElementById('r-opex').textContent = '-' + fmt(opex);
+      document.getElementById('r-noi').textContent = fmt(noi);
+      document.getElementById('r-mortgage').textContent = '-' + fmt(mortgage);
+
+      const cfEl = document.getElementById('r-cashflow');
+      cfEl.textContent = fmt(cashflow) + '/mo';
+      cfEl.className = 'text-xl font-bold ' + (cashflow >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400');
+
+      document.getElementById('r-capRate').textContent = capRate.toFixed(2) + '%';
+      document.getElementById('r-coc').textContent = coc.toFixed(2) + '%';
+      document.getElementById('r-dscr').textContent = dscr.toFixed(2);
+      document.getElementById('r-grm').textContent = grm.toFixed(1) + 'x';
+      document.getElementById('r-annualCF').textContent = fmt(annualCF) + '/yr';
+      document.getElementById('r-cashIn').textContent = fmt(cashIn);
+      document.getElementById('r-annualNOI').textContent = fmt(annualNOI) + '/yr';
+      document.getElementById('r-annualDebt').textContent = fmt(annualDebt) + '/yr';
+
+      const b1 = document.getElementById('badge-1pct');
+      if (pctRule >= 1) {
+        b1.className = 'rounded-xl p-4 border text-sm font-medium text-center bg-green-50 dark:bg-green-950 border-green-300 dark:border-green-700 text-green-800 dark:text-green-300';
+        b1.textContent = '✓ Passes 1% Rule (' + pctRule.toFixed(2) + '%) — rent is ' + pctRule.toFixed(2) + '% of price';
+      } else {
+        b1.className = 'rounded-xl p-4 border text-sm font-medium text-center bg-orange-50 dark:bg-orange-950 border-orange-300 dark:border-orange-700 text-orange-800 dark:text-orange-300';
+        b1.textContent = '✗ Fails 1% Rule (' + pctRule.toFixed(2) + '%) — typical for expensive markets';
+      }
+
+      const bd = document.getElementById('badge-dscr');
+      if (dscr >= 1.25) {
+        bd.className = 'rounded-xl p-4 border text-sm font-medium text-center bg-green-50 dark:bg-green-950 border-green-300 dark:border-green-700 text-green-800 dark:text-green-300';
+        bd.textContent = '✓ DSCR ' + dscr.toFixed(2) + ' — lender-qualifying (≥ 1.25 required)';
+      } else if (dscr >= 1.0) {
+        bd.className = 'rounded-xl p-4 border text-sm font-medium text-center bg-yellow-50 dark:bg-yellow-950 border-yellow-300 dark:border-yellow-700 text-yellow-800 dark:text-yellow-300';
+        bd.textContent = '⚠ DSCR ' + dscr.toFixed(2) + ' — cash flows but below lender threshold of 1.25';
+      } else {
+        bd.className = 'rounded-xl p-4 border text-sm font-medium text-center bg-red-50 dark:bg-red-950 border-red-300 dark:border-red-700 text-red-800 dark:text-red-300';
+        bd.textContent = '✗ DSCR ' + dscr.toFixed(2) + ' — rent does not cover debt service';
+      }
+    }
+
+    document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calc));
+    calc();
+  </script>
+</Base>

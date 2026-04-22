@@ -1,0 +1,258 @@
+---
+import Base from '../layouts/Base.astro';
+const softwareSchema = JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"FSBO vs Agent Calculator","url":"https://commission-calc.com/fsbo-vs-agent-calculator/","description":"Free FSBO vs agent calculator. Compare selling your home by owner vs with a real estate agent. See the break-even analysis and true net proceeds for each path.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const faqSchema = JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do FSBO homes sell for less?","acceptedAnswer":{"@type":"Answer","text":"Yes, on average FSBO homes sell for 5.5–17% less than agent-listed homes, according to NAR data. The 2023 NAR Profile of Home Buyers and Sellers found the median FSBO sale price was $310,000 vs $405,000 for agent-assisted sales — a 23% gap. However this includes selection bias (FSBO sellers often have smaller, lower-value homes). A realistic discount for homes that would have sold at similar prices is 3–8%."}},{"@type":"Question","name":"What does FSBO cost?","acceptedAnswer":{"@type":"Answer","text":"FSBO costs include: MLS listing fee ($300–$500), professional photography ($200–$400), yard signs ($20–$80), marketing/advertising ($100–$500), attorney fees ($500–$1,500 for closing in some states), and the buyer's agent commission (typically 2.5–3% — this is usually still offered to attract buyers). Total FSBO costs excluding buyer agent commission: roughly $1,000–$3,000."}},{"@type":"Question","name":"Do I still need to pay the buyer's agent if I sell FSBO?","acceptedAnswer":{"@type":"Answer","text":"Technically no, but practically many FSBO sellers offer a buyer's agent commission (typically 2.5–3%) to attract buyers who come with their own agents. If you refuse, many buyer's agents may steer clients away from your listing. After the 2024 NAR settlement, buyer agent compensation is fully negotiable — but offering it may increase your buyer pool."}},{"@type":"Question","name":"What is FSBO break-even price?","acceptedAnswer":{"@type":"Answer","text":"The FSBO break-even price is the minimum home value at which FSBO saves you money vs using an agent — accounting for the FSBO sale price discount. If the commission savings ($22,000 on a $400,000 home at 5.5%) exceed the FSBO discount ($12,000 at 3% discount), you come out ahead. The break-even depends on your specific market and negotiating ability."}},{"@type":"Question","name":"How long does it take to sell a home FSBO?","acceptedAnswer":{"@type":"Answer","text":"FSBO homes typically take longer to sell — studies show 1–2 weeks more on average. However, with good pricing and marketing, FSBO homes in hot markets can sell quickly. The main challenge is exposure — an MLS listing reaches all buyer's agents while FSBO-only listings rely on Zillow, Craigslist, and word of mouth."}}]});
+---
+<Base
+  title="FSBO vs Agent Calculator — Which Nets You More in 2026?"
+  description="Free FSBO vs agent calculator. Compare selling by owner vs listing with an agent. See your break-even point and true net proceeds for each path."
+  canonicalUrl="https://commission-calc.com/fsbo-vs-agent-calculator/"
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">FSBO vs Agent Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-2">For Sale By Owner vs listing with an agent — which path nets you more? Enter your numbers to find out.</p>
+
+    <div class="mb-6 p-3 bg-indigo-50 dark:bg-indigo-950 rounded-lg border border-indigo-200 dark:border-indigo-800 text-sm text-indigo-800 dark:text-indigo-300">
+      FSBO saves on commission but typically nets 3–8% less due to limited marketing exposure and negotiating disadvantage. This calculator shows your real break-even.
+    </div>
+
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 mb-4">
+      <h2 class="text-base font-semibold mb-4 text-gray-800 dark:text-gray-200">Your Home</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Expected Market Value ($)</label>
+          <input type="number" id="marketValue" value="400000" min="0" step="5000"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-0.5">What an agent-listed home would sell for</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mortgage Payoff ($)</label>
+          <input type="number" id="mortgage" value="250000" min="0" step="1000"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <!-- Agent side -->
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Agent-Assisted Sale</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Total Commission (%)</label>
+            <input type="number" id="agentCommission" value="5.5" min="0" max="10" step="0.1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Both agents combined (post-NAR, now negotiable)</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Agent Closing Costs ($)</label>
+            <input type="number" id="agentClosing" value="3000" min="0" step="500"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Staging/Prep Costs ($)</label>
+            <input type="number" id="agentPrep" value="2000" min="0" step="250"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- FSBO side -->
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">FSBO (For Sale By Owner)</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Expected FSBO Sale Price Discount (%)</label>
+            <input type="number" id="fsboDiscount" value="4" min="0" max="20" step="0.5"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">NAR data: avg 3–8% below agent sales</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Buyer Agent Offer (% of FSBO price)</label>
+            <input type="number" id="buyerAgent" value="2.5" min="0" max="5" step="0.1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Offered to attract buyer's agents (0 if buyer unrepresented)</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">FSBO Marketing Costs ($)</label>
+            <input type="number" id="fsboMarketing" value="1200" min="0" step="100"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">MLS flat fee + photos + ads + attorney</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">FSBO Closing Costs ($)</label>
+            <input type="number" id="fsboClosing" value="2000" min="0" step="250"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="space-y-4 mb-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-indigo-50 dark:bg-indigo-950 rounded-2xl p-5 border border-indigo-200 dark:border-indigo-800">
+          <p class="text-sm font-semibold text-indigo-700 dark:text-indigo-400 mb-3">Agent-Assisted</p>
+          <div class="space-y-1.5 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Sale price</span><span id="ag-price" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Commission</span><span id="ag-commission" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Closing + prep</span><span id="ag-costs" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Mortgage payoff</span><span id="ag-mortgage" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between border-t border-indigo-200 dark:border-indigo-700 pt-2 mt-2">
+              <span class="font-bold">Net Proceeds</span>
+              <span id="ag-net" class="text-xl font-bold text-indigo-700 dark:text-indigo-400">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-green-50 dark:bg-green-950 rounded-2xl p-5 border border-green-200 dark:border-green-800">
+          <p class="text-sm font-semibold text-green-700 dark:text-green-400 mb-3">FSBO</p>
+          <div class="space-y-1.5 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">FSBO sale price</span><span id="fsbo-price" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Buyer agent offer</span><span id="fsbo-buyeragent" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Marketing + closing</span><span id="fsbo-costs" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Mortgage payoff</span><span id="fsbo-mortgage" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between border-t border-green-200 dark:border-green-700 pt-2 mt-2">
+              <span class="font-bold">Net Proceeds</span>
+              <span id="fsbo-net" class="text-xl font-bold text-green-700 dark:text-green-400">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="verdict" class="rounded-2xl p-5 border text-center">
+        <p class="text-sm text-gray-500 mb-1">Winner</p>
+        <p id="verdict-label" class="text-2xl font-bold mb-1">—</p>
+        <p id="verdict-detail" class="text-sm">—</p>
+        <p id="verdict-breakeven" class="text-xs text-gray-400 mt-2">—</p>
+      </div>
+    </div>
+
+    <div class="p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-sm text-amber-800 dark:text-amber-300 mb-8">
+      For educational purposes only. FSBO vs agent outcomes vary significantly by market, home condition, and seller skill. Consult a real estate professional before deciding.
+    </div>
+
+    <div class="mt-10 prose dark:prose-invert prose-lg max-w-none">
+      <h2>FSBO vs Agent: What the Data Says in 2026</h2>
+
+      <h3>The commission savings reality</h3>
+      <p>On a $400,000 home with a 5.5% commission, using an agent costs $22,000. That's the obvious savings from going FSBO. But the NAR's annual survey consistently shows FSBO homes sell for less — the 2023 study found a $95,000 median price gap (though this includes significant selection bias from smaller FSBO homes).</p>
+      <p>A realistic FSBO discount in comparable properties is 3–8%, meaning a $400K home might sell for $384K–$368K. Run your specific numbers above to see if FSBO makes sense for your situation.</p>
+
+      <h3>Hidden FSBO costs</h3>
+      <p>MLS listing fee ($300–$500), professional photos ($200–$400), signage ($20–$80), attorney fees ($500–$1,500), and the buyer's agent commission (still offered by most FSBO sellers to attract buyers) add up to $1,000–$3,000+ before the buyer agent offer.</p>
+
+      <h3>When FSBO makes sense</h3>
+      <p>FSBO works best when: you have an experienced negotiator, your home is priced under $300K (lower commissions don't justify agent costs as much), you're selling in a hot market where homes sell without marketing, or you have a direct buyer (relocation company, neighbor, etc.)</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>Do FSBO homes sell for less?</h3>
+      <p>On average yes — NAR data shows FSBO homes sell for 5.5–17% less. Accounting for selection bias, a realistic disadvantage is 3–8%. This varies by market and seller experience.</p>
+
+      <h3>What does FSBO cost?</h3>
+      <p>MLS flat fee ($300–500) + photos ($200–400) + attorney ($500–1,500) + marketing ($100–500) = roughly $1,000–$3,000. Plus buyer agent commission if offered (2.5–3%).</p>
+
+      <h3>Do I still need to pay buyer's agent if I sell FSBO?</h3>
+      <p>Technically no, but most FSBO sellers offer 2.5–3% to attract buyer's agents. After the 2024 NAR settlement, buyer agent compensation is fully negotiable.</p>
+
+      <h3>What is FSBO break-even?</h3>
+      <p>The home value where commission savings exceed the FSBO sale price discount. If your home is small and in a hot market, FSBO may win. If your home needs marketing to reach buyers, an agent likely nets more.</p>
+
+      <h3>How long does FSBO take to sell?</h3>
+      <p>Typically 1–2 weeks longer than agent-listed homes on average. In hot markets, FSBO can sell quickly. The key limitation is exposure to buyer's agents who direct most buyers.</p>
+    </div>
+
+    <div class="mt-10 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
+      <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Related Calculators</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="/ibuyer-offer-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">iBuyer Offer Analyzer</a>
+        <a href="/seller-net/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Seller Net Proceeds</a>
+        <a href="/closing-costs/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Closing Costs</a>
+        <a href="/commission-calculator-2026/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">NAR 2026 Commission</a>
+        <a href="/capital-gains-home-sale/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Capital Gains</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function fmt(n) {
+      const abs = Math.abs(n);
+      return (n < 0 ? '-$' : '$') + abs.toLocaleString('en-US', {maximumFractionDigits: 0});
+    }
+
+    function calc() {
+      const market = parseFloat(document.getElementById('marketValue').value) || 0;
+      const mortgagePay = parseFloat(document.getElementById('mortgage').value) || 0;
+      const agentCommPct = parseFloat(document.getElementById('agentCommission').value) / 100 || 0;
+      const agentClosing = parseFloat(document.getElementById('agentClosing').value) || 0;
+      const agentPrep = parseFloat(document.getElementById('agentPrep').value) || 0;
+      const fsboDisc = parseFloat(document.getElementById('fsboDiscount').value) / 100 || 0;
+      const buyerAgentPct = parseFloat(document.getElementById('buyerAgent').value) / 100 || 0;
+      const fsboMarketing = parseFloat(document.getElementById('fsboMarketing').value) || 0;
+      const fsboClosing = parseFloat(document.getElementById('fsboClosing').value) || 0;
+
+      // Agent path
+      const agCommission = market * agentCommPct;
+      const agTotal = agCommission + agentClosing + agentPrep + mortgagePay;
+      const agNet = market - agTotal;
+
+      // FSBO path
+      const fsboSalePrice = market * (1 - fsboDisc);
+      const fsboBuyerAgent = fsboSalePrice * buyerAgentPct;
+      const fsboTotal = fsboBuyerAgent + fsboMarketing + fsboClosing + mortgagePay;
+      const fsboNet = fsboSalePrice - fsboTotal;
+
+      const diff = fsboNet - agNet;
+
+      // Commission savings vs price discount
+      const commSavings = agCommission - (fsboBuyerAgent + fsboMarketing);
+      const priceDiscount = market * fsboDisc;
+
+      // Break-even discount %: commSavings = market * discount
+      const breakEvenDisc = market > 0 ? (commSavings / market * 100) : 0;
+
+      document.getElementById('ag-price').textContent = fmt(market);
+      document.getElementById('ag-commission').textContent = '-' + fmt(agCommission);
+      document.getElementById('ag-costs').textContent = '-' + fmt(agentClosing + agentPrep);
+      document.getElementById('ag-mortgage').textContent = '-' + fmt(mortgagePay);
+      document.getElementById('ag-net').textContent = fmt(agNet);
+
+      document.getElementById('fsbo-price').textContent = fmt(fsboSalePrice);
+      document.getElementById('fsbo-buyeragent').textContent = '-' + fmt(fsboBuyerAgent);
+      document.getElementById('fsbo-costs').textContent = '-' + fmt(fsboMarketing + fsboClosing);
+      document.getElementById('fsbo-mortgage').textContent = '-' + fmt(mortgagePay);
+      document.getElementById('fsbo-net').textContent = fmt(fsboNet);
+
+      const verdict = document.getElementById('verdict');
+      const vLabel = document.getElementById('verdict-label');
+      const vDetail = document.getElementById('verdict-detail');
+      const vBreakeven = document.getElementById('verdict-breakeven');
+
+      vBreakeven.textContent = 'Break-even FSBO discount: ' + breakEvenDisc.toFixed(1) + '% — if your FSBO sells for less than ' + breakEvenDisc.toFixed(1) + '% below market, FSBO wins.';
+
+      if (diff > 0) {
+        verdict.className = 'rounded-2xl p-5 border text-center bg-green-50 dark:bg-green-950 border-green-300 dark:border-green-700';
+        vLabel.textContent = 'FSBO nets more: ' + fmt(diff) + ' advantage';
+        vLabel.className = 'text-2xl font-bold mb-1 text-green-700 dark:text-green-400';
+        vDetail.textContent = 'Commission savings (' + fmt(commSavings) + ') outweigh the expected price discount (' + fmt(priceDiscount) + ').';
+      } else if (diff < 0) {
+        verdict.className = 'rounded-2xl p-5 border text-center bg-indigo-50 dark:bg-indigo-950 border-indigo-300 dark:border-indigo-700';
+        vLabel.textContent = 'Agent nets more: ' + fmt(Math.abs(diff)) + ' advantage';
+        vLabel.className = 'text-2xl font-bold mb-1 text-indigo-700 dark:text-indigo-400';
+        vDetail.textContent = 'The expected FSBO price discount (' + fmt(priceDiscount) + ') exceeds the commission savings (' + fmt(commSavings) + ').';
+      } else {
+        verdict.className = 'rounded-2xl p-5 border text-center bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-700';
+        vLabel.textContent = 'It\'s a tie';
+        vLabel.className = 'text-2xl font-bold mb-1 text-gray-700 dark:text-gray-300';
+        vDetail.textContent = 'Both paths net the same — choose based on your time and stress tolerance.';
+      }
+    }
+
+    document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+    calc();
+  </script>
+</Base>

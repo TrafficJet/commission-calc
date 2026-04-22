@@ -1,0 +1,286 @@
+---
+import Base from '../layouts/Base.astro';
+const softwareSchema = JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"BRRRR Calculator","url":"https://commission-calc.com/brrrr-calculator/","description":"Free BRRRR calculator for real estate investors. Calculate cash left in deal, cash-on-cash return, equity captured, and whether your BRRRR deal works.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const faqSchema = JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does BRRRR stand for?","acceptedAnswer":{"@type":"Answer","text":"BRRRR stands for Buy, Rehab, Rent, Refinance, Repeat. It's a real estate investing strategy where you buy a distressed property, renovate it, rent it out, then do a cash-out refinance to pull out your invested capital and repeat the process with the next property."}},{"@type":"Question","name":"What is a good BRRRR deal?","acceptedAnswer":{"@type":"Answer","text":"A good BRRRR deal leaves $0 or less cash in the deal after refinancing (infinite returns), generates positive monthly cash flow after the refi mortgage, has an ARV at least 25-30% above total acquisition + rehab costs, and passes the 1% rule for rent."}},{"@type":"Question","name":"What LTV can I get on a BRRRR refinance?","acceptedAnswer":{"@type":"Answer","text":"Most lenders offer 70-75% LTV on investment property cash-out refinances. Some portfolio lenders offer up to 80%. The loan is based on the ARV (after-repair value), which is why forcing equity through rehab is critical to the strategy."}},{"@type":"Question","name":"What is equity capture in BRRRR?","acceptedAnswer":{"@type":"Answer","text":"Equity capture is the instant equity created when you buy below market value and/or force appreciation through rehab. If you buy + rehab for $220,000 and the ARV is $300,000, you've captured $80,000 in equity. This is what makes BRRRR work — you profit on the buy, not just the rent."}},{"@type":"Question","name":"What happens if my BRRRR cash-out doesn't cover my investment?","acceptedAnswer":{"@type":"Answer","text":"If the refi loan is less than your total invested capital, you have cash left in the deal. This isn't necessarily bad — as long as you still get strong cash-on-cash returns and positive monthly cash flow. The goal is to minimize trapped capital, not necessarily reach $0 left in deal on every property."}}]});
+---
+<Base
+  title="BRRRR Calculator — Buy, Rehab, Rent, Refinance, Repeat 2026"
+  description="Free BRRRR real estate calculator. Calculate cash left in deal, cash-on-cash return, equity captured, and refinance analysis for your BRRRR investment."
+  canonicalUrl="https://commission-calc.com/brrrr-calculator/"
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">BRRRR Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-2">Buy · Rehab · Rent · Refinance · Repeat — analyze your deal in seconds.</p>
+    <div class="mb-6 p-3 bg-indigo-50 dark:bg-indigo-950 rounded-lg border border-indigo-200 dark:border-indigo-800 text-sm text-indigo-800 dark:text-indigo-300">
+      The BRRRR method works by forcing equity through rehab, then pulling that equity back out via refinance — leaving little or no cash in the deal while keeping the rental income stream.
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+      <!-- Phase 1: Acquisition -->
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Phase 1 — Acquisition & Rehab</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Purchase Price ($)</label>
+            <input type="number" id="purchasePrice" value="180000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rehab Costs ($)</label>
+            <input type="number" id="rehabCosts" value="40000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Purchase Closing Costs ($)</label>
+            <input type="number" id="buyCosts" value="3500" min="0" step="500"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Holding Costs ($)</label>
+            <input type="number" id="holdCosts" value="2000" min="0" step="100"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2: ARV & Refi -->
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Phase 2 — After Repair Value & Refi</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">ARV (After Repair Value $)</label>
+            <input type="number" id="arv" value="280000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Refi LTV (%)</label>
+            <input type="number" id="refiLtv" value="75" min="0" max="100" step="1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Refi Interest Rate (%)</label>
+            <input type="number" id="refiRate" value="7.0" min="0" max="20" step="0.1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Refi Closing Costs ($)</label>
+            <input type="number" id="refiCosts" value="3000" min="0" step="500"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3: Rental Income & Expenses -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Phase 3 — Rental Performance</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly Rent ($)</label>
+          <input type="number" id="rent" value="1800" min="0" step="50"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vacancy (%)</label>
+          <input type="number" id="vacancy" value="5" min="0" max="50" step="1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly Expenses ($)</label>
+          <input type="number" id="expenses" value="600" min="0" step="50"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-0.5">Tax + ins + mgmt + maint</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="space-y-4 mb-8">
+      <!-- Deal Score Card -->
+      <div id="deal-score" class="rounded-2xl p-5 border text-center">
+        <p class="text-sm font-medium mb-1">Deal Score</p>
+        <p id="score-label" class="text-2xl font-bold">—</p>
+        <p id="score-sub" class="text-sm mt-1 opacity-70">—</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Invested</p>
+          <p id="r-totalIn" class="text-lg font-bold text-gray-800 dark:text-gray-100">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Refi Loan</p>
+          <p id="r-refiLoan" class="text-lg font-bold text-indigo-700 dark:text-indigo-400">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Cash Left in Deal</p>
+          <p id="r-cashLeft" class="text-lg font-bold">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Equity Captured</p>
+          <p id="r-equity" class="text-lg font-bold text-green-600 dark:text-green-400">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Monthly Cash Flow</p>
+          <p id="r-cashflow" class="text-lg font-bold">—</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Cash-on-Cash</p>
+          <p id="r-coc" class="text-lg font-bold text-indigo-700 dark:text-indigo-400">—</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-sm space-y-1.5">
+        <div class="flex justify-between"><span class="text-gray-500">Refi mortgage (P&I)</span><span id="r-refiMortgage" class="font-medium">—</span></div>
+        <div class="flex justify-between"><span class="text-gray-500">Cap rate (on ARV)</span><span id="r-capRate" class="font-medium">—</span></div>
+        <div class="flex justify-between"><span class="text-gray-500">1% rule</span><span id="r-pctRule" class="font-medium">—</span></div>
+        <div class="flex justify-between"><span class="text-gray-500">Equity at refi (ARV − loan)</span><span id="r-equityLeft" class="font-medium">—</span></div>
+      </div>
+    </div>
+
+    <div class="p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-sm text-amber-800 dark:text-amber-300 mb-8">
+      For educational purposes only. BRRRR involves significant risk including rehab cost overruns, refinance appraisal risk, and vacancy. Consult a licensed financial advisor and lender before investing.
+    </div>
+
+    <div class="mt-10 prose dark:prose-invert prose-lg max-w-none">
+      <h2>How the BRRRR Method Works</h2>
+      <p>BRRRR is a five-step real estate investing strategy that uses equity from one property to fund the next:</p>
+      <ol>
+        <li><strong>Buy</strong> a distressed property below market value</li>
+        <li><strong>Rehab</strong> it to force appreciation and increase the ARV</li>
+        <li><strong>Rent</strong> it out to generate cash flow and qualify for refinancing</li>
+        <li><strong>Refinance</strong> at 70-75% LTV based on the new ARV — pulling out most or all of your invested capital</li>
+        <li><strong>Repeat</strong> with the extracted cash on the next property</li>
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>What does BRRRR stand for?</h3>
+      <p>Buy, Rehab, Rent, Refinance, Repeat. It's a leveraged real estate investing strategy that recycles capital across multiple properties.</p>
+
+      <h3>What is a good BRRRR deal?</h3>
+      <p>A strong BRRRR deal leaves $0 or less cash in the deal after refinancing, generates positive monthly cash flow, has ARV at least 25-30% above total acquisition + rehab, and passes the 1% rule for rent.</p>
+
+      <h3>What LTV can I get on a BRRRR refinance?</h3>
+      <p>Most lenders offer 70-75% LTV on investment property cash-out refinances. Portfolio lenders may go to 80%. The loan is based on ARV — which is why rehab quality matters.</p>
+
+      <h3>What is equity capture in BRRRR?</h3>
+      <p>The instant equity created by buying below market and/or forcing appreciation through rehab. Buying + rehabbing for $220K with an ARV of $300K captures $80K in equity.</p>
+
+      <h3>What if my BRRRR cash-out doesn't cover my investment?</h3>
+      <p>You have cash left in the deal. This isn't automatically bad — as long as cash-on-cash return is strong and cash flow is positive. The goal is to minimize trapped capital, not necessarily zero on every deal.</p>
+    </div>
+
+    <div class="mt-10 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
+      <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Related Calculators</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="/rental-property-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Rental Property Analyzer</a>
+        <a href="/1031-exchange-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">1031 Exchange</a>
+        <a href="/capital-gains-home-sale/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Capital Gains</a>
+        <a href="/mortgage-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Mortgage Calculator</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function pmt(P, r, n) {
+      if (r === 0) return P / n;
+      return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+    }
+    function fmt(n) {
+      const abs = Math.abs(n);
+      return (n < 0 ? '-$' : '$') + abs.toLocaleString('en-US', {maximumFractionDigits: 0});
+    }
+
+    function calc() {
+      const purchase = parseFloat(document.getElementById('purchasePrice').value) || 0;
+      const rehab = parseFloat(document.getElementById('rehabCosts').value) || 0;
+      const buyCosts = parseFloat(document.getElementById('buyCosts').value) || 0;
+      const holdCosts = parseFloat(document.getElementById('holdCosts').value) || 0;
+      const arv = parseFloat(document.getElementById('arv').value) || 0;
+      const refiLtv = parseFloat(document.getElementById('refiLtv').value) / 100 || 0;
+      const refiRateAnnual = parseFloat(document.getElementById('refiRate').value) / 100 || 0;
+      const refiCosts = parseFloat(document.getElementById('refiCosts').value) || 0;
+      const rent = parseFloat(document.getElementById('rent').value) || 0;
+      const vacPct = parseFloat(document.getElementById('vacancy').value) / 100 || 0;
+      const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+
+      const totalIn = purchase + rehab + buyCosts + holdCosts;
+      const refiLoan = arv * refiLtv;
+      const cashOut = refiLoan - refiCosts;
+      const cashLeft = totalIn - cashOut;
+      const equityCapture = arv - totalIn;
+      const equityAfterRefi = arv - refiLoan;
+
+      const r = refiRateAnnual / 12;
+      const n = 30 * 12;
+      const mortgage = pmt(refiLoan, r, n);
+
+      const egi = rent * (1 - vacPct);
+      const noi = egi - expenses;
+      const cashflow = noi - mortgage;
+      const annualCF = cashflow * 12;
+      const coc = cashLeft > 0 ? (annualCF / cashLeft * 100) : Infinity;
+      const capRate = arv > 0 ? ((egi - expenses) * 12 / arv * 100) : 0;
+      const pctRule = purchase > 0 ? (rent / purchase * 100) : 0;
+
+      document.getElementById('r-totalIn').textContent = fmt(totalIn);
+      document.getElementById('r-refiLoan').textContent = fmt(refiLoan);
+
+      const cashLeftEl = document.getElementById('r-cashLeft');
+      cashLeftEl.textContent = fmt(cashLeft);
+      cashLeftEl.className = 'text-lg font-bold ' + (cashLeft <= 0 ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400');
+
+      document.getElementById('r-equity').textContent = fmt(equityCapture);
+      document.getElementById('r-refiMortgage').textContent = fmt(mortgage) + '/mo';
+      document.getElementById('r-capRate').textContent = capRate.toFixed(2) + '%';
+      document.getElementById('r-pctRule').textContent = pctRule.toFixed(2) + '% ' + (pctRule >= 1 ? '✓' : '✗');
+      document.getElementById('r-equityLeft').textContent = fmt(equityAfterRefi);
+
+      const cfEl = document.getElementById('r-cashflow');
+      cfEl.textContent = fmt(cashflow) + '/mo';
+      cfEl.className = 'text-lg font-bold ' + (cashflow >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400');
+
+      const cocEl = document.getElementById('r-coc');
+      if (!isFinite(coc)) {
+        cocEl.textContent = '∞ (infinite)';
+        cocEl.className = 'text-lg font-bold text-green-600 dark:text-green-400';
+      } else {
+        cocEl.textContent = coc.toFixed(1) + '%';
+        cocEl.className = 'text-lg font-bold text-indigo-700 dark:text-indigo-400';
+      }
+
+      const score = document.getElementById('deal-score');
+      const scoreLabel = document.getElementById('score-label');
+      const scoreSub = document.getElementById('score-sub');
+      if (cashLeft <= 0 && cashflow > 0) {
+        score.className = 'rounded-2xl p-5 border text-center bg-green-50 dark:bg-green-950 border-green-300 dark:border-green-700';
+        scoreLabel.textContent = 'Grand Slam BRRRR';
+        scoreLabel.className = 'text-2xl font-bold text-green-700 dark:text-green-400';
+        scoreSub.textContent = '$0 left in deal + positive cash flow — infinite returns';
+      } else if (cashLeft <= totalIn * 0.2 && cashflow > 0) {
+        score.className = 'rounded-2xl p-5 border text-center bg-indigo-50 dark:bg-indigo-950 border-indigo-300 dark:border-indigo-700';
+        scoreLabel.textContent = 'Strong BRRRR Deal';
+        scoreLabel.className = 'text-2xl font-bold text-indigo-700 dark:text-indigo-400';
+        scoreSub.textContent = 'Pulled out most capital with positive cash flow';
+      } else if (cashflow > 0) {
+        score.className = 'rounded-2xl p-5 border text-center bg-yellow-50 dark:bg-yellow-950 border-yellow-300 dark:border-yellow-700';
+        scoreLabel.textContent = 'Decent BRRRR';
+        scoreLabel.className = 'text-2xl font-bold text-yellow-700 dark:text-yellow-400';
+        scoreSub.textContent = 'Cash flows but more capital trapped than ideal';
+      } else {
+        score.className = 'rounded-2xl p-5 border text-center bg-red-50 dark:bg-red-950 border-red-300 dark:border-red-700';
+        scoreLabel.textContent = 'Deal Needs Work';
+        scoreLabel.className = 'text-2xl font-bold text-red-700 dark:text-red-400';
+        scoreSub.textContent = 'Negative cash flow after refi — revisit your numbers';
+      }
+    }
+
+    document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calc));
+    calc();
+  </script>
+</Base>

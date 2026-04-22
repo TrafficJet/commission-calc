@@ -1,0 +1,277 @@
+---
+import Base from '../layouts/Base.astro';
+const softwareSchema = JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"1031 Exchange Calculator","url":"https://commission-calc.com/1031-exchange-calculator/","description":"Free 1031 exchange calculator. See how much capital gains tax you defer, your timeline (45-day identification and 180-day exchange), and how much more real estate you can buy by exchanging.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const faqSchema = JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a 1031 exchange?","acceptedAnswer":{"@type":"Answer","text":"A 1031 exchange (named after IRS Code Section 1031) allows real estate investors to defer capital gains taxes when selling an investment property by reinvesting the proceeds into a 'like-kind' replacement property. You must identify the replacement property within 45 days of closing and complete the purchase within 180 days."}},{"@type":"Question","name":"How much can I save with a 1031 exchange?","acceptedAnswer":{"@type":"Answer","text":"A 1031 exchange defers — not eliminates — capital gains tax. On a $200,000 capital gain, you might defer $30,000–$60,000 in federal taxes plus state taxes. This allows you to reinvest the full proceeds into a larger property, compounding your real estate wealth without an immediate tax bill."}},{"@type":"Question","name":"What are the 1031 exchange timeline rules?","acceptedAnswer":{"@type":"Answer","text":"Two critical deadlines: (1) You must identify up to 3 potential replacement properties within 45 days of selling your relinquished property. (2) You must close on the replacement property within 180 days of selling. These deadlines are strict — missing either disqualifies the exchange and makes your full gain taxable."}},{"@type":"Question","name":"What is depreciation recapture in a 1031 exchange?","acceptedAnswer":{"@type":"Answer","text":"Depreciation recapture is the portion of your gain attributable to depreciation deductions you took over the years. It's taxed at 25% federally (not the lower capital gains rate). In a 1031 exchange, depreciation recapture is also deferred — it carries over to the replacement property's basis instead."}},{"@type":"Question","name":"Does a 1031 exchange eliminate taxes permanently?","acceptedAnswer":{"@type":"Answer","text":"No — 1031 exchanges defer, not eliminate, taxes. When you eventually sell without exchanging, all the deferred gains become taxable. However, if you hold the replacement property until death, your heirs receive a stepped-up basis and the deferred gains may be forgiven. Consult a tax advisor for estate planning strategies."}},{"@type":"Question","name":"What is a qualified intermediary in a 1031 exchange?","acceptedAnswer":{"@type":"Answer","text":"A qualified intermediary (QI) — also called an exchange accommodator — is a third party required to hold your exchange proceeds between closing on the relinquished property and purchasing the replacement property. You cannot touch the funds directly or the exchange is invalidated. QI fees typically run $750–$1,500."}}]});
+---
+<Base
+  title="1031 Exchange Calculator — Defer Capital Gains Tax 2026"
+  description="Free 1031 exchange calculator. Calculate your tax deferral, leverage increase, 45-day and 180-day timeline, and depreciation recapture for any like-kind exchange."
+  canonicalUrl="https://commission-calc.com/1031-exchange-calculator/"
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">1031 Exchange Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-2">Defer capital gains tax by reinvesting in like-kind property. See your tax savings, leverage boost, and critical deadlines.</p>
+
+    <div class="mb-6 p-3 bg-indigo-50 dark:bg-indigo-950 rounded-lg border border-indigo-200 dark:border-indigo-800 text-sm text-indigo-800 dark:text-indigo-300">
+      A 1031 exchange defers — not eliminates — capital gains. Use it to upgrade your real estate portfolio without an immediate tax bill, preserving capital to compound into a larger property.
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <!-- Relinquished Property -->
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Relinquished Property (Sold)</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Original Purchase Price ($)</label>
+            <input type="number" id="purchasePrice" value="200000" min="0" step="5000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Depreciation Taken ($)</label>
+            <input type="number" id="depreciation" value="30000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Total depreciation over ownership period</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sale Price ($)</label>
+            <input type="number" id="salePrice" value="450000" min="0" step="5000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Selling Costs ($)</label>
+            <input type="number" id="sellingCosts" value="27000" min="0" step="1000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Commission + closing costs</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sale Close Date</label>
+            <input type="date" id="closeDate" class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Tax Info -->
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Tax & Exchange Info</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Federal Capital Gains Rate</label>
+            <select id="fedRate" class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="0">0% (Income below $48,350 single / $96,700 MFJ)</option>
+              <option value="0.15" selected>15% (Income $48,350–$533,400 single)</option>
+              <option value="0.20">20% (Income above $533,400 single)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">State Capital Gains Rate (%)</label>
+            <input type="number" id="stateRate" value="5.0" min="0" max="15" step="0.1"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">0% for TX, FL, WA, NV, WY, SD, AK, NH, TN</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">QI (Intermediary) Fees ($)</label>
+            <input type="number" id="qiFees" value="1200" min="0" step="100"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Replacement Property Value ($)</label>
+            <input type="number" id="replValue" value="600000" min="0" step="10000"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="text-xs text-gray-400 mt-0.5">Must be ≥ net sale price for full tax deferral</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="space-y-4 mb-8">
+      <!-- Timeline badges -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-200">Critical 1031 Deadlines</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="p-4 bg-orange-50 dark:bg-orange-950 rounded-xl border border-orange-200 dark:border-orange-800">
+            <p class="text-xs font-medium text-orange-700 dark:text-orange-400 uppercase tracking-wide mb-1">45-Day Identification Deadline</p>
+            <p id="tl-identify" class="text-lg font-bold text-gray-800 dark:text-gray-100">—</p>
+            <p class="text-xs text-gray-500 mt-0.5">Must identify up to 3 replacement properties by this date</p>
+          </div>
+          <div class="p-4 bg-red-50 dark:bg-red-950 rounded-xl border border-red-200 dark:border-red-800">
+            <p class="text-xs font-medium text-red-700 dark:text-red-400 uppercase tracking-wide mb-1">180-Day Exchange Deadline</p>
+            <p id="tl-close" class="text-lg font-bold text-gray-800 dark:text-gray-100">—</p>
+            <p class="text-xs text-gray-500 mt-0.5">Must close on replacement property by this date</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tax comparison -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-red-50 dark:bg-red-950 rounded-2xl p-5 border border-red-200 dark:border-red-800">
+          <p class="text-sm font-semibold text-red-700 dark:text-red-400 mb-3">Without 1031 Exchange</p>
+          <div class="space-y-1.5 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Realized gain</span><span id="no-gain" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Depreciation recapture (25%)</span><span id="no-deprec" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Federal cap gains tax</span><span id="no-fed" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">State tax</span><span id="no-state" class="font-medium">—</span></div>
+            <div class="flex justify-between border-t border-red-200 dark:border-red-700 pt-2 mt-1">
+              <span class="font-bold">Total Tax Due</span>
+              <span id="no-total" class="text-xl font-bold text-red-700 dark:text-red-400">—</span>
+            </div>
+            <div class="flex justify-between"><span class="text-gray-500">Net to reinvest</span><span id="no-net" class="font-medium">—</span></div>
+          </div>
+        </div>
+        <div class="bg-green-50 dark:bg-green-950 rounded-2xl p-5 border border-green-200 dark:border-green-800">
+          <p class="text-sm font-semibold text-green-700 dark:text-green-400 mb-3">With 1031 Exchange</p>
+          <div class="space-y-1.5 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Net sale proceeds</span><span id="ex-proceeds" class="font-medium">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Tax deferred</span><span id="ex-deferred" class="font-medium text-green-600">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">QI fees</span><span id="ex-qi" class="font-medium text-red-500">—</span></div>
+            <div class="flex justify-between border-t border-green-200 dark:border-green-700 pt-2 mt-1">
+              <span class="font-bold">Net to reinvest</span>
+              <span id="ex-net" class="text-xl font-bold text-green-700 dark:text-green-400">—</span>
+            </div>
+            <div class="flex justify-between"><span class="text-gray-500">Leverage boost</span><span id="ex-leverage" class="font-medium">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary banner -->
+      <div class="bg-indigo-50 dark:bg-indigo-950 rounded-xl p-4 border border-indigo-200 dark:border-indigo-800 text-center">
+        <p class="text-sm text-gray-500 mb-1">Tax Deferred by Exchanging</p>
+        <p id="savings-banner" class="text-3xl font-bold text-indigo-700 dark:text-indigo-400">—</p>
+        <p id="savings-sub" class="text-sm text-gray-500 mt-1">—</p>
+      </div>
+    </div>
+
+    <div class="p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-sm text-amber-800 dark:text-amber-300 mb-8">
+      For educational purposes only. 1031 exchange rules are complex and strictly enforced. Always work with a qualified intermediary (QI) and tax advisor before initiating an exchange.
+    </div>
+
+    <div class="mt-10 prose dark:prose-invert prose-lg max-w-none">
+      <h2>1031 Exchange: Complete Guide for Investors 2026</h2>
+
+      <h3>How a 1031 exchange works</h3>
+      <p>When you sell an investment property, you normally owe capital gains tax on your profit. A 1031 exchange lets you defer that tax by rolling the proceeds directly into a "like-kind" replacement property — without touching the money. A qualified intermediary holds the funds between transactions.</p>
+
+      <h3>The two critical deadlines</h3>
+      <ul>
+        <li><strong>45 days:</strong> You must identify up to 3 replacement properties within 45 calendar days of closing on your sale. These deadlines are strict — no extensions.</li>
+        <li><strong>180 days:</strong> You must close on the replacement property within 180 calendar days of your sale closing (or your tax filing deadline if earlier).</li>
+      </ul>
+
+      <h3>What qualifies as "like-kind"?</h3>
+      <p>For real estate, "like-kind" is very broad — any US investment or business property can exchange into any other US investment or business property. A rental house can exchange into an apartment building, land, or commercial property. Primary residences and personal property do not qualify.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>What is a 1031 exchange?</h3>
+      <p>An IRS provision allowing real estate investors to defer capital gains taxes by reinvesting sale proceeds into a like-kind property. You must use a qualified intermediary and meet 45-day/180-day deadlines.</p>
+
+      <h3>How much can I save with a 1031 exchange?</h3>
+      <p>You defer — not eliminate — taxes. On $200K in gains, you might defer $30K–$60K in federal taxes plus state taxes. The deferred tax compounds over time as you upgrade into larger properties.</p>
+
+      <h3>What are the 1031 exchange timeline rules?</h3>
+      <p>45 days to identify up to 3 replacement properties. 180 days to close the purchase. Both are from your relinquished property close date. No exceptions or extensions.</p>
+
+      <h3>What is depreciation recapture?</h3>
+      <p>The gain from accumulated depreciation deductions, taxed at 25% federally. In a 1031, recapture is also deferred and carried to the replacement property's basis.</p>
+
+      <h3>Does a 1031 eliminate taxes permanently?</h3>
+      <p>No — it defers them. When you sell the replacement property without exchanging, all deferred gains become taxable. However, heirs receive a stepped-up basis at death, potentially forgiving deferred gains.</p>
+
+      <h3>What is a qualified intermediary?</h3>
+      <p>A required third party (QI/exchange accommodator) who holds your proceeds between closings. You cannot touch the funds directly. QI fees run $750–$1,500.</p>
+    </div>
+
+    <div class="mt-10 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
+      <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Related Calculators</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="/capital-gains-home-sale/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Capital Gains Calculator</a>
+        <a href="/rental-property-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Rental Property Analyzer</a>
+        <a href="/brrrr-calculator/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">BRRRR Calculator</a>
+        <a href="/seller-net/" class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400 rounded-lg border border-indigo-200 dark:border-indigo-800 hover:shadow-sm">Seller Net Proceeds</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function fmt(n) {
+      const abs = Math.abs(n);
+      return (n < 0 ? '-$' : '$') + abs.toLocaleString('en-US', {maximumFractionDigits: 0});
+    }
+    function fmtDate(d) {
+      return d.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+    }
+
+    function calc() {
+      const purchase = parseFloat(document.getElementById('purchasePrice').value) || 0;
+      const depr = parseFloat(document.getElementById('depreciation').value) || 0;
+      const salePrice = parseFloat(document.getElementById('salePrice').value) || 0;
+      const sellingCosts = parseFloat(document.getElementById('sellingCosts').value) || 0;
+      const fedRate = parseFloat(document.getElementById('fedRate').value) || 0;
+      const stateRate = parseFloat(document.getElementById('stateRate').value) / 100 || 0;
+      const qiFees = parseFloat(document.getElementById('qiFees').value) || 0;
+      const replValue = parseFloat(document.getElementById('replValue').value) || 0;
+
+      // Timelines
+      const closeDateStr = document.getElementById('closeDate').value;
+      if (closeDateStr) {
+        const closeDate = new Date(closeDateStr + 'T00:00:00');
+        const d45 = new Date(closeDate); d45.setDate(d45.getDate() + 45);
+        const d180 = new Date(closeDate); d180.setDate(d180.getDate() + 180);
+        document.getElementById('tl-identify').textContent = fmtDate(d45);
+        document.getElementById('tl-close').textContent = fmtDate(d180);
+      } else {
+        document.getElementById('tl-identify').textContent = 'Enter close date above';
+        document.getElementById('tl-close').textContent = 'Enter close date above';
+      }
+
+      // Basis
+      const adjustedBasis = purchase - depr;
+      const netProceeds = salePrice - sellingCosts;
+      const realizedGain = netProceeds - adjustedBasis;
+
+      // Without 1031
+      const deprecRecapture = Math.min(depr, realizedGain);
+      const longTermGain = Math.max(0, realizedGain - deprecRecapture);
+      const deprecTax = deprecRecapture * 0.25;
+      const fedTax = longTermGain * fedRate;
+      const stateTax = realizedGain * stateRate;
+      const totalTax = deprecTax + fedTax + stateTax;
+      const netWithout = netProceeds - totalTax;
+
+      // With 1031
+      const netWith = netProceeds - qiFees;
+      const taxDeferred = totalTax;
+      const leverage = netWithout > 0 ? (netWith / netWithout) : 1;
+
+      document.getElementById('no-gain').textContent = fmt(realizedGain);
+      document.getElementById('no-deprec').textContent = fmt(deprecTax);
+      document.getElementById('no-fed').textContent = fmt(fedTax);
+      document.getElementById('no-state').textContent = fmt(stateTax);
+      document.getElementById('no-total').textContent = fmt(totalTax);
+      document.getElementById('no-net').textContent = fmt(netWithout);
+
+      document.getElementById('ex-proceeds').textContent = fmt(netProceeds);
+      document.getElementById('ex-deferred').textContent = fmt(taxDeferred) + ' deferred';
+      document.getElementById('ex-qi').textContent = '-' + fmt(qiFees);
+      document.getElementById('ex-net').textContent = fmt(netWith);
+      document.getElementById('ex-leverage').textContent = leverage.toFixed(2) + 'x more capital';
+
+      document.getElementById('savings-banner').textContent = fmt(taxDeferred);
+      const isEnough = replValue >= netProceeds;
+      document.getElementById('savings-sub').textContent = isEnough
+        ? 'Full deferral — replacement value (' + fmt(replValue) + ') covers all proceeds ✓'
+        : 'Partial deferral — ' + fmt(netProceeds - replValue) + ' in "boot" will be taxable (replacement value too low)';
+    }
+
+    // Set default date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('closeDate').value = today;
+
+    document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calc));
+    calc();
+  </script>
+</Base>
