@@ -6,6 +6,8 @@ description: "Discover the best AI real estate agent tools from 2025. Compare fe
 author: "Alex Morgan"
 tags: ["ai real estate agent tools 2025"]
 seoTitle: "AI Real Estate Agent Tools 2025: Top Picks"
+heroImage: "/images/ai-real-estate-agent-tools-2025/hero.jpg"
+heroImageAlt: "Real estate agent reviewing property analytics and client information on laptop"
 ---
 
 # AI Real Estate Agent Tools 2025: Top Picks
