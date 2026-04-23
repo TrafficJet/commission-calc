@@ -1,18 +1,29 @@
 # Commission-Calc.com
 
-Free real estate commission calculator — estimate agent fees, closing costs, and net proceeds for home sales across the USA, Canada, Australia, UK, and Germany.
+Free real estate calculator suite — agent commissions, mortgage payments, home affordability, rent vs buy, capital gains, closing costs, rental property analysis, BRRRR, 1031 exchange, FSBO vs agent, and more. Supports USA, Canada, Australia, UK, and Germany.
 
 ## About
 https://commission-calc.com/
 
-## Tools
+## Calculators — Sellers & Buyers
 https://commission-calc.com/
+https://commission-calc.com/commission-calculator-2026/
+https://commission-calc.com/mortgage-calculator/
+https://commission-calc.com/home-affordability-calculator/
+https://commission-calc.com/rent-vs-buy-calculator/
+https://commission-calc.com/capital-gains-home-sale/
 https://commission-calc.com/closing-costs/
 https://commission-calc.com/seller-net/
 
+## Calculators — Investors
+https://commission-calc.com/rental-property-calculator/
+https://commission-calc.com/brrrr-calculator/
+https://commission-calc.com/1031-exchange-calculator/
+https://commission-calc.com/ibuyer-offer-calculator/
+https://commission-calc.com/fsbo-vs-agent-calculator/
+
 ## Blog
 https://commission-calc.com/blog/
-https://commission-calc.com/sitemap.xml
 
-## Contact
-https://commission-calc.com/
+## Sitemap
+https://commission-calc.com/sitemap-index.xml

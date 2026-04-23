@@ -1,0 +1,270 @@
+---
+import Base from '../layouts/Base.astro';
+const softwareSchema = JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"Keller Williams Cap Calculator","url":"https://commission-calc.com/kw-cap-calculator/","description":"Free Keller Williams cap calculator. See exactly when you'll hit your market center cap, how much you'll pay in royalty, and your income before and after capping.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const faqSchema = JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Keller Williams cap?","acceptedAnswer":{"@type":"Answer","text":"The KW Market Center Cap is the maximum amount an agent pays to their market center in a given anniversary year. Once you hit your cap (typically $21,000), you keep 100% of your commission for the rest of the year. The cap amount varies by market center — it can range from $18,000 to $30,000+."}},{"@type":"Question","name":"What is the KW royalty cap?","acceptedAnswer":{"@type":"Answer","text":"In addition to the market center cap, KW agents pay a 6% royalty to Keller Williams International, capped at $3,000 per anniversary year. This royalty is paid on each transaction until you hit the $3,000 ceiling."}},{"@type":"Question","name":"How does the KW 70/30 split work?","acceptedAnswer":{"@type":"Answer","text":"At Keller Williams, agents start at a 70/30 split — agents keep 70% and the market center takes 30%. This continues until the agent has paid $21,000 (or their market center's cap amount) to the market center. After capping, agents keep 100% of their commission for the rest of their anniversary year."}},{"@type":"Question","name":"When does a KW agent's anniversary year start?","acceptedAnswer":{"@type":"Answer","text":"Your KW anniversary year starts on the date you joined your market center. Each year on that date, your cap resets to zero and you start the 70/30 split again. This differs from brokerages that reset on January 1 each year."}},{"@type":"Question","name":"What happens to the KW cap if I change market centers?","acceptedAnswer":{"@type":"Answer","text":"If you transfer to a new KW market center, your cap typically resets based on your new market center's policies. You generally do not carry over cap credit from your previous market center. However, KW profit share follows you regardless of which market center you're in."}}]});
+---
+<Base
+  title="Keller Williams Cap Calculator 2026 — When Will You Cap? (Free KW Tool)"
+  description="Calculate exactly when you'll hit your KW market center cap, total royalty paid, and your GCI before and after capping. Free Keller Williams cap calculator."
+  canonicalUrl="https://commission-calc.com/kw-cap-calculator/"
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Keller Williams Cap Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">Enter your production goals and KW plan details to see when you'll cap, how much you'll pay, and what you'll net.</p>
+
+    <!-- Inputs -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Production Goals</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Sales Volume ($)</label>
+          <input type="number" id="salesVolume" value="5000000" min="0" step="100000"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Total sales volume for the year</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Avg Commission Rate (%)</label>
+          <input type="number" id="commRate" value="2.75" min="0" max="10" step="0.05"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Your side's commission %</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Avg Sale Price ($)</label>
+          <input type="number" id="avgSalePrice" value="400000" min="0" step="10000"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Used to estimate transactions</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">KW Plan Details</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Market Center Cap ($)</label>
+          <input type="number" id="mcCap" value="21000" min="0" step="500"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Standard KW cap is $21,000</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Royalty Cap ($)</label>
+          <input type="number" id="royaltyCap" value="3000" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">KW International royalty cap (typically $3,000)</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Agent Split — Agent keeps (%)</label>
+          <input type="number" id="agentSplit" value="70" min="0" max="100" step="1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Standard KW = 70%. Negotiated may differ.</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Royalty Rate (%)</label>
+          <input type="number" id="royaltyRate" value="6" min="0" max="15" step="0.5"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">KW International royalty rate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-4">Your KW Projection</h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">Gross Commission Income (GCI)</span>
+          <span id="r-gci" class="font-semibold">$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">Estimated transactions</span>
+          <span id="r-txns" class="font-semibold">0</span>
+        </div>
+        <div class="border-t border-gray-100 dark:border-gray-700 my-2"></div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Market center cap paid</span>
+          <span id="r-mcPaid" class="text-red-500">-$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Royalty paid to KW Intl</span>
+          <span id="r-royaltyPaid" class="text-red-500">-$0</span>
+        </div>
+        <div class="border-t border-gray-100 dark:border-gray-700 my-2"></div>
+        <div class="flex justify-between text-base">
+          <span class="font-semibold text-gray-800 dark:text-gray-100">Net to Agent</span>
+          <span id="r-net" class="font-bold text-indigo-600 dark:text-indigo-400">$0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cap milestone card -->
+    <div class="bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl p-6 border border-indigo-200 dark:border-indigo-700 mb-6">
+      <h2 class="text-base font-semibold text-indigo-800 dark:text-indigo-200 mb-4">Cap Milestone</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="text-center">
+          <div id="r-capMonth" class="text-3xl font-bold text-indigo-700 dark:text-indigo-300">—</div>
+          <div class="text-xs text-indigo-500 mt-1">Estimated month to cap</div>
+        </div>
+        <div class="text-center">
+          <div id="r-capTxns" class="text-3xl font-bold text-indigo-700 dark:text-indigo-300">—</div>
+          <div class="text-xs text-indigo-500 mt-1">Transactions to cap</div>
+        </div>
+        <div class="text-center">
+          <div id="r-preCap" class="text-2xl font-bold text-gray-700 dark:text-gray-300">$0</div>
+          <div class="text-xs text-gray-500 mt-1">Income before cap</div>
+        </div>
+        <div class="text-center">
+          <div id="r-postCap" class="text-2xl font-bold text-green-600">$0</div>
+          <div class="text-xs text-gray-500 mt-1">Income after cap (100%)</div>
+        </div>
+      </div>
+      <p id="r-capMsg" class="text-sm text-indigo-600 dark:text-indigo-300 text-center mt-4"></p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="space-y-4 mb-10">
+      <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100">KW Cap FAQ</h2>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">What is the Keller Williams cap?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">The KW Market Center Cap is the maximum amount you pay to your market center in a given anniversary year. Once you hit your cap (typically $21,000), you keep 100% of commissions for the rest of the year. Cap amounts vary by market center — ranging from $18,000 to $30,000+.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">What is the KW royalty cap?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">In addition to the market center cap, KW agents pay a 6% royalty to Keller Williams International, capped at $3,000 per anniversary year. After hitting $3,000, no further royalty is charged for that year.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">How does the 70/30 split work?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">At KW, agents start at 70/30 — you keep 70% and the market center takes 30%. This continues until you've paid $21,000 (or your local cap amount). After capping, you keep 100% for the rest of your anniversary year.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">When does my KW anniversary year start?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Your anniversary year starts on the date you joined your market center — not January 1. Each year on that date, your cap resets to zero and the 70/30 split restarts.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">What happens to the cap if I change market centers?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">If you transfer to a new KW market center, your cap typically resets based on that market center's policies. You generally do not carry over cap credit from your previous market center. Profit share follows you regardless of which market center you're in.</p>
+      </details>
+    </div>
+
+    <!-- Cross-links -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-10">
+      <h2 class="text-base font-semibold mb-3 text-gray-700 dark:text-gray-300">More Agent Calculators</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+        <a href="/agent-commission-split-calculator/" class="block bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-600 hover:border-indigo-400 transition-colors">
+          <div class="font-medium text-indigo-600 dark:text-indigo-400">Commission Split Calculator</div>
+          <div class="text-gray-500 text-xs mt-1">Net after broker split + all deductions</div>
+        </a>
+        <a href="/agent-net-pay-calculator/" class="block bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-600 hover:border-indigo-400 transition-colors">
+          <div class="font-medium text-indigo-600 dark:text-indigo-400">Agent Net Pay Calculator</div>
+          <div class="text-gray-500 text-xs mt-1">Take-home after taxes + expenses</div>
+        </a>
+        <a href="/commission-calculator-2026/" class="block bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-600 hover:border-indigo-400 transition-colors">
+          <div class="font-medium text-indigo-600 dark:text-indigo-400">Commission Calculator</div>
+          <div class="text-gray-500 text-xs mt-1">Quick commission by side</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function fmt(n: number) {
+      return '$' + Math.round(n).toLocaleString();
+    }
+
+    function calc() {
+      const salesVolume = parseFloat((document.getElementById('salesVolume') as HTMLInputElement).value) || 0;
+      const commRate = parseFloat((document.getElementById('commRate') as HTMLInputElement).value) / 100 || 0;
+      const avgSalePrice = parseFloat((document.getElementById('avgSalePrice') as HTMLInputElement).value) || 0;
+      const mcCap = parseFloat((document.getElementById('mcCap') as HTMLInputElement).value) || 0;
+      const royaltyCap = parseFloat((document.getElementById('royaltyCap') as HTMLInputElement).value) || 0;
+      const agentSplit = parseFloat((document.getElementById('agentSplit') as HTMLInputElement).value) / 100 || 0;
+      const royaltyRate = parseFloat((document.getElementById('royaltyRate') as HTMLInputElement).value) / 100 || 0;
+
+      const brokerSplit = 1 - agentSplit;
+      const gci = salesVolume * commRate;
+      const txns = avgSalePrice > 0 ? Math.round(salesVolume / avgSalePrice) : 0;
+      const avgCommPerTxn = txns > 0 ? gci / txns : 0;
+
+      // Simulate transaction by transaction
+      let mcPaid = 0;
+      let royaltyPaid = 0;
+      let agentNet = 0;
+      let capped = false;
+      let royaltyCapped = false;
+      let capTxn = 0;
+      let preCapIncome = 0;
+      let postCapIncome = 0;
+
+      for (let i = 0; i < txns; i++) {
+        const txnComm = avgCommPerTxn;
+
+        // Royalty (6%, capped at royaltyCap)
+        let txnRoyalty = 0;
+        if (!royaltyCapped) {
+          txnRoyalty = Math.min(txnComm * royaltyRate, royaltyCap - royaltyPaid);
+          royaltyPaid += txnRoyalty;
+          if (royaltyPaid >= royaltyCap) royaltyCapped = true;
+        }
+
+        // Broker split (until cap)
+        let txnBroker = 0;
+        let txnAgent = 0;
+        if (!capped) {
+          txnBroker = Math.min(txnComm * brokerSplit, mcCap - mcPaid);
+          mcPaid += txnBroker;
+          txnAgent = txnComm - txnBroker - txnRoyalty;
+          if (mcPaid >= mcCap) {
+            capped = true;
+            capTxn = i + 1;
+          }
+          preCapIncome += txnAgent;
+        } else {
+          txnAgent = txnComm - txnRoyalty;
+          postCapIncome += txnAgent;
+        }
+
+        agentNet += txnAgent;
+      }
+
+      // If never capped (production too low)
+      if (!capped) {
+        preCapIncome = agentNet;
+        postCapIncome = 0;
+        capTxn = 0;
+      }
+
+      // Estimate month to cap (assuming even distribution)
+      const capMonth = capTxn > 0 && txns > 0
+        ? Math.ceil((capTxn / txns) * 12)
+        : null;
+
+      const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+      (document.getElementById('r-gci') as HTMLElement).textContent = fmt(gci);
+      (document.getElementById('r-txns') as HTMLElement).textContent = txns.toLocaleString();
+      (document.getElementById('r-mcPaid') as HTMLElement).textContent = '-' + fmt(mcPaid);
+      (document.getElementById('r-royaltyPaid') as HTMLElement).textContent = '-' + fmt(royaltyPaid);
+      (document.getElementById('r-net') as HTMLElement).textContent = fmt(agentNet);
+      (document.getElementById('r-preCap') as HTMLElement).textContent = fmt(preCapIncome);
+      (document.getElementById('r-postCap') as HTMLElement).textContent = fmt(postCapIncome);
+      (document.getElementById('r-capTxns') as HTMLElement).textContent = capTxn > 0 ? capTxn.toString() : '—';
+      (document.getElementById('r-capMonth') as HTMLElement).textContent = capMonth ? (monthNames[capMonth - 1] || 'Month ' + capMonth) : '—';
+
+      const msg = capTxn > 0
+        ? `You'll cap around transaction #${capTxn} (~${monthNames[(capMonth || 1) - 1]}). After that, every dollar is yours.`
+        : `At this production level, you won't hit your cap this year. You'll pay $${Math.round(mcPaid).toLocaleString()} to your market center.`;
+      (document.getElementById('r-capMsg') as HTMLElement).textContent = msg;
+    }
+
+    document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+    calc();
+  </script>
+</Base>

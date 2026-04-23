@@ -1,0 +1,309 @@
+---
+import Base from '../layouts/Base.astro';
+const softwareSchema = JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"Real Estate Agent Net Pay Calculator","url":"https://commission-calc.com/agent-net-pay-calculator/","description":"Free real estate agent net pay calculator. Calculate your true take-home after broker split, business expenses, self-employment tax, and income tax.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const faqSchema = JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is self-employment tax for real estate agents?","acceptedAnswer":{"@type":"Answer","text":"Real estate agents are independent contractors and pay 15.3% self-employment (SE) tax on net self-employment income (after business expenses). This covers Social Security (12.4%) and Medicare (2.9%). However, you can deduct half of SE tax from your gross income when calculating income tax, reducing the effective burden."}},{"@type":"Question","name":"What business expenses can real estate agents deduct?","acceptedAnswer":{"@type":"Answer","text":"Common deductible expenses include: MLS fees, NAR/state/local association dues, E&O insurance, marketing and advertising, vehicle mileage (or actual auto expenses), home office, technology and software (CRM, transaction management), continuing education, and business meals. Keep receipts for all expenses."}},{"@type":"Question","name":"How much should a real estate agent set aside for taxes?","acceptedAnswer":{"@type":"Answer","text":"Most agents should set aside 25-35% of their gross commission for taxes. A common rule is: save 30% from every commission check. This covers self-employment tax (~15%) plus federal income tax (22-24% bracket for most agents) minus deductions. You must pay quarterly estimated taxes to avoid IRS penalties."}},{"@type":"Question","name":"What is the QBI deduction for real estate agents?","acceptedAnswer":{"@type":"Answer","text":"Real estate agents may qualify for the 20% Qualified Business Income (QBI) deduction under Section 199A. If you qualify, you can deduct up to 20% of your net self-employment income, significantly reducing your effective tax rate. Consult a CPA — there are income thresholds and limitations."}},{"@type":"Question","name":"What is the difference between GCI and net income for an agent?","acceptedAnswer":{"@type":"Answer","text":"GCI (Gross Commission Income) is your total commission before any deductions. Net income is what remains after broker split, referral fees, and business expenses. Taxable income is net income minus the SE tax deduction. Take-home pay is what remains after all taxes — often 50-65% of GCI for a typical agent."}}]});
+---
+<Base
+  title="Real Estate Agent Net Pay Calculator 2026 — True Take-Home After Taxes (Free)"
+  description="Calculate your real estate agent take-home pay after broker split, business expenses, self-employment tax, and income tax. See exactly what you keep from every commission."
+  canonicalUrl="https://commission-calc.com/agent-net-pay-calculator/"
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Real Estate Agent Net Pay Calculator</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">Calculate your true take-home pay after broker split, business expenses, self-employment tax, and income tax.</p>
+
+    <!-- GCI + Split -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Gross Commission Income</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual GCI ($)</label>
+          <input type="number" id="gci" value="100000" min="0" step="5000"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Total commissions before any deductions</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Agent keeps after broker split (%)</label>
+          <input type="number" id="agentSplit" value="70" min="0" max="100" step="1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">70 = 70/30, 80 = 80/20, 100 = full commission</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Referral fees paid ($)</label>
+          <input type="number" id="referralFees" value="0" min="0" step="500"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">25% referral fees paid to referring agents</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Additional broker fees ($)</label>
+          <input type="number" id="brokerFees" value="2400" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">E&O, desk fees, transaction fees, etc.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Expenses -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Annual Business Expenses</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Marketing & Advertising ($)</label>
+          <input type="number" id="marketing" value="5000" min="0" step="500"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">MLS & Association Dues ($)</label>
+          <input type="number" id="mlsDues" value="2000" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Technology & Software ($)</label>
+          <input type="number" id="tech" value="1800" min="0" step="100"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">CRM, transaction mgmt, e-sign tools</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vehicle / Auto ($)</label>
+          <input type="number" id="auto" value="4000" min="0" step="500"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">IRS mileage rate × business miles, or actual</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Other Expenses ($)</label>
+          <input type="number" id="otherExp" value="1500" min="0" step="250"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Home office, continuing ed, meals, etc.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tax Settings -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Tax Settings</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Federal Income Tax Rate (%)</label>
+          <input type="number" id="fedTax" value="22" min="0" max="37" step="1"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">Use your marginal bracket (10–37%)</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">State Income Tax Rate (%)</label>
+          <input type="number" id="stateTax" value="5" min="0" max="15" step="0.5"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <p class="text-xs text-gray-400 mt-1">0% for TX, FL, WA, NV, SD, WY, AK</p>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="qbiDeduction" checked
+              class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+            <span class="text-sm text-gray-700 dark:text-gray-300">Apply 20% QBI deduction (Section 199A)</span>
+          </label>
+          <p class="text-xs text-gray-400 mt-1 ml-6">Most agents qualify. Deduct 20% of net self-employment income from taxable income. Consult a CPA for your situation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+      <h2 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-4">Full Income Breakdown</h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">Gross Commission Income (GCI)</span>
+          <span id="r-gci" class="font-semibold">$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Broker split (market center share)</span>
+          <span id="r-brokerSplit" class="text-red-500">-$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Referral fees paid</span>
+          <span id="r-referral" class="text-red-500">-$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Additional broker fees</span>
+          <span id="r-brokerFees" class="text-red-500">-$0</span>
+        </div>
+        <div class="border-t border-gray-100 dark:border-gray-700 my-2"></div>
+        <div class="flex justify-between font-medium">
+          <span class="text-gray-700 dark:text-gray-200">Net commission (after broker)</span>
+          <span id="r-netComm" class="font-semibold">$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Business expenses</span>
+          <span id="r-expenses" class="text-red-500">-$0</span>
+        </div>
+        <div class="border-t border-gray-100 dark:border-gray-700 my-2"></div>
+        <div class="flex justify-between font-medium">
+          <span class="text-gray-700 dark:text-gray-200">Net self-employment income</span>
+          <span id="r-netSE" class="font-semibold">$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Self-employment tax (15.3%)</span>
+          <span id="r-seTax" class="text-red-500">-$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">+ ½ SE tax deduction</span>
+          <span id="r-halfSE" class="text-green-600">+$0</span>
+        </div>
+        <div class="flex justify-between" id="r-qbiRow">
+          <span class="text-gray-500 dark:text-gray-400">+ 20% QBI deduction</span>
+          <span id="r-qbi" class="text-green-600">+$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– Federal income tax</span>
+          <span id="r-fedTax" class="text-red-500">-$0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500 dark:text-gray-400">– State income tax</span>
+          <span id="r-stateTax" class="text-red-500">-$0</span>
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-600 my-3"></div>
+        <div class="flex justify-between text-base">
+          <span class="font-bold text-gray-800 dark:text-gray-100">Take-home pay</span>
+          <span id="r-takeHome" class="font-bold text-indigo-600 dark:text-indigo-400 text-lg">$0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+      <div class="bg-indigo-50 dark:bg-indigo-900/30 rounded-xl p-4 text-center border border-indigo-100 dark:border-indigo-700">
+        <div id="r-keepPct" class="text-2xl font-bold text-indigo-700 dark:text-indigo-300">0%</div>
+        <div class="text-xs text-indigo-500 mt-1">You keep of GCI</div>
+      </div>
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+        <div id="r-totalTax" class="text-2xl font-bold text-gray-700 dark:text-gray-300">$0</div>
+        <div class="text-xs text-gray-500 mt-1">Total taxes</div>
+      </div>
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+        <div id="r-effTaxRate" class="text-2xl font-bold text-gray-700 dark:text-gray-300">0%</div>
+        <div class="text-xs text-gray-500 mt-1">Effective tax rate</div>
+      </div>
+      <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+        <div id="r-monthly" class="text-2xl font-bold text-gray-700 dark:text-gray-300">$0</div>
+        <div class="text-xs text-gray-500 mt-1">Monthly take-home</div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="space-y-4 mb-10">
+      <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100">Agent Net Pay FAQ</h2>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">What is self-employment tax for real estate agents?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Real estate agents are independent contractors and pay 15.3% self-employment tax on net self-employment income (after business expenses). This covers Social Security (12.4%) and Medicare (2.9%). You can deduct half of SE tax from gross income when calculating income tax.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">What business expenses can I deduct?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Common deductible expenses include: MLS fees, NAR/state/local association dues, E&O insurance, marketing and advertising, vehicle mileage, home office, technology and software (CRM, transaction management), continuing education, and business meals. Keep receipts for everything.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">How much should I set aside for taxes?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Most agents should set aside 25-35% of gross commission. A common rule: save 30% from every check. This covers SE tax (~15%) plus federal income tax (22-24% for most agents) minus deductions. Pay quarterly estimated taxes to avoid IRS penalties.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">What is the QBI deduction?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Real estate agents may qualify for the 20% Qualified Business Income (QBI) deduction under Section 199A. If you qualify, you can deduct up to 20% of net self-employment income, significantly reducing your effective tax rate. Income thresholds apply — consult a CPA.</p>
+      </details>
+
+      <details class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+        <summary class="font-medium cursor-pointer text-gray-800 dark:text-gray-200">What % of GCI do most agents actually keep?</summary>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Most agents take home 45-65% of their GCI. At a 70/30 split with average expenses and taxes: roughly 50-55% of GCI. On a 100% commission plan (no broker split) with typical expenses and taxes: around 60-70% of GCI. Agents with high production and KW-cap plans often net 60%+.</p>
+      </details>
+    </div>
+
+    <!-- Cross-links -->
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-10">
+      <h2 class="text-base font-semibold mb-3 text-gray-700 dark:text-gray-300">More Agent Calculators</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+        <a href="/agent-commission-split-calculator/" class="block bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-600 hover:border-indigo-400 transition-colors">
+          <div class="font-medium text-indigo-600 dark:text-indigo-400">Commission Split Calculator</div>
+          <div class="text-gray-500 text-xs mt-1">Net after broker split + all deductions</div>
+        </a>
+        <a href="/kw-cap-calculator/" class="block bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-600 hover:border-indigo-400 transition-colors">
+          <div class="font-medium text-indigo-600 dark:text-indigo-400">KW Cap Calculator</div>
+          <div class="text-gray-500 text-xs mt-1">When you'll cap + income before/after</div>
+        </a>
+        <a href="/commission-calculator-2026/" class="block bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-600 hover:border-indigo-400 transition-colors">
+          <div class="font-medium text-indigo-600 dark:text-indigo-400">Commission Calculator</div>
+          <div class="text-gray-500 text-xs mt-1">Quick commission by side</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function fmt(n: number) {
+      return '$' + Math.round(n).toLocaleString();
+    }
+
+    function calc() {
+      const gci = parseFloat((document.getElementById('gci') as HTMLInputElement).value) || 0;
+      const agentSplitPct = parseFloat((document.getElementById('agentSplit') as HTMLInputElement).value) / 100 || 0;
+      const referralFees = parseFloat((document.getElementById('referralFees') as HTMLInputElement).value) || 0;
+      const brokerFees = parseFloat((document.getElementById('brokerFees') as HTMLInputElement).value) || 0;
+      const marketing = parseFloat((document.getElementById('marketing') as HTMLInputElement).value) || 0;
+      const mlsDues = parseFloat((document.getElementById('mlsDues') as HTMLInputElement).value) || 0;
+      const tech = parseFloat((document.getElementById('tech') as HTMLInputElement).value) || 0;
+      const auto = parseFloat((document.getElementById('auto') as HTMLInputElement).value) || 0;
+      const otherExp = parseFloat((document.getElementById('otherExp') as HTMLInputElement).value) || 0;
+      const fedTaxRate = parseFloat((document.getElementById('fedTax') as HTMLInputElement).value) / 100 || 0;
+      const stateTaxRate = parseFloat((document.getElementById('stateTax') as HTMLInputElement).value) / 100 || 0;
+      const useQbi = (document.getElementById('qbiDeduction') as HTMLInputElement).checked;
+
+      const brokerSplit = gci * (1 - agentSplitPct);
+      const netComm = gci - brokerSplit - referralFees - brokerFees;
+      const totalExpenses = marketing + mlsDues + tech + auto + otherExp;
+      const netSE = Math.max(0, netComm - totalExpenses);
+
+      // SE tax = 15.3% of 92.35% of net SE income
+      const seTaxBase = netSE * 0.9235;
+      const seTax = seTaxBase * 0.153;
+      const halfSE = seTax / 2;
+
+      // Taxable income = netSE - halfSE - (QBI: 20% of netSE if applicable)
+      const qbiDeductionAmt = useQbi ? netSE * 0.2 : 0;
+      const taxableIncome = Math.max(0, netSE - halfSE - qbiDeductionAmt);
+
+      const fedTaxAmt = taxableIncome * fedTaxRate;
+      const stateTaxAmt = taxableIncome * stateTaxRate;
+      const totalTax = seTax + fedTaxAmt + stateTaxAmt;
+
+      const takeHome = netSE - seTax - fedTaxAmt - stateTaxAmt;
+      const keepPct = gci > 0 ? (takeHome / gci * 100) : 0;
+      const effTaxRate = netSE > 0 ? (totalTax / netSE * 100) : 0;
+
+      // Update DOM
+      (document.getElementById('r-gci') as HTMLElement).textContent = fmt(gci);
+      (document.getElementById('r-brokerSplit') as HTMLElement).textContent = '-' + fmt(brokerSplit);
+      (document.getElementById('r-referral') as HTMLElement).textContent = '-' + fmt(referralFees);
+      (document.getElementById('r-brokerFees') as HTMLElement).textContent = '-' + fmt(brokerFees);
+      (document.getElementById('r-netComm') as HTMLElement).textContent = fmt(netComm);
+      (document.getElementById('r-expenses') as HTMLElement).textContent = '-' + fmt(totalExpenses);
+      (document.getElementById('r-netSE') as HTMLElement).textContent = fmt(netSE);
+      (document.getElementById('r-seTax') as HTMLElement).textContent = '-' + fmt(seTax);
+      (document.getElementById('r-halfSE') as HTMLElement).textContent = '+' + fmt(halfSE);
+      (document.getElementById('r-qbi') as HTMLElement).textContent = '+' + fmt(qbiDeductionAmt);
+      (document.getElementById('r-qbiRow') as HTMLElement).style.display = useQbi ? 'flex' : 'none';
+      (document.getElementById('r-fedTax') as HTMLElement).textContent = '-' + fmt(fedTaxAmt);
+      (document.getElementById('r-stateTax') as HTMLElement).textContent = '-' + fmt(stateTaxAmt);
+      (document.getElementById('r-takeHome') as HTMLElement).textContent = fmt(takeHome);
+      (document.getElementById('r-keepPct') as HTMLElement).textContent = keepPct.toFixed(1) + '%';
+      (document.getElementById('r-totalTax') as HTMLElement).textContent = fmt(totalTax);
+      (document.getElementById('r-effTaxRate') as HTMLElement).textContent = effTaxRate.toFixed(1) + '%';
+      (document.getElementById('r-monthly') as HTMLElement).textContent = fmt(takeHome / 12);
+    }
+
+    document.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+    calc();
+  </script>
+</Base>

@@ -1,11 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
+const schemaJson = JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Real Estate Commission Calculator","url":"https://commission-calc.com/","description":"Free real estate commission calculator for USA, Canada, Australia, UK, and Germany. Calculate agent commission, broker splits, and seller net proceeds instantly.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is real estate commission calculated?","acceptedAnswer":{"@type":"Answer","text":"Real estate commission is calculated as a percentage of the home's sale price. In the US, the total commission is typically 5–6%, split between the listing agent and buyer's agent. For a $450,000 home at 5.5% commission, total commission = $24,750."}},{"@type":"Question","name":"Who pays the real estate agent commission?","acceptedAnswer":{"@type":"Answer","text":"Traditionally the seller pays the total commission out of proceeds at closing. Following the 2024 NAR settlement, buyer agent compensation must now be negotiated separately in writing — sellers may still offer to pay it, or buyers can pay their own agent directly."}},{"@type":"Question","name":"What is a typical agent/broker split?","acceptedAnswer":{"@type":"Answer","text":"The most common split is 70/30 — the agent keeps 70% and the broker takes 30%. KW agents on a 100% plan pay a cap ($18,000–21,000/year) then keep 100%. Splits vary by brokerage and production level."}},{"@type":"Question","name":"Is real estate commission negotiable?","acceptedAnswer":{"@type":"Answer","text":"Yes. Commission rates are always negotiable — there is no fixed legal rate. In the US, average rates have been declining since the 2024 NAR settlement. Sellers can negotiate lower rates, especially for higher-value properties or if they plan to buy through the same agent."}}]}]});
 ---
 <Base
   title="Real Estate Commission Calculator 2026 — USA, Canada, UK & Australia (Free)"
   description="Free real estate commission calculator for 5 countries. See agent commission, broker splits, and exact seller net proceeds — updated for 2026 NAR settlement rules. Instant results."
   canonicalUrl="https://commission-calc.com/"
+  noWebAppSchema={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={schemaJson} />
+  </Fragment>
   <div class="max-w-3xl mx-auto">
     <h1 class="text-3xl font-bold mb-2 text-center">Real Estate Commission Calculator</h1>
     <p class="text-gray-500 dark:text-gray-400 text-center mb-6">Calculate agent commission, broker split, and net earnings. Supports 5 countries.</p>
@@ -67,6 +72,25 @@ import Base from '../layouts/Base.astro';
 
       <!-- Country note -->
       <div id="country-note" class="mt-6 p-4 bg-indigo-50 dark:bg-indigo-950 rounded-xl text-sm text-indigo-800 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800"></div>
+
+      <!-- Email capture -->
+      <div id="ec-wrap-cc" class="mt-6 p-5 bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800 rounded-xl">
+        <p class="font-semibold text-gray-900 dark:text-gray-100 mb-1">Email me these results</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">Get a clean summary you can share with your agent or client.</p>
+        <form id="ec-form-cc" class="flex flex-col sm:flex-row gap-2">
+          <input id="ec-email-cc" type="email" required placeholder="you@email.com"
+            class="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <button id="ec-btn-cc" type="submit"
+            class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+            Send results →
+          </button>
+        </form>
+        <p id="ec-error-cc" class="hidden text-xs text-red-500 mt-2"></p>
+        <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">No spam. Unsubscribe any time.</p>
+      </div>
+      <div id="ec-success-cc" class="hidden mt-6 p-4 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-xl text-sm text-green-800 dark:text-green-300 text-center">
+        ✓ Results sent — check your inbox.
+      </div>
     </div>
 
     <!-- Quick links to other tools -->
@@ -164,6 +188,37 @@ import Base from '../layouts/Base.astro';
           <div>
             <p class="font-semibold text-gray-900 dark:text-gray-100">FSBO vs Agent Breakeven</p>
             <p class="text-sm text-gray-500 dark:text-gray-400">Commission savings vs FSBO price discount — which nets more?</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- P3 Agent Tools -->
+    <div class="mt-6">
+      <div class="flex items-center gap-3 mb-3">
+        <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Agent Income Tools</h2>
+        <span class="text-xs bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded-full font-medium">3 tools</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="/agent-commission-split-calculator/" class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+          <div class="shrink-0 text-2xl">✂️</div>
+          <div>
+            <p class="font-semibold text-gray-900 dark:text-gray-100">Agent Commission Split</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Net after broker split, referral, E&O, desk fees</p>
+          </div>
+        </a>
+        <a href="/kw-cap-calculator/" class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+          <div class="shrink-0 text-2xl">🎯</div>
+          <div>
+            <p class="font-semibold text-gray-900 dark:text-gray-100">KW Cap Calculator</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">When you cap + income before & after the KW cap</p>
+          </div>
+        </a>
+        <a href="/agent-net-pay-calculator/" class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all">
+          <div class="shrink-0 text-2xl">💵</div>
+          <div>
+            <p class="font-semibold text-gray-900 dark:text-gray-100">Agent Net Pay Calculator</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">True take-home after expenses, SE tax & income tax</p>
           </div>
         </a>
       </div>
@@ -301,5 +356,33 @@ import Base from '../layouts/Base.astro';
     });
 
     setCountry('US');
+
+    // Email capture
+    document.getElementById('ec-form-cc').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const emailEl = document.getElementById('ec-email-cc');
+      const btnEl = document.getElementById('ec-btn-cc');
+      const errEl = document.getElementById('ec-error-cc');
+      const country = document.querySelector('.country-btn.bg-indigo-600')?.dataset.country || 'US';
+      btnEl.disabled = true;
+      btnEl.textContent = 'Sending…';
+      errEl.classList.add('hidden');
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailEl.value, source: `commission-calculator-${country.toLowerCase()}` }),
+        });
+        if (res.ok) {
+          document.getElementById('ec-wrap-cc').classList.add('hidden');
+          document.getElementById('ec-success-cc').classList.remove('hidden');
+        } else { throw new Error(); }
+      } catch {
+        btnEl.disabled = false;
+        btnEl.textContent = 'Send results →';
+        errEl.textContent = 'Something went wrong — please try again.';
+        errEl.classList.remove('hidden');
+      }
+    });
   </script>
 </Base>

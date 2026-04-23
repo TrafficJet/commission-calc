@@ -8,8 +8,10 @@ interface Props {
   noWebAppSchema?: boolean;
 }
 const { title, description, canonicalUrl, noindex, ogImage, noWebAppSchema } = Astro.props;
-const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Real Estate Commission Calculator","url":"https://commission-calc.com/","description":"Free real estate commission calculator. Supports USA, Canada, Australia, UK, Germany.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
 const canon = canonicalUrl || Astro.url.href;
+const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Real Estate Commission Calculator","url":"https://commission-calc.com/","description":"Free real estate commission calculator. Supports USA, Canada, Australia, UK, Germany.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const _path = new URL(canon).pathname;
+const breadcrumbJson = _path !== '/' ? JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CommissionCalc","item":"https://commission-calc.com/"},{"@type":"ListItem","position":2,"name":title.split(' — ')[0].split(' | ')[0].trim(),"item":canon}]}) : null;
 const finalOgImage = ogImage || 'https://commission-calc.com/og-default.png';
 const GA_ID = 'G-3BRK8TYEGY';
 ---
@@ -40,6 +42,7 @@ const GA_ID = 'G-3BRK8TYEGY';
   {noindex && <meta name="robots" content="noindex, follow" />}
   <meta name="p:domain_verify" content="011bb6d55b47efd0724be8831c4c5381"/>
   {!noWebAppSchema && <script type="application/ld+json" set:html={webAppSchemaJson} />}
+  {breadcrumbJson && <script type="application/ld+json" set:html={breadcrumbJson} />}
   <!-- Anti-FOUC: apply dark mode before paint -->
   <script is:inline>
     (function() {
@@ -62,6 +65,9 @@ const GA_ID = 'G-3BRK8TYEGY';
         <li><a href="/rent-vs-buy-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Rent vs Buy</a></li>
         <li><a href="/rental-property-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Rental</a></li>
         <li><a href="/capital-gains-home-sale/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Capital Gains</a></li>
+        <li><a href="/agent-commission-split-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Agent Split</a></li>
+        <li><a href="/kw-cap-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">KW Cap</a></li>
+        <li><a href="/agent-net-pay-calculator/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Agent Net Pay</a></li>
         <li><a href="/blog/" class="hover:text-indigo-700 dark:hover:text-indigo-400">Blog</a></li>
         <li>
           <button id="theme-toggle" aria-label="Toggle dark mode"
