@@ -3,8 +3,8 @@ import Base from '../layouts/Base.astro';
 const schemaJson = JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Real Estate Commission Calculator","url":"https://commission-calc.com/","description":"Free real estate commission calculator for USA, Canada, Australia, UK, and Germany. Calculate agent commission, broker splits, and seller net proceeds instantly.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is real estate commission calculated?","acceptedAnswer":{"@type":"Answer","text":"Real estate commission is calculated as a percentage of the home's sale price. In the US, the total commission is typically 5–6%, split between the listing agent and buyer's agent. For a $450,000 home at 5.5% commission, total commission = $24,750."}},{"@type":"Question","name":"Who pays the real estate agent commission?","acceptedAnswer":{"@type":"Answer","text":"Traditionally the seller pays the total commission out of proceeds at closing. Following the 2024 NAR settlement, buyer agent compensation must now be negotiated separately in writing — sellers may still offer to pay it, or buyers can pay their own agent directly."}},{"@type":"Question","name":"What is a typical agent/broker split?","acceptedAnswer":{"@type":"Answer","text":"The most common split is 70/30 — the agent keeps 70% and the broker takes 30%. KW agents on a 100% plan pay a cap ($18,000–21,000/year) then keep 100%. Splits vary by brokerage and production level."}},{"@type":"Question","name":"Is real estate commission negotiable?","acceptedAnswer":{"@type":"Answer","text":"Yes. Commission rates are always negotiable — there is no fixed legal rate. In the US, average rates have been declining since the 2024 NAR settlement. Sellers can negotiate lower rates, especially for higher-value properties or if they plan to buy through the same agent."}}]}]});
 ---
 <Base
-  title="Real Estate Commission Calculator 2026 — USA, Canada, UK & Australia (Free)"
-  description="Free real estate commission calculator for 5 countries. See agent commission, broker splits, and exact seller net proceeds — updated for 2026 NAR settlement rules. Instant results."
+  title="Real Estate Commission Calculator — How Much Will You Pay? (2026)"
+  description="Calculate your exact real estate commission in seconds. On a $450K home at 5.5% commission = $24,750. See agent split, broker cut, and seller net. Free, no signup. Updated 2026."
   canonicalUrl="https://commission-calc.com/"
   noWebAppSchema={true}
 >
@@ -221,6 +221,36 @@ const schemaJson = JSON.stringify({"@context":"https://schema.org","@graph":[{"@
             <p class="text-sm text-gray-500 dark:text-gray-400">True take-home after expenses, SE tax & income tax</p>
           </div>
         </a>
+      </div>
+    </div>
+
+    <!-- State calculators hub -->
+    <div class="mt-12 mb-2">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100">Commission Calculators by State</h2>
+        <a href="/commission/" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">View all cities →</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+        {[
+          {name:'California',slug:'california',rate:'4.5%'},
+          {name:'Texas',slug:'texas',rate:'5.4%'},
+          {name:'Florida',slug:'florida',rate:'5.2%'},
+          {name:'New York',slug:'new-york',rate:'5.0%'},
+          {name:'Washington',slug:'washington',rate:'4.6%'},
+          {name:'Colorado',slug:'colorado',rate:'4.9%'},
+          {name:'Georgia',slug:'georgia',rate:'5.1%'},
+          {name:'North Carolina',slug:'north-carolina',rate:'5.1%'},
+          {name:'Ohio',slug:'ohio',rate:'5.2%'},
+          {name:'Tennessee',slug:'tennessee',rate:'5.0%'},
+          {name:'Nevada',slug:'nevada',rate:'5.0%'},
+          {name:'Arizona',slug:'arizona',rate:'5.1%'},
+        ].map(s => (
+          <a href={`/state/${s.slug}/`}
+            class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-indigo-400 hover:shadow-sm transition-all text-sm">
+            <span class="font-medium text-gray-900 dark:text-gray-100">{s.name}</span>
+            <span class="text-xs text-indigo-600 dark:text-indigo-400">{s.rate}</span>
+          </a>
+        ))}
       </div>
     </div>
 
