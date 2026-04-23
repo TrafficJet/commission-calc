@@ -6,6 +6,8 @@ description: "Discover the best AI lead generation tools for real estate agents 
 author: "Alex Morgan"
 tags: ["real estate ai lead generation"]
 seoTitle: "Real Estate AI Lead Generation Tools 2026 | Top Platforms"
+heroImage: "/images/real-estate-ai-lead-generation/hero.jpg"
+heroImageAlt: "Real estate agent reviewing AI-generated leads and analytics on computer screen"
 ---
 
 # Real Estate AI Lead Generation: Top Tools for 2026
