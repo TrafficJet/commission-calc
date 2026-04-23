@@ -6,6 +6,8 @@ description: "Learn how machine learning real estate prediction works in 2026. C
 author: "Alex Morgan"
 tags: ["machine learning real estate prediction"]
 seoTitle: "Machine Learning Real Estate Prediction: 2026 Guide"
+heroImage: "/images/machine-learning-real-estate-prediction/hero.jpg"
+heroImageAlt: "Real estate professional reviewing property valuation data on laptop and tablet with charts visible"
 ---
 
 # Machine Learning Real Estate Prediction: 2026 Guide
