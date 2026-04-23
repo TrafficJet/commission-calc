@@ -40,6 +40,9 @@ const GA_ID = 'G-3BRK8TYEGY';
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   {noindex && <meta name="robots" content="noindex, follow" />}
+  <script is:inline>
+    (function(){if(location.hostname.endsWith('.pages.dev')){document.head.insertAdjacentHTML('beforeend','<meta name="robots" content="noindex,nofollow">');location.replace(location.href.replace(location.hostname,'commission-calc.com'));}})();
+  </script>
   <meta name="p:domain_verify" content="011bb6d55b47efd0724be8831c4c5381"/>
   {!noWebAppSchema && <script type="application/ld+json" set:html={webAppSchemaJson} />}
   {breadcrumbJson && <script type="application/ld+json" set:html={breadcrumbJson} />}
