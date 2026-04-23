@@ -1,11 +1,11 @@
 ---
-title: "Real Estate Commission Calculator 2026"
+title: "Real Estate Commission Calculator 2026 — See Exactly What You'll Pay"
 slug: "real-estate-commission-calculator-2025"
 pubDate: 2026-04-17
-description: "Use our free real estate commission calculator to estimate agent fees, closing costs, and net proceeds when selling your home in 2026."
+description: "On a $400K home at 5.5% commission, you owe $22,000. Use our free calculator to see your exact agent fees, broker split, and seller net proceeds — in seconds."
 author: "Alex Morgan"
 tags: ["real estate commission calculator 2026"]
-seoTitle: "Real Estate Commission Calculator 2026 | Estimate Agent Fees"
+seoTitle: "Real Estate Commission Calculator 2026 — See Exactly What You'll Pay"
 ---
 Use this calculator to estimate how much you'll pay in agent fees when you sell your home. Enter your sale price, adjust commission percentages for each agent, and see your net proceeds instantly.
 
