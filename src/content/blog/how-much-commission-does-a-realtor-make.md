@@ -6,6 +6,8 @@ description: "Learn current realtor commission rates (2.5–3% per side), how th
 author: "Alex Morgan"
 tags: ["how much commission does a realtor make"]
 seoTitle: "How Much Commission Does a Realtor Make in 2026? | Commission Calc"
+heroImage: "/images/how-much-commission-does-a-realtor-make/hero.jpg"
+heroImageAlt: "Real estate agent presenting home details to prospective buyers during a property showing"
 ---
 
 # How Much Commission Does a Realtor Make in 2026?
