@@ -6,6 +6,8 @@ description: "Learn how ML algorithms value homes, compare top AVMs like Zillow 
 author: "Alex Morgan"
 tags: ["machine learning real estate valuation"]
 seoTitle: "Machine Learning Real Estate Valuation: 2026 Guide | Commission Calc"
+heroImage: "/images/machine-learning-real-estate-valuation/hero.jpg"
+heroImageAlt: "Real estate professional reviewing property valuation data and analytics on laptop screen"
 ---
 
 # Machine Learning Real Estate Valuation: 2026 Guide
