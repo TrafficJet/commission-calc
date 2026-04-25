@@ -6,6 +6,8 @@ description: "Discover the best real estate virtual assistant AI tools for 2026.
 author: "Alex Morgan"
 tags: ["real estate virtual assistant ai"]
 seoTitle: "Real Estate Virtual Assistant AI: Top Tools for 2026"
+heroImage: "/images/real-estate-virtual-assistant-ai/hero.jpg"
+heroImageAlt: "Real estate agent reviewing lead management system on laptop screen"
 ---
 
 # Real Estate Virtual Assistant AI: Top Tools for 2026
