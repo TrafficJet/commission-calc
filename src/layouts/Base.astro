@@ -40,6 +40,7 @@ const GA_ID = 'G-3BRK8TYEGY';
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   {noindex && <meta name="robots" content="noindex, follow" />}
+  <slot name="head" />
   <script is:inline>
     (function(){if(location.hostname.endsWith('.pages.dev')){document.head.insertAdjacentHTML('beforeend','<meta name="robots" content="noindex,nofollow">');location.replace(location.href.replace(location.hostname,'commission-calc.com'));}})();
   </script>

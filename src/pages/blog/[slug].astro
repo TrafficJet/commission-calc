@@ -7,8 +7,33 @@ export async function getStaticPaths() {
 }
 const { post } = Astro.props;
 const { Content } = await post.render();
+const canonicalUrl = `https://commission-calc.com/blog/${post.slug}/`;
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.seoTitle || post.data.title,
+  "description": post.data.description,
+  "url": canonicalUrl,
+  "datePublished": post.data.pubDate.toISOString(),
+  "dateModified": post.data.pubDate.toISOString(),
+  "author": { "@type": "Person", "name": post.data.author },
+  "publisher": { "@type": "Organization", "name": "CommissionCalc", "url": "https://commission-calc.com/" }
+});
+const faqSchema = post.data.faq ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": post.data.faq.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": a }
+  }))
+}) : null;
 ---
-<Base title={post.data.seoTitle || post.data.title} description={post.data.description} canonicalUrl={`https://commission-calc.com/blog/${post.slug}/`}>
+<Base title={post.data.seoTitle || post.data.title} description={post.data.description} canonicalUrl={canonicalUrl}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={articleSchema} />
+    {faqSchema && <script type="application/ld+json" set:html={faqSchema} />}
+  </Fragment>
   <article class="max-w-3xl mx-auto prose prose-indigo prose-lg dark:prose-invert">
     <p class="text-sm text-gray-400 not-prose mb-4">{post.data.pubDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} · By {post.data.author}</p>
     <Content />

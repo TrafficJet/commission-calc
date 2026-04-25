@@ -8,6 +8,7 @@ const blog = defineCollection({
     author: z.string().default('Alex Morgan'),
     tags: z.array(z.string()).default([]),
     seoTitle: z.string().optional(),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });
 export const collections = { blog };

@@ -6,6 +6,21 @@ description: "On a $400K home at 5.5% commission, you owe $22,000. Use our free 
 author: "Alex Morgan"
 tags: ["real estate commission calculator 2026"]
 seoTitle: "Real Estate Commission Calculator 2026 — See Exactly What You'll Pay"
+faq:
+  - q: "What is the average real estate commission in 2025?"
+    a: "The average total commission in 2025 is roughly 4.5%–5.4% of the sale price. Before the 2024 NAR settlement, it was around 5%–6%. Rates vary by market and are more negotiable than they were even two years ago."
+  - q: "How do I calculate real estate commission on a home sale?"
+    a: "Multiply your sale price by the commission percentage. A $350,000 home with a 5% total commission comes to $17,500. The listing agent and buyer's agent each receive their negotiated portion."
+  - q: "Do sellers still have to pay the buyer's agent commission in 2025?"
+    a: "No. As of August 2024, sellers are no longer required to offer buyer agent compensation through the MLS. Many still do to attract more buyers, but it is no longer mandatory under the NAR settlement."
+  - q: "Can I negotiate my real estate agent's commission?"
+    a: "Yes. Rates are not set by law or by the National Association of Realtors. In competitive markets or for higher-priced homes, many listing agents will accept 2%–2.5% instead of the traditional 3%."
+  - q: "What is a typical commission split between listing and buyer agents?"
+    a: "In 2025, each side is negotiated separately. A common arrangement is 2.5%–3% to the listing agent and 2%–2.5% offered to the buyer's agent. There is no required standard split."
+  - q: "How much does a real estate agent actually take home from the commission?"
+    a: "Most agents split their commission with their broker, keeping 60%–80% of their portion. On a $10,000 commission with a 70/30 split, the agent nets $7,000 before taxes and business expenses."
+  - q: "Is a 6% real estate commission still common in 2025?"
+    a: "Much less so. The NAR settlement and competition from discount brokerages have pushed the average well below 6%. Most sellers in 2025 pay between 4.5% and 5.5% total."
 ---
 Use this calculator to estimate how much you'll pay in agent fees when you sell your home. Enter your sale price, adjust commission percentages for each agent, and see your net proceeds instantly.
 
