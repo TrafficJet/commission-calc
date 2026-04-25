@@ -6,6 +6,8 @@ description: "Calculate your exact cash at closing with our seller net proceeds 
 author: "Alex Morgan"
 tags: ["seller net proceeds calculator"]
 seoTitle: "Seller Net Proceeds Calculator: Estimate Your Take-Home | Commission Calc"
+heroImage: "/images/seller-net-proceeds-calculator/hero.jpg"
+heroImageAlt: "Real estate professional using calculator and reviewing sale documents at desk"
 ---
 
 # Seller Net Proceeds Calculator: Know Your Take-Home
