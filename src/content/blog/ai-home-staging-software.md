@@ -6,6 +6,8 @@ description: "Compare the best AI home staging software in 2026. See pricing, sp
 author: "Alex Morgan"
 tags: ["ai home staging software"]
 seoTitle: "AI Home Staging Software: Top Tools Reviewed 2026 | Commission Calc"
+heroImage: "/images/ai-home-staging-software/hero.jpg"
+heroImageAlt: "Vacant living room with natural light from windows, ready for AI staging"
 ---
 
 # AI Home Staging Software: Top Tools Reviewed 2026
