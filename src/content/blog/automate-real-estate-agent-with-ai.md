@@ -6,6 +6,8 @@ description: "Learn which real estate tasks to automate with AI: lead gen, follo
 author: "Alex Morgan"
 tags: ["automate real estate agent with ai"]
 seoTitle: "Automate Real Estate Agent Tasks with AI in 2026 | Commission Calc"
+heroImage: "/images/automate-real-estate-agent-with-ai/hero.jpg"
+heroImageAlt: "Real estate agent reviewing client data and leads on computer screen"
 ---
 
 # Automate Real Estate Agent Tasks with AI in 2026
