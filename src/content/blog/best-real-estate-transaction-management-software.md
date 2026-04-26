@@ -6,6 +6,8 @@ description: "Compare top real estate transaction management platforms with pric
 author: "Alex Morgan"
 tags: ["best real estate transaction management software"]
 seoTitle: "Best Real Estate Transaction Management Software 2026 | Commission Calc"
+heroImage: "/images/best-real-estate-transaction-management-software/hero.jpg"
+heroImageAlt: "Real estate transaction coordinator organizing documents and digital files on computer screen"
 ---
 
 # Best Real Estate Transaction Management Software 2026
