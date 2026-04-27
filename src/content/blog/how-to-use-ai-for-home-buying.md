@@ -6,6 +6,8 @@ description: "Learn how to use AI tools for home buying: research listings, anal
 author: "Alex Morgan"
 tags: ["how to use ai for home buying"]
 seoTitle: "How to Use AI for Home Buying in 2026 | Commission Calc"
+heroImage: "/images/how-to-use-ai-for-home-buying/hero.jpg"
+heroImageAlt: "Couple researching home listings on laptop together at kitchen table"
 ---
 
 # How to Use AI for Home Buying in 2026
