@@ -6,6 +6,8 @@ description: "Learn how real estate commission AI assistants automate complex sp
 author: "Alex Morgan"
 tags: ["real estate commission ai assistant"]
 seoTitle: "Real Estate Commission AI Assistant 2026 Guide | Commission Calc"
+heroImage: "/images/real-estate-commission-ai-assistant/hero.jpg"
+heroImageAlt: "Real estate professional reviewing commission calculations on laptop screen"
 ---
 
 # Real Estate Commission AI Assistant: 2026 Guide
