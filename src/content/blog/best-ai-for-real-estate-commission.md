@@ -6,6 +6,8 @@ description: "Compare top AI tools for real estate commission tracking, forecast
 author: "Alex Morgan"
 tags: ["best ai for real estate commission"]
 seoTitle: "Best AI for Real Estate Commission 2026 | Commission Calc"
+heroImage: "/images/best-ai-for-real-estate-commission/hero.jpg"
+heroImageAlt: "Real estate agent reviewing commission data and calculations on laptop"
 ---
 
 # Best AI for Real Estate Commission (2026 Guide)
