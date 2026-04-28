@@ -6,6 +6,8 @@ description: "Discover the best AI tools for property listing creation. Save 5-1
 author: "Alex Morgan"
 tags: ["ai tools for property listing"]
 seoTitle: "AI Tools for Property Listings 2026 | Best Platforms"
+heroImage: "/images/ai-tools-for-property-listing/hero.jpg"
+heroImageAlt: "Real estate agent working on property listing description on laptop with MLS data"
 ---
 
 # Best AI Tools for Property Listings in 2026
