@@ -6,6 +6,8 @@ description: "Learn how buyer agents use ChatGPT to draft offers, emails & scrip
 author: "Alex Morgan"
 tags: ["chatgpt for buyer agent"]
 seoTitle: "ChatGPT for Buyer Agents: Close More Deals in 2026"
+heroImage: "/images/chatgpt-for-buyer-agent/hero.jpg"
+heroImageAlt: "Buyer agent reviewing property details and ChatGPT prompts on laptop during client consultation"
 ---
 
 # ChatGPT for Buyer Agents: Close More Deals in 2026
