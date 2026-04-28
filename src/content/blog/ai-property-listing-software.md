@@ -6,6 +6,8 @@ description: "Compare top AI property listing software for real estate agents. S
 author: "Alex Morgan"
 tags: ["ai property listing software"]
 seoTitle: "AI Property Listing Software: Top Picks for 2026 | Commission Calc"
+heroImage: "/images/ai-property-listing-software/hero.jpg"
+heroImageAlt: "Real estate agent reviewing AI-generated property listing on laptop screen"
 ---
 
 # AI Property Listing Software: Top Picks for 2026
