@@ -6,6 +6,8 @@ description: "Discover how listing agent AI assistants automate MLS descriptions
 author: "Alex Morgan"
 tags: ["listing agent ai assistant"]
 seoTitle: "Listing Agent AI Assistant: Close More Deals in 2026 | Commission Calc"
+heroImage: "/images/listing-agent-ai-assistant/hero.jpg"
+heroImageAlt: "Real estate listing agent reviewing MLS property listings on laptop with comparative market analysis"
 ---
 
 # Listing Agent AI Assistant: Close More Deals in 2026
