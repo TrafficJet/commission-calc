@@ -6,6 +6,8 @@ description: "Learn how to automate lead qualification, showing scheduling, and 
 author: "Alex Morgan"
 tags: ["automate buyer agent with ai"]
 seoTitle: "Automate Buyer Agent with AI in 2026 | Commission Calc"
+heroImage: "/images/automate-buyer-agent-with-ai/hero.jpg"
+heroImageAlt: "Real estate buyer agent reviewing property listings and MLS data on laptop screen"
 ---
 
 # Automate Your Buyer Agent with AI in 2026
