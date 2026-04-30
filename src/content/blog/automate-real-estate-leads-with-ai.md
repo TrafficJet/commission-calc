@@ -6,6 +6,8 @@ description: "Learn how to automate real estate leads with AI to respond in minu
 author: "Alex Morgan"
 tags: ["automate real estate leads with ai"]
 seoTitle: "Automate Real Estate Leads with AI in 2026 | Commission Calc"
+heroImage: "/images/automate-real-estate-leads-with-ai/hero.jpg"
+heroImageAlt: "Real estate professional reviewing automated lead management system on laptop with CRM dashboard visible"
 ---
 
 # Automate Real Estate Leads with AI in 2026
