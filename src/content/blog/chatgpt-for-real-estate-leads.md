@@ -6,6 +6,8 @@ description: "Learn how to use ChatGPT to generate real estate leads faster. Dis
 author: "Alex Morgan"
 tags: ["chatgpt for real estate leads"]
 seoTitle: "ChatGPT for Real Estate Leads: Practical Guide & Prompts"
+heroImage: "/images/chatgpt-for-real-estate-leads/hero.jpg"
+heroImageAlt: "Real estate agent working on laptop with ChatGPT interface open, drafting property listing descriptions"
 ---
 
 # ChatGPT for Real Estate Leads: A Practical Guide
