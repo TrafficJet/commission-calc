@@ -6,6 +6,8 @@ description: "Compare the best AI real estate marketing software for 2026. Learn
 author: "Alex Morgan"
 tags: ["ai real estate marketing software"]
 seoTitle: "AI Real Estate Marketing Software: Top Tools for 2026 | Commission Calc"
+heroImage: "/images/ai-real-estate-marketing-software/hero.jpg"
+heroImageAlt: "Real estate agent reviewing property listings and lead analytics on laptop"
 ---
 
 # AI Real Estate Marketing Software: Top Tools for 2026
