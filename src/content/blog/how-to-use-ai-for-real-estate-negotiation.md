@@ -6,6 +6,8 @@ description: "Learn 5 practical steps to use AI for real estate negotiation: com
 author: "Alex Morgan"
 tags: ["how to use ai for real estate negotiation"]
 seoTitle: "How to Use AI for Real Estate Negotiation in 2026 | Commission Calc"
+heroImage: "/images/how-to-use-ai-for-real-estate-negotiation/hero.jpg"
+heroImageAlt: "Real estate professional analyzing comparable sales data and market values on computer screen"
 ---
 
 # How to Use AI for Real Estate Negotiation in 2026
