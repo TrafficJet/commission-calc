@@ -6,6 +6,8 @@ description: "Top AI tools for open house lead capture, follow-up automation, an
 author: "Alex Morgan"
 tags: ["best ai for open house"]
 seoTitle: "Best AI for Open House Tools 2026 | Commission Calc"
+heroImage: "/images/best-ai-for-open-house/hero.jpg"
+heroImageAlt: "Real estate agent using tablet to check in visitors at an open house event"
 ---
 
 # Best AI for Open House: Top Tools in 2026
