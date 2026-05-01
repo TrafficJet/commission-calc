@@ -6,6 +6,8 @@ description: "Learn how open house AI assistants capture leads, answer buyer que
 author: "Alex Morgan"
 tags: ["open house ai assistant"]
 seoTitle: "Open House AI Assistant: Run Smarter Showings 2026 | Commission Calc"
+heroImage: "/images/open-house-ai-assistant/hero.jpg"
+heroImageAlt: "Real estate agent using tablet kiosk to check in visitors at an open house showing"
 ---
 
 # Open House AI Assistant: Run Smarter Showings in 2026
