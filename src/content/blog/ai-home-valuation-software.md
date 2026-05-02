@@ -6,6 +6,8 @@ description: "Discover the best AI home valuation software tools in 2026. Compar
 author: "Alex Morgan"
 tags: ["ai home valuation software"]
 seoTitle: "AI Home Valuation Software: Top Tools for 2026 | Commission Calc"
+heroImage: "/images/ai-home-valuation-software/hero.jpg"
+heroImageAlt: "Real estate professional reviewing AI-generated home valuation estimates on laptop screen"
 ---
 
 # AI Home Valuation Software: Top Tools for 2026
