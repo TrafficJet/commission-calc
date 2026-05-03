@@ -6,6 +6,8 @@ description: "Discover the best real estate social media AI assistants for 2026.
 author: "Alex Morgan"
 tags: ["real estate social media ai assistant"]
 seoTitle: "Real Estate Social Media AI Assistant: 2026 Guide | Commission Calc"
+heroImage: "/images/real-estate-social-media-ai-assistant/hero.jpg"
+heroImageAlt: "Real estate agent managing social media posts on laptop dashboard with property listings visible"
 ---
 
 # Real Estate Social Media AI Assistant: 2026 Guide
