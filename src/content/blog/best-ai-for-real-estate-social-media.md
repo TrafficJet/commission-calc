@@ -6,6 +6,8 @@ description: "Discover the top AI tools for real estate social media. Compare Pr
 author: "Alex Morgan"
 tags: ["best ai for real estate social media"]
 seoTitle: "Best AI for Real Estate Social Media 2025–2026 | Commission Calc"
+heroImage: "/images/best-ai-for-real-estate-social-media/hero.jpg"
+heroImageAlt: "Real estate agent using smartphone to post property listings on social media"
 ---
 
 # Best AI for Real Estate Social Media in 2025–2026
