@@ -6,6 +6,8 @@ description: "Learn how to automate your real estate CRM with AI. Compare top pl
 author: "Alex Morgan"
 tags: ["automate real estate crm with ai"]
 seoTitle: "Automate Real Estate CRM With AI in 2026 | Commission Calc"
+heroImage: "/images/automate-real-estate-crm-with-ai/hero.jpg"
+heroImageAlt: "Real estate agent reviewing CRM dashboard with lead contacts and automated workflows on laptop screen"
 ---
 
 # Automate Your Real Estate CRM With AI in 2026
