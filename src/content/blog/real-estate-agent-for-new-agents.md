@@ -6,6 +6,8 @@ description: "Complete guide for new real estate agents: licensing, choosing a b
 author: "Alex Morgan"
 tags: ["real estate agent for new agents"]
 seoTitle: "Real Estate Agent Guide for New Agents in 2026 | Commission Calc"
+heroImage: "/images/real-estate-agent-for-new-agents/hero.jpg"
+heroImageAlt: "New real estate agent presenting a home to first-time buyers during a property showing"
 ---
 
 # Real Estate Agent Guide for New Agents in 2026
