@@ -6,6 +6,8 @@ description: "Learn how to become a real estate agent in 2026. Complete step-by-
 author: "Alex Morgan"
 tags: ["how to real estate agent"]
 seoTitle: "How to Become a Real Estate Agent in 2026 | Commission Calc"
+heroImage: "/images/how-to-real-estate-agent/hero.jpg"
+heroImageAlt: "Real estate agent walking clients through a residential home during a showing"
 ---
 
 # How to Become a Real Estate Agent in 2026
