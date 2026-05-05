@@ -6,6 +6,8 @@ description: "Learn what real estate agents do, how they earn money, and the dif
 author: "Alex Morgan"
 tags: ["what is real estate agent"]
 seoTitle: "What Is a Real Estate Agent? Roles, Pay & How to Find One"
+heroImage: "/images/what-is-real-estate-agent/hero.jpg"
+heroImageAlt: "Real estate agent presenting a residential property to prospective buyers during a home showing"
 ---
 
 # What Is a Real Estate Agent? Roles, Pay & How to Find One
