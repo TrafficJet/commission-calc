@@ -6,6 +6,8 @@ description: "Master a repeatable home buying framework to guide clients from pr
 author: "Vladislav T."
 tags: ["home buying tips for agents"]
 seoTitle: "Home Buying Tips for Agents: Close More Deals in 2026 | Commission Calc"
+heroImage: "/images/home-buying-tips-for-agents/hero.jpg"
+heroImageAlt: "Real estate agent discussing home details with buyer couple during property showing"
 ---
 
 # Home Buying Tips for Agents: Close More Deals in 2026
