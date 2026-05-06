@@ -6,6 +6,8 @@ description: "Step-by-step real estate commission checklist for 2026. Track rate
 author: "Vladislav T."
 tags: ["real estate commission checklist"]
 seoTitle: "Real Estate Commission Checklist 2026 | Commission Calc"
+heroImage: "/images/real-estate-commission-checklist/hero.jpg"
+heroImageAlt: "Real estate agent reviewing listing agreement and commission documents at desk with calculator"
 ---
 
 # Real Estate Commission Checklist: 2026 Guide
