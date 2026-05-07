@@ -6,6 +6,8 @@ description: "Complete property listing guide for 2026. Master pricing, staging,
 author: "Vladislav T."
 tags: ["property listing guide 2026"]
 seoTitle: "Property Listing Guide 2026: Sell Faster & For More | Commission Calc"
+heroImage: "/images/property-listing-guide-2026/hero.jpg"
+heroImageAlt: "Real estate agent showing modern home interior to interested buyers during property viewing"
 ---
 
 # Property Listing Guide 2026: Sell Faster & for More
