@@ -6,6 +6,8 @@ description: "Avoid costly home buying mistakes in 2026's competitive market. Le
 author: "Vladislav T."
 tags: ["home buying mistakes to avoid"]
 seoTitle: "Home Buying Mistakes to Avoid in 2026 | Commission Calc"
+heroImage: "/images/home-buying-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Couple reviewing mortgage pre-approval letter and financial documents at home"
 ---
 
 # Home Buying Mistakes to Avoid in 2026
