@@ -6,6 +6,8 @@ description: "Learn what buyer's agents do, how they're paid after the NAR settl
 author: "Vladislav T."
 tags: ["how to buyer agent"]
 seoTitle: "How to Find and Work With a Buyer's Agent in 2026 | Commission Calc"
+heroImage: "/images/how-to-buyer-agent/hero.jpg"
+heroImageAlt: "Real estate agent walking with buyer through modern home interior during showing"
 ---
 
 # How to Find and Work With a Buyer's Agent in 2026
