@@ -6,6 +6,8 @@ description: "Learn 7 proven steps to improve your property listing in 2026. Pro
 author: "Vladislav T."
 tags: ["how to improve property listing"]
 seoTitle: "How to Improve Property Listing | 7 Steps for 2026 | Commission Calc"
+heroImage: "/images/how-to-improve-property-listing/hero.jpg"
+heroImageAlt: "Real estate agent taking professional photos of a bright, staged home interior with natural lighting"
 ---
 
 # How to Improve Your Property Listing (2026 Guide)
