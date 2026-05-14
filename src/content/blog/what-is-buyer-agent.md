@@ -6,6 +6,8 @@ description: "Learn what a buyer's agent does, how they're paid after the 2024 N
 author: "Vladislav T."
 tags: ["what is buyer agent"]
 seoTitle: "What Is a Buyer's Agent? 2026 Guide to Roles & Post-NAR Commissions"
+heroImage: "/images/what-is-buyer-agent/hero.jpg"
+heroImageAlt: "Real estate agent walking through home with buyer couple during showing"
 ---
 
 # What Is a Buyer's Agent? Your Complete 2026 Guide
