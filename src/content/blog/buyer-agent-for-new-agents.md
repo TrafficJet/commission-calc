@@ -6,6 +6,8 @@ description: "Complete buyer agent guide for new real estate agents. Learn roles
 author: "Vladislav T."
 tags: ["buyer agent for new agents"]
 seoTitle: "Buyer Agent Guide for New Real Estate Agents 2026 | Commission Calc"
+heroImage: "/images/buyer-agent-for-new-agents/hero.jpg"
+heroImageAlt: "Real estate agent walking with buyers through modern home interior during property showing"
 ---
 
 # Buyer Agent Guide for New Real Estate Agents 2026
