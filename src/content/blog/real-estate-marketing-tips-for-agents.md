@@ -6,6 +6,8 @@ description: "Proven real estate marketing tips for agents: local SEO, short-for
 author: "Vladislav T."
 tags: ["real estate marketing tips for agents"]
 seoTitle: "Real Estate Marketing Tips for Agents That Work in 2026"
+heroImage: "/images/real-estate-marketing-tips-for-agents/hero.jpg"
+heroImageAlt: "Real estate agent presenting a home to prospective buyers during a showing"
 ---
 
 # Real Estate Marketing Tips for Agents That Work in 2026
