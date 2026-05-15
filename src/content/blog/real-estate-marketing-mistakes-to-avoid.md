@@ -6,6 +6,8 @@ description: "Discover the 10 most damaging real estate marketing mistakes agent
 author: "Vladislav T."
 tags: ["real estate marketing mistakes to avoid"]
 seoTitle: "Real Estate Marketing Mistakes to Avoid in 2026 | Commission Calc"
+heroImage: "/images/real-estate-marketing-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Real estate agent presenting a home listing to prospective buyers in a modern living room"
 ---
 
 # Real Estate Marketing Mistakes to Avoid in 2026
