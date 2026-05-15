@@ -6,6 +6,8 @@ description: "Master the listing agent checklist: pre-listing prep, pricing, sta
 author: "Vladislav T."
 tags: ["listing agent checklist"]
 seoTitle: "Listing Agent Checklist: 12 Steps to Sell Faster | Commission Calc"
+heroImage: "/images/listing-agent-checklist/hero.jpg"
+heroImageAlt: "Real estate listing agent reviewing property documents and checklist at desk"
 ---
 
 # Listing Agent Checklist: 12 Steps to Sell Faster
