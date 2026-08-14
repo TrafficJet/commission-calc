@@ -1,0 +1,46 @@
+---
+interface Props {
+  stateName: string;
+  avgCommission: number;
+  medianPrice: number;
+}
+const { stateName, avgCommission, medianPrice } = Astro.props;
+const fmt = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+const listingSide = (avgCommission / 2).toFixed(1);
+const closingLow = fmt(Math.round(medianPrice * 0.01));
+const closingHigh = fmt(Math.round(medianPrice * 0.03));
+---
+<section class="mb-10 prose prose-lg max-w-none">
+  <h2>Who Pays the Real Estate Commission in {stateName}?</h2>
+  <p>
+    In {stateName}, the <strong>seller traditionally pays the full commission</strong> out of their sale proceeds,
+    and the listing broker then shares part of it with the buyer's agent. That changed with the
+    <strong>August 2024 NAR settlement</strong>: sellers are no longer required to advertise a buyer-agent
+    commission through the MLS. Today the seller almost always still pays the listing side (about {listingSide}% in {stateName}),
+    but buyer-agent compensation is <strong>negotiated separately</strong> - it may be paid by the seller as a concession,
+    by the buyer directly, or split between them. Every buyer now signs a written representation agreement before
+    touring homes, so the fee is agreed up front rather than assumed.
+  </p>
+</section>
+
+<section class="mb-10">
+  <h2 class="text-xl font-bold mb-5">More {stateName} Commission Questions</h2>
+  <div class="space-y-4">
+    <div class="border border-gray-200 rounded-xl p-5">
+      <h3 class="font-semibold text-gray-900 mb-2">Who pays the real estate commission in {stateName} - the buyer or the seller?</h3>
+      <p class="text-sm text-gray-600 leading-relaxed">The seller pays the listing agent's side (roughly {listingSide}% of the sale price in {stateName}) from their proceeds. Since the 2024 NAR settlement, the buyer's agent fee is negotiated separately: the seller may still cover it as a concession to attract buyers, or the buyer may pay their own agent under their representation agreement. On the median {stateName} home of {fmt(medianPrice)}, the full {avgCommission}% works out to about {fmt(Math.round(medianPrice * avgCommission / 100))}.</p>
+    </div>
+    <div class="border border-gray-200 rounded-xl p-5">
+      <h3 class="font-semibold text-gray-900 mb-2">When is the commission paid in {stateName}?</h3>
+      <p class="text-sm text-gray-600 leading-relaxed">Commission is paid at closing, not up front. It is deducted from the seller's proceeds by the title or escrow company and disbursed to the brokerages on the settlement statement. If the home never closes, no commission is owed under a standard {stateName} listing agreement.</p>
+    </div>
+    <div class="border border-gray-200 rounded-xl p-5">
+      <h3 class="font-semibold text-gray-900 mb-2">Do you still pay commission if your house doesn't sell in {stateName}?</h3>
+      <p class="text-sm text-gray-600 leading-relaxed">Generally no. Most {stateName} listing agreements are "no sale, no fee" - if the property doesn't close, you owe nothing. Watch two clauses: a cancellation fee for early termination, and a protection (or "safety") period that can owe commission if you sell to a buyer the agent introduced shortly after the listing ends.</p>
+    </div>
+    <div class="border border-gray-200 rounded-xl p-5">
+      <h3 class="font-semibold text-gray-900 mb-2">What are typical closing costs in {stateName}, on top of commission?</h3>
+      <p class="text-sm text-gray-600 leading-relaxed">Beyond agent commission, sellers in {stateName} usually pay another 1-3% in closing costs - roughly {closingLow} to {closingHigh} on the median home - covering title, transfer taxes, escrow, and prorated property taxes. Estimate the full picture with our <a href="/closing-costs/" class="text-indigo-700 hover:underline font-medium">closing costs calculator</a> before you list.</p>
+    </div>
+  </div>
+</section>
