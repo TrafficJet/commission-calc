@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { states } from '../../data/states';
+import StateCommissionExtra from '../../components/StateCommissionExtra.astro';
 
 export function getStaticPaths() {
   return states.map(s => ({ params: { state: s.slug }, props: { data: s } }));
@@ -207,6 +208,7 @@ const faqSchema = JSON.stringify({
         ))}
       </div>
     </section>
+<StateCommissionExtra stateName={stateName} avgCommission={avgCommission} medianPrice={medianPrice} />
 
     <div class="p-6 bg-indigo-50 rounded-xl border border-indigo-100">
       <h3 class="font-bold text-lg text-indigo-900 mb-2">Related Resources</h3>
