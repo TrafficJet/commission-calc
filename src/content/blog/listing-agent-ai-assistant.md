@@ -3,7 +3,7 @@ title: "Listing Agent AI Assistant: Close More Deals in 2026"
 slug: "listing-agent-ai-assistant"
 pubDate: 2026-04-29
 description: "Discover how listing agent AI assistants automate MLS descriptions, comps, and seller emails. Learn which tools work and how to adopt without compliance risks."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["listing agent ai assistant"]
 seoTitle: "Listing Agent AI Assistant: Close More Deals in 2026 | Commission Calc"
 heroImage: "/images/listing-agent-ai-assistant/hero.jpg"

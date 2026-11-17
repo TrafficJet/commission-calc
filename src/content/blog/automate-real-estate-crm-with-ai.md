@@ -3,7 +3,7 @@ title: "Automate Your Real Estate CRM With AI in 2026"
 slug: "automate-real-estate-crm-with-ai"
 pubDate: 2026-05-03
 description: "Learn how to automate your real estate CRM with AI. Compare top platforms, set up workflows, and close 23% more deals. Step-by-step guide inside."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["automate real estate crm with ai"]
 seoTitle: "Automate Real Estate CRM With AI in 2026 | Commission Calc"
 heroImage: "/images/automate-real-estate-crm-with-ai/hero.jpg"

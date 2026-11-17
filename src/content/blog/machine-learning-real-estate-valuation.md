@@ -3,7 +3,7 @@ title: "Machine Learning Real Estate Valuation: 2026 Guide"
 slug: "machine-learning-real-estate-valuation"
 pubDate: 2026-04-24
 description: "Learn how ML algorithms value homes, compare top AVMs like Zillow & Redfin, and discover when to trust AI over human appraisers."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["machine learning real estate valuation"]
 seoTitle: "Machine Learning Real Estate Valuation: 2026 Guide | Commission Calc"
 heroImage: "/images/machine-learning-real-estate-valuation/hero.jpg"

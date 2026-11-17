@@ -3,7 +3,7 @@ title: "Real Estate AI Lead Generation: Top Tools for 2026"
 slug: "real-estate-ai-lead-generation"
 pubDate: 2026-04-23
 description: "Discover the best AI lead generation tools for real estate agents in 2026. Compare pricing, features, and ROI to boost your pipeline today."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["real estate ai lead generation"]
 seoTitle: "Real Estate AI Lead Generation Tools 2026 | Top Platforms"
 heroImage: "/images/real-estate-ai-lead-generation/hero.jpg"

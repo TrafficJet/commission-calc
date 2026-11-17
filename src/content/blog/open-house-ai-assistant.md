@@ -3,7 +3,7 @@ title: "Open House AI Assistant: Run Smarter Showings in 2026"
 slug: "open-house-ai-assistant"
 pubDate: 2026-05-01
 description: "Learn how open house AI assistants capture leads, answer buyer questions, and boost follow-up speed. Compare top tools and pricing for 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["open house ai assistant"]
 seoTitle: "Open House AI Assistant: Run Smarter Showings 2026 | Commission Calc"
 heroImage: "/images/open-house-ai-assistant/hero.jpg"

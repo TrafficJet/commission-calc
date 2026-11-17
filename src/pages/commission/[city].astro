@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { cities, getStateName } from '../../data/cities';
+import NextStepBox from '../../components/NextStepBox.astro';
+import NearbyCities from '../../components/NearbyCities.astro';
 
 export function getStaticPaths() {
   return cities.map(c => ({ params: { city: c.slug }, props: { data: c } }));
@@ -19,12 +21,42 @@ function fmt(n: number) {
   return '$' + n.toLocaleString('en-US');
 }
 
-const title = `Real Estate Commission Calculator ${city}, ${state} (2025)`;
-const description = `Free real estate commission calculator for ${city}, ${stateName}. Median home price ${fmt(medianPrice)}, typical commission ${avgCommission}%. Calculate agent splits and seller net instantly.`;
+const YEAR = new Date().getFullYear();
+
+const title = `Realtor Commission in ${city}, ${state} (${YEAR}): ${fmt(totalComm)} on a Typical Home`;
+const description = `Selling a ${fmt(medianPrice)} home in ${city}? Typical commission is ${avgCommission}% — about ${fmt(totalComm)} in agent fees. See your exact number and how to pay less. Free, updated ${YEAR}.`;
 const canonicalUrl = `https://commission-calc.com/commission/${data.slug}/`;
+
+const faq = [
+  {
+    q: `What is the average real estate commission in ${city}, ${state}?`,
+    a: `The average total commission in ${city} is approximately ${avgCommission}%, ${avgCommission < 5.0 ? 'below' : 'at or above'} the national average of 5.0–5.4% following the NAR settlement. On the median ${city} home price of ${fmt(medianPrice)}, that equals ${fmt(totalComm)} in total agent fees.`,
+  },
+  {
+    q: `How much does a real estate agent make on a home sale in ${city}?`,
+    a: `On the median ${city} home price of ${fmt(medianPrice)}, a listing agent earns roughly ${fmt(Math.round(totalComm * 0.5))} before broker split. After a typical 70/30 agent-broker split, the agent takes home approximately ${fmt(listingAgent)}.`,
+  },
+  {
+    q: `Do sellers have to pay the buyer's agent in ${city}?`,
+    a: `No. Since August 2024, sellers in ${stateName} are no longer required to offer buyer agent compensation through the MLS. Many still do to attract buyers, but it is now fully negotiable.`,
+  },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
 ---
 
 <Base title={title} description={description} canonicalUrl={canonicalUrl}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={faqSchema} />
+  </Fragment>
   <div class="max-w-3xl mx-auto">
 
     <nav class="text-sm text-gray-400 mb-6">
@@ -38,7 +70,7 @@ const canonicalUrl = `https://commission-calc.com/commission/${data.slug}/`;
     <h1 class="text-3xl font-bold mb-2">Real Estate Commission Calculator — {city}, {state}</h1>
     <p class="text-gray-500 mb-8">
       Median home price in {city}: <strong>{fmt(medianPrice)}</strong> ·
-      Typical commission: <strong>{avgCommission}%</strong> · Updated 2025
+      Typical commission: <strong>{avgCommission}%</strong> · Updated {YEAR}
     </p>
 
     <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
@@ -85,6 +117,14 @@ const canonicalUrl = `https://commission-calc.com/commission/${data.slug}/`;
       </div>
     </div>
 
+    <NextStepBox
+      headline={`You could pay less than ${fmt(totalComm)}`}
+      body={`Top-rated agents in ${city} often negotiate commission below ${avgCommission}%. Compare local agents side by side — it takes 2 minutes.`}
+      ctaText={`Find a top agent in ${city}`}
+      utmContent={data.slug}
+      offer="agent"
+    />
+
     <div class="mt-10 prose prose-lg max-w-none">
       <h2>Real Estate Commission Rates in {city}, {stateName}</h2>
       <p>
@@ -124,6 +164,8 @@ const canonicalUrl = `https://commission-calc.com/commission/${data.slug}/`;
       <h4>Do sellers have to pay the buyer's agent in {city}?</h4>
       <p>No. Since August 2024, sellers in {stateName} are no longer required to offer buyer agent compensation through the MLS. Many still do to attract buyers, but it's now fully negotiable.</p>
     </div>
+
+    <NearbyCities state={state} stateSlug={data.stateSlug} currentSlug={data.slug} />
 
     <div class="mt-10 p-6 bg-indigo-50 rounded-xl border border-indigo-100">
       <h3 class="font-bold text-lg text-indigo-900 mb-2">Related Resources</h3>

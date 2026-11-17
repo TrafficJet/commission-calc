@@ -3,7 +3,7 @@ title: "How Much Commission Does a Realtor Make in 2026?"
 slug: "how-much-commission-does-a-realtor-make"
 pubDate: 2026-04-24
 description: "Learn current realtor commission rates (2.5–3% per side), how the NAR settlement changed everything, and agent-broker splits. Discover what realtors actually keep."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how much commission does a realtor make"]
 seoTitle: "How Much Commission Does a Realtor Make in 2026? | Commission Calc"
 heroImage: "/images/how-much-commission-does-a-realtor-make/hero.jpg"

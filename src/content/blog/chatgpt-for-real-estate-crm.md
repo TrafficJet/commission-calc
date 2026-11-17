@@ -3,7 +3,7 @@ title: "ChatGPT for Real Estate CRM: A Practical Guide"
 slug: "chatgpt-for-real-estate-crm"
 pubDate: 2026-05-02
 description: "Learn how to use ChatGPT with your real estate CRM to auto-draft emails, summarize leads, and save 15+ hours weekly. Practical integrations included."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["chatgpt for real estate crm"]
 seoTitle: "ChatGPT for Real Estate CRM: Automate Follow-ups & Personalize Leads"
 ---

@@ -3,7 +3,7 @@ title: "Machine Learning Real Estate Prediction: 2026 Guide"
 slug: "machine-learning-real-estate-prediction"
 pubDate: 2026-04-23
 description: "Learn how machine learning real estate prediction works in 2026. Compare top tools, accuracy benchmarks, and how buyers, sellers, and agents use AI to price homes."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["machine learning real estate prediction"]
 seoTitle: "Machine Learning Real Estate Prediction: 2026 Guide"
 heroImage: "/images/machine-learning-real-estate-prediction/hero.jpg"

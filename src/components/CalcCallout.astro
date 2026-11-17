@@ -1,0 +1,38 @@
+---
+// Blog → money-page router. Picks the most relevant calculator from post tags/title
+// and renders a prefilled callout. One template insert covers every post.
+interface Props {
+  title: string;
+  tags?: string[];
+}
+const { title, tags = [] } = Astro.props;
+const hay = (title + ' ' + tags.join(' ')).toLowerCase();
+
+type Target = { href: string; label: string; blurb: string };
+function pick(): Target {
+  if (/mortgage|loan|interest/.test(hay))
+    return { href: '/mortgage-calculator/', label: 'Mortgage Payment Calculator', blurb: 'See your exact monthly payment, taxes and PMI.' };
+  if (/afford|budget/.test(hay))
+    return { href: '/home-affordability-calculator/', label: 'Home Affordability Calculator', blurb: 'Find your price range with the 28/36 rule.' };
+  if (/net proceeds|seller net|closing/.test(hay))
+    return { href: '/seller-net/', label: 'Seller Net Proceeds Calculator', blurb: 'See what you actually walk away with after fees.' };
+  if (/rent|landlord|rental|brrrr|invest/.test(hay))
+    return { href: '/rental-property-calculator/', label: 'Rental Property Calculator', blurb: 'Cash flow, cap rate and ROI in seconds.' };
+  if (/split|broker|agent pay|income/.test(hay))
+    return { href: '/agent-commission-split-calculator/', label: 'Agent Commission Split Calculator', blurb: 'Model your take-home after broker splits and caps.' };
+  return { href: '/', label: 'Real Estate Commission Calculator', blurb: 'See total commission, agent splits and seller net on your exact price.' };
+}
+const t = pick();
+---
+<div class="not-prose my-8 p-6 rounded-2xl border-2 border-indigo-200 bg-indigo-50 dark:bg-indigo-950 dark:border-indigo-800">
+  <p class="text-xs font-semibold uppercase tracking-wide text-indigo-500 mb-1">Free tool</p>
+  <h3 class="text-lg font-bold text-indigo-900 dark:text-indigo-100 mb-1">
+    <a href={t.href} class="hover:underline">{t.label} →</a>
+  </h3>
+  <p class="text-sm text-indigo-800 dark:text-indigo-200 mb-3">{t.blurb}</p>
+  <p class="text-sm">
+    <a href={t.href} class="font-semibold text-indigo-700 dark:text-indigo-300 hover:underline">Open the calculator</a>
+    <span class="mx-2 text-indigo-300">·</span>
+    <a href="/commission/" class="text-indigo-700 dark:text-indigo-300 hover:underline">Commission rates in your city</a>
+  </p>
+</div>

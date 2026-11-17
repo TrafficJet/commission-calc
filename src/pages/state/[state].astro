@@ -21,7 +21,8 @@ const sellerNet    = medianPrice - totalComm;
 
 const comparedToNational = avgCommission < 5.0 ? 'below' : avgCommission > 5.4 ? 'above' : 'in line with';
 
-const title = `${stateName} Real Estate Commission Calculator (2026)`;
+const YEAR = new Date().getFullYear();
+const title = `${stateName} Real Estate Commission Calculator (${YEAR})`;
 const description = `Free ${stateName} real estate commission calculator. Average commission ${avgCommission}%, median home price ${fmt(medianPrice)}. Calculate total fees, agent splits, and seller net proceeds.`;
 const canonicalUrl = `https://commission-calc.com/state/${data.slug}/`;
 
@@ -73,7 +74,7 @@ const faqSchema = JSON.stringify({
     <p class="text-gray-500 mb-8">
       State average: <strong>{avgCommission}%</strong> commission ·
       Median home: <strong>{fmt(medianPrice)}</strong> ·
-      {cityCount} cities tracked · Updated 2026
+      {cityCount} cities tracked · Updated {YEAR}
     </p>
 
     <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 mb-10">
@@ -122,7 +123,7 @@ const faqSchema = JSON.stringify({
     </div>
 
     <div class="mt-4 mb-10 prose prose-lg max-w-none">
-      <h2>Real Estate Commission Rates in {stateName} (2026)</h2>
+      <h2>Real Estate Commission Rates in {stateName} ({YEAR})</h2>
       <p>
         The average total real estate commission in <strong>{stateName}</strong> is <strong>{avgCommission}%</strong>,
         which is {comparedToNational} the national average of 5.0–5.4%. On the median {stateName} home price of

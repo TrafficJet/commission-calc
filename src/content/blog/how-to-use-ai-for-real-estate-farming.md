@@ -3,7 +3,7 @@ title: "How to Use AI for Real Estate Farming in 2026"
 slug: "how-to-use-ai-for-real-estate-farming"
 pubDate: 2026-05-04
 description: "Master AI-powered real estate farming with precision targeting, predictive scoring, and automated outreach. Increase listing appointments by 40%+ in 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how to use ai for real estate farming"]
 seoTitle: "How to Use AI for Real Estate Farming in 2026 | Commission Calc"
 ---

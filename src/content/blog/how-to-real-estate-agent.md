@@ -3,7 +3,7 @@ title: "How to Become a Real Estate Agent in 2026"
 slug: "how-to-real-estate-agent"
 pubDate: 2026-05-04
 description: "Learn how to become a real estate agent in 2026. Complete step-by-step guide covering licensing, exam prep, costs, and landing your first client."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how to real estate agent"]
 seoTitle: "How to Become a Real Estate Agent in 2026 | Commission Calc"
 heroImage: "/images/how-to-real-estate-agent/hero.jpg"

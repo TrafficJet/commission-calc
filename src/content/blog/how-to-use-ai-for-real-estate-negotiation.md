@@ -3,7 +3,7 @@ title: "How to Use AI for Real Estate Negotiation in 2026"
 slug: "how-to-use-ai-for-real-estate-negotiation"
 pubDate: 2026-05-01
 description: "Learn 5 practical steps to use AI for real estate negotiation: comp analysis, scenario planning, counter-offer drafting, and more. Copy-paste prompts included."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how to use ai for real estate negotiation"]
 seoTitle: "How to Use AI for Real Estate Negotiation in 2026 | Commission Calc"
 heroImage: "/images/how-to-use-ai-for-real-estate-negotiation/hero.jpg"

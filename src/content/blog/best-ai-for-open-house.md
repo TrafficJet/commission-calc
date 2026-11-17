@@ -3,7 +3,7 @@ title: "Best AI for Open House: Top Tools in 2026"
 slug: "best-ai-for-open-house"
 pubDate: 2026-05-01
 description: "Top AI tools for open house lead capture, follow-up automation, and CRM integration. Compare Spacio, Structurely, and more. Find the right fit for your workflow."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best ai for open house"]
 seoTitle: "Best AI for Open House Tools 2026 | Commission Calc"
 heroImage: "/images/best-ai-for-open-house/hero.jpg"

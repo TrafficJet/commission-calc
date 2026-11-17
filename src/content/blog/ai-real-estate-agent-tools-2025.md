@@ -3,7 +3,7 @@ title: "AI Real Estate Agent Tools 2025: Top Picks"
 slug: "ai-real-estate-agent-tools-2025"
 pubDate: 2026-04-23
 description: "Discover the best AI real estate agent tools from 2025. Compare features, pricing, and real results to close more deals in 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ai real estate agent tools 2025"]
 seoTitle: "AI Real Estate Agent Tools 2025: Top Picks"
 heroImage: "/images/ai-real-estate-agent-tools-2025/hero.jpg"

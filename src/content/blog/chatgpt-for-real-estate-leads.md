@@ -3,7 +3,7 @@ title: "ChatGPT for Real Estate Leads: A Practical Guide"
 slug: "chatgpt-for-real-estate-leads"
 pubDate: 2026-04-30
 description: "Learn how to use ChatGPT to generate real estate leads faster. Discover 5 proven strategies, custom GPT setup, and exact prompts for agents."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["chatgpt for real estate leads"]
 seoTitle: "ChatGPT for Real Estate Leads: Practical Guide & Prompts"
 heroImage: "/images/chatgpt-for-real-estate-leads/hero.jpg"

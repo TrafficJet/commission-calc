@@ -3,7 +3,7 @@ title: "Best Real Estate Commission Strategies in 2026"
 slug: "best-real-estate-commission-strategies"
 pubDate: 2026-05-05
 description: "Master real estate commission strategies post-NAR settlement. Learn negotiation tactics for sellers, buyers, and agents to maximize equity in 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best real estate commission strategies"]
 seoTitle: "Best Real Estate Commission Strategies 2026 | Commission Calc"
 heroImage: "/images/best-real-estate-commission-strategies/hero.jpg"

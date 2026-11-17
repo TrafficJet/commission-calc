@@ -3,7 +3,7 @@ title: "How to Use AI for Home Buying in 2026"
 slug: "how-to-use-ai-for-home-buying"
 pubDate: 2026-04-27
 description: "Learn how to use AI tools for home buying: research listings, analyze neighborhoods, estimate costs, and make stronger offers. Step-by-step guide for 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how to use ai for home buying"]
 seoTitle: "How to Use AI for Home Buying in 2026 | Commission Calc"
 heroImage: "/images/how-to-use-ai-for-home-buying/hero.jpg"

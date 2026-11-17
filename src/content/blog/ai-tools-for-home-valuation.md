@@ -3,7 +3,7 @@ title: "AI Tools for Home Valuation: Top Picks in 2026"
 slug: "ai-tools-for-home-valuation"
 pubDate: 2026-05-02
 description: "Compare the best AI home valuation tools in 2026. Free & paid options tested for accuracy, speed & coverage. Find the right AVM for your property."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ai tools for home valuation"]
 seoTitle: "AI Tools for Home Valuation: Top Picks 2026 | Commission Calc"
 heroImage: "/images/ai-tools-for-home-valuation/hero.jpg"

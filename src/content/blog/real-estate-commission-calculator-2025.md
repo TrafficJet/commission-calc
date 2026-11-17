@@ -3,7 +3,7 @@ title: "Real Estate Commission Calculator 2026 — See Exactly What You'll Pay"
 slug: "real-estate-commission-calculator-2025"
 pubDate: 2026-04-17
 description: "On a $400K home at 5.5% commission, you owe $22,000. Use our free calculator to see your exact agent fees, broker split, and seller net proceeds — in seconds."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["real estate commission calculator 2026"]
 seoTitle: "Real Estate Commission Calculator 2026 — See Exactly What You'll Pay"
 faq:

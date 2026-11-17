@@ -3,7 +3,7 @@ title: "ChatGPT for Real Estate Agents: A Practical Guide"
 slug: "chatgpt-for-real-estate-agent"
 pubDate: 2026-04-26
 description: "Learn how real estate agents use ChatGPT to write listings, nurture leads & create social content. Practical prompts + compliance tips inside."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["chatgpt for real estate agent"]
 seoTitle: "ChatGPT for Real Estate Agents: Practical Guide 2026 | Commission Calc"
 ---
