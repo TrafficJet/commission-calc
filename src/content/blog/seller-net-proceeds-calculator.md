@@ -3,7 +3,7 @@ title: "Seller Net Proceeds Calculator: Know Your Take-Home"
 slug: "seller-net-proceeds-calculator"
 pubDate: 2026-04-25
 description: "Calculate your exact cash at closing with our seller net proceeds calculator. Account for commissions, closing costs, and taxes instantly."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["seller net proceeds calculator"]
 seoTitle: "Seller Net Proceeds Calculator: Estimate Your Take-Home | Commission Calc"
 heroImage: "/images/seller-net-proceeds-calculator/hero.jpg"

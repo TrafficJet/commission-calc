@@ -3,7 +3,7 @@ title: "What Is a Real Estate Agent? Roles, Pay & How to Find One"
 slug: "what-is-real-estate-agent"
 pubDate: 2026-05-05
 description: "Learn what real estate agents do, how they earn money, and the difference between agents, brokers, and Realtors. Guide includes 2026 NAR settlement changes."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["what is real estate agent"]
 seoTitle: "What Is a Real Estate Agent? Roles, Pay & How to Find One"
 heroImage: "/images/what-is-real-estate-agent/hero.jpg"

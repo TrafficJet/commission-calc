@@ -3,7 +3,7 @@ title: "Real Estate Social Media AI Assistant: 2026 Guide"
 slug: "real-estate-social-media-ai-assistant"
 pubDate: 2026-05-03
 description: "Discover the best real estate social media AI assistants for 2026. Compare top tools, features, pricing, and learn how to automate content without sacrificing compliance."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["real estate social media ai assistant"]
 seoTitle: "Real Estate Social Media AI Assistant: 2026 Guide | Commission Calc"
 heroImage: "/images/real-estate-social-media-ai-assistant/hero.jpg"

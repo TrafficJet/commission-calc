@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import CalcCallout from '../../components/CalcCallout.astro';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
@@ -15,7 +16,7 @@ const articleSchema = JSON.stringify({
   "description": post.data.description,
   "url": canonicalUrl,
   "datePublished": post.data.pubDate.toISOString(),
-  "dateModified": post.data.pubDate.toISOString(),
+  "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
   "author": { "@type": "Person", "name": post.data.author },
   "publisher": { "@type": "Organization", "name": "CommissionCalc", "url": "https://commission-calc.com/" }
 });
@@ -36,6 +37,7 @@ const faqSchema = post.data.faq ? JSON.stringify({
   </Fragment>
   <article class="max-w-3xl mx-auto prose prose-indigo prose-lg dark:prose-invert">
     <p class="text-sm text-gray-400 not-prose mb-4">{post.data.pubDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} · By {post.data.author}</p>
+    <CalcCallout title={post.data.title} tags={post.data.tags} />
     <Content />
   </article>
 </Base>

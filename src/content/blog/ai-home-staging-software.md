@@ -3,7 +3,7 @@ title: "AI Home Staging Software: Top Tools Reviewed 2026"
 slug: "ai-home-staging-software"
 pubDate: 2026-04-25
 description: "Compare the best AI home staging software in 2026. See pricing, speed, and real agent results. Find the right tool for your staging needs today."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ai home staging software"]
 seoTitle: "AI Home Staging Software: Top Tools Reviewed 2026 | Commission Calc"
 heroImage: "/images/ai-home-staging-software/hero.jpg"

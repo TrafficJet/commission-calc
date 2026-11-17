@@ -3,7 +3,7 @@ title: "Real Estate Commission AI Assistant: 2026 Guide"
 slug: "real-estate-commission-ai-assistant"
 pubDate: 2026-04-27
 description: "Learn how real estate commission AI assistants automate complex splits, ensure NAR compliance, and streamline payouts in 2026. Compare top platforms."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["real estate commission ai assistant"]
 seoTitle: "Real Estate Commission AI Assistant 2026 Guide | Commission Calc"
 heroImage: "/images/real-estate-commission-ai-assistant/hero.jpg"

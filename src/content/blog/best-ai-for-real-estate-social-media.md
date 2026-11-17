@@ -3,7 +3,7 @@ title: "Best AI for Real Estate Social Media in 2026"
 slug: "best-ai-for-real-estate-social-media"
 pubDate: 2026-05-03
 description: "Discover the top AI tools for real estate social media. Compare Predis.ai, Jasper, Canva & more. Cut 75% of content creation time while staying fair housing compliant."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best ai for real estate social media"]
 seoTitle: "Best AI for Real Estate Social Media 2025–2026 | Commission Calc"
 heroImage: "/images/best-ai-for-real-estate-social-media/hero.jpg"

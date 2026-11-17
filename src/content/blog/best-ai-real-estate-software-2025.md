@@ -3,7 +3,7 @@ title: "7 Best AI Real Estate Software Tools in 2026 (Tested & Ranked)"
 slug: "best-ai-real-estate-software-2025"
 pubDate: 2026-04-17
 description: "We tested 7 AI real estate platforms: Lofty, Offrs, HouseCanary, PropStream & more. See exact pricing, what each does, and which one is worth your money in 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best ai real estate software 2026"]
 seoTitle: "7 Best AI Real Estate Software Tools in 2026 (Tested & Ranked)"
 faq:

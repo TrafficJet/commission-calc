@@ -3,7 +3,7 @@ title: "Best AI for Listing Agents in 2026"
 slug: "best-ai-for-listing-agent"
 pubDate: 2026-04-29
 description: "Compare the best AI tools for listing agents in 2026. ListingAI, Lofty AI, ChatGPT & more with pricing, features & real-world use cases. Find your fit."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best ai for listing agent"]
 seoTitle: "Best AI for Listing Agents 2026 | Top Tools & Pricing | Commission Calc"
 heroImage: "/images/best-ai-for-listing-agent/hero.jpg"

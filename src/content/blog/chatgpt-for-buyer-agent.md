@@ -3,7 +3,7 @@ title: "ChatGPT for Buyer Agents: Close More Deals in 2026"
 slug: "chatgpt-for-buyer-agent"
 pubDate: 2026-04-28
 description: "Learn how buyer agents use ChatGPT to draft offers, emails & scripts. Save 6-8 hours weekly with compliant AI prompts and workflows."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["chatgpt for buyer agent"]
 seoTitle: "ChatGPT for Buyer Agents: Close More Deals in 2026"
 heroImage: "/images/chatgpt-for-buyer-agent/hero.jpg"

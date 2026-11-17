@@ -3,7 +3,7 @@ title: "Best Real Estate Transaction Management Software 2026"
 slug: "best-real-estate-transaction-management-software"
 pubDate: 2026-04-26
 description: "Compare top real estate transaction management platforms with pricing, features, and honest reviews. Find the best software for your team."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best real estate transaction management software"]
 seoTitle: "Best Real Estate Transaction Management Software 2026 | Commission Calc"
 heroImage: "/images/best-real-estate-transaction-management-software/hero.jpg"

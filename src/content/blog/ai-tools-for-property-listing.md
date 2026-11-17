@@ -3,7 +3,7 @@ title: "Best AI Tools for Property Listings in 2026"
 slug: "ai-tools-for-property-listing"
 pubDate: 2026-04-28
 description: "Discover the best AI tools for property listing creation. Save 5-10 hours/week with MLS descriptions, photo enhancement, and pricing analysis. Compare ListingAI, Jasper & more."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ai tools for property listing"]
 seoTitle: "AI Tools for Property Listings 2026 | Best Platforms"
 heroImage: "/images/ai-tools-for-property-listing/hero.jpg"

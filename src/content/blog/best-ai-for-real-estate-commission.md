@@ -3,7 +3,7 @@ title: "Best AI for Real Estate Commission (2026 Guide)"
 slug: "best-ai-for-real-estate-commission"
 pubDate: 2026-04-27
 description: "Compare top AI tools for real estate commission tracking, forecasting, and NAR-compliant negotiations in 2026. Find the right platform for your team."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best ai for real estate commission"]
 seoTitle: "Best AI for Real Estate Commission 2026 | Commission Calc"
 heroImage: "/images/best-ai-for-real-estate-commission/hero.jpg"

@@ -3,7 +3,7 @@ title: "Automate Real Estate Leads with AI in 2026"
 slug: "automate-real-estate-leads-with-ai"
 pubDate: 2026-04-30
 description: "Learn how to automate real estate leads with AI to respond in minutes, not hours. Tools, strategies, and setup guide for agents."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["automate real estate leads with ai"]
 seoTitle: "Automate Real Estate Leads with AI in 2026 | Commission Calc"
 heroImage: "/images/automate-real-estate-leads-with-ai/hero.jpg"

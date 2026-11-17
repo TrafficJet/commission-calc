@@ -3,7 +3,7 @@ title: "AI Home Valuation Software: Top Tools for 2026"
 slug: "ai-home-valuation-software"
 pubDate: 2026-05-02
 description: "Discover the best AI home valuation software tools in 2026. Compare accuracy, pricing, and use cases for real estate agents, lenders, and investors."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ai home valuation software"]
 seoTitle: "AI Home Valuation Software: Top Tools for 2026 | Commission Calc"
 heroImage: "/images/ai-home-valuation-software/hero.jpg"

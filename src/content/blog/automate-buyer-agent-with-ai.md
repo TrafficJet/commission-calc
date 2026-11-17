@@ -3,7 +3,7 @@ title: "Automate Your Buyer Agent with AI in 2026"
 slug: "automate-buyer-agent-with-ai"
 pubDate: 2026-04-29
 description: "Learn how to automate lead qualification, showing scheduling, and follow-up with AI tools. Save 10+ hours weekly and close more deals."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["automate buyer agent with ai"]
 seoTitle: "Automate Buyer Agent with AI in 2026 | Commission Calc"
 heroImage: "/images/automate-buyer-agent-with-ai/hero.jpg"

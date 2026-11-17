@@ -3,7 +3,7 @@ title: "AI Property Listing Software: Top Picks for 2026"
 slug: "ai-property-listing-software"
 pubDate: 2026-04-28
 description: "Compare top AI property listing software for real estate agents. Save 45–90 minutes per listing with automated descriptions, MLS integration & Fair Housing compliance."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ai property listing software"]
 seoTitle: "AI Property Listing Software: Top Picks for 2026 | Commission Calc"
 heroImage: "/images/ai-property-listing-software/hero.jpg"

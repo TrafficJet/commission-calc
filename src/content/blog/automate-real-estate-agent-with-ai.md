@@ -3,7 +3,7 @@ title: "Automate Real Estate Agent Tasks with AI in 2026"
 slug: "automate-real-estate-agent-with-ai"
 pubDate: 2026-04-26
 description: "Learn which real estate tasks to automate with AI: lead gen, follow-up, listings, scheduling & more. Build your AI stack without losing the human touch."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["automate real estate agent with ai"]
 seoTitle: "Automate Real Estate Agent Tasks with AI in 2026 | Commission Calc"
 heroImage: "/images/automate-real-estate-agent-with-ai/hero.jpg"

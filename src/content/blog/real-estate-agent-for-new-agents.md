@@ -3,7 +3,7 @@ title: "Real Estate Agent Guide for New Agents in 2026"
 slug: "real-estate-agent-for-new-agents"
 pubDate: 2026-05-04
 description: "Complete guide for new real estate agents: licensing, choosing a brokerage, finding clients, and closing your first deal. Start your career with confidence."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["real estate agent for new agents"]
 seoTitle: "Real Estate Agent Guide for New Agents in 2026 | Commission Calc"
 heroImage: "/images/real-estate-agent-for-new-agents/hero.jpg"

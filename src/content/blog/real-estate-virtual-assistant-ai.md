@@ -3,7 +3,7 @@ title: "Real Estate Virtual Assistant AI: Top Tools for 2026"
 slug: "real-estate-virtual-assistant-ai"
 pubDate: 2026-04-25
 description: "Discover the best real estate virtual assistant AI tools for 2026. Compare Structurely, Lofty, Ylopo & more. Automate lead follow-up, qualification & scheduling."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["real estate virtual assistant ai"]
 seoTitle: "Real Estate Virtual Assistant AI: Top Tools for 2026"
 heroImage: "/images/real-estate-virtual-assistant-ai/hero.jpg"

@@ -3,7 +3,7 @@ title: "How to Negotiate Realtor Commission in 2025"
 slug: "how-to-negotiate-realtor-commission-2025"
 pubDate: 2026-04-25
 description: "Master realtor commission negotiation post-NAR settlement. Learn tactics, scripts, and real data to lower agent fees and save thousands at closing."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how to negotiate realtor commission 2025"]
 seoTitle: "How to Negotiate Realtor Commission in 2025 | Commission Calc"
 heroImage: "/images/how-to-negotiate-realtor-commission-2025/hero.jpg"
