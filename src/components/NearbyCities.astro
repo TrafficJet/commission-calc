@@ -1,0 +1,31 @@
+---
+// Internal-linking block: other cities in the same state + the state hub page.
+import { cities, getStateName } from '../data/cities';
+
+interface Props {
+  state: string;      // abbr, e.g. "WA"
+  stateSlug: string;
+  currentSlug: string;
+}
+const { state, stateSlug, currentSlug } = Astro.props;
+const stateName = getStateName(state);
+
+const nearby = cities
+  .filter(c => c.state === state && c.slug !== currentSlug)
+  .slice(0, 8);
+---
+{nearby.length > 0 && (
+  <div class="mt-10 p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
+    <h3 class="font-bold text-lg mb-3">Commission Calculators Near You</h3>
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+      {nearby.map(c => (
+        <li>
+          <a href={`/commission/${c.slug}/`} class="text-indigo-700 dark:text-indigo-400 hover:underline">{c.city}, {c.state}</a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-3 text-sm">
+      → <a href={`/state/${stateSlug}/`} class="text-indigo-700 dark:text-indigo-400 font-medium hover:underline">All {stateName} commission data</a>
+    </p>
+  </div>
+)}

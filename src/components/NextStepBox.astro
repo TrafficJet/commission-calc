@@ -1,0 +1,30 @@
+---
+// Monetization CTA shown right under calculator results.
+// Renders nothing until the affiliate URL is configured in src/data/affiliates.ts.
+import { AFFILIATES, withUtm } from '../data/affiliates';
+
+interface Props {
+  headline: string;
+  body: string;
+  ctaText: string;
+  utmContent: string;
+  offer?: 'agent' | 'mortgage';
+}
+const { headline, body, ctaText, utmContent, offer = 'agent' } = Astro.props;
+
+const baseUrl = offer === 'mortgage' ? AFFILIATES.MORTGAGE_URL : AFFILIATES.AGENT_MATCH_URL;
+const href = withUtm(baseUrl, utmContent);
+---
+{href && (
+  <div class="mt-6 p-6 rounded-2xl border-2 border-emerald-200 bg-emerald-50 dark:bg-emerald-950 dark:border-emerald-800">
+    <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-100 mb-1">{headline}</h3>
+    <p class="text-sm text-emerald-800 dark:text-emerald-200 mb-4">{body}</p>
+    <a href={href} rel="sponsored nofollow noopener" target="_blank"
+       class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+      {ctaText} →
+    </a>
+    <p class="mt-3 text-xs text-emerald-700/70 dark:text-emerald-300/70">
+      Free &amp; no obligation. We may earn a referral fee — see our <a href="/disclosure" class="underline">disclosure</a>.
+    </p>
+  </div>
+)}
